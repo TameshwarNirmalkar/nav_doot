@@ -1,6 +1,6 @@
-import type { AppState } from '@redux-store/store_config';
-import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from '@reduxjs/toolkit';
-import { addBranchTypeAction, getbranchTypeListAction, updateBranchTypeAction } from './action';
+import type { AppState } from "@redux-store/store_config";
+import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from "@reduxjs/toolkit";
+import { addBranchTypeAction, getbranchTypeListAction, updateBranchTypeAction } from "./action";
 
 interface BranchTypeCollection {
   branchtype_id: number;
@@ -19,11 +19,11 @@ const branchTypeEntityAdapter = createEntityAdapter<BranchTypeCollection, Entity
 });
 
 const branchTypeEntitySlice = createSlice({
-  name: 'BRANCH_TYPE_SLICE',
+  name: "BRANCH_TYPE_SLICE",
   initialState: branchTypeEntityAdapter.getInitialState<BranchTypeStateI>({
     isLoading: false,
     error: false,
-    message: '',
+    message: "",
   }),
   reducers: {
     addBranchType: branchTypeEntityAdapter.addOne,

@@ -1,15 +1,6 @@
 import type { AppState } from "@redux-store/store_config";
-import {
-  createEntityAdapter,
-  createSlice,
-  type EntityId,
-  type PayloadAction,
-} from "@reduxjs/toolkit";
-import {
-  changePassword,
-  getUserDetailsAction,
-  getUsersCollectionAction,
-} from "./action";
+import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from "@reduxjs/toolkit";
+import { changePassword, getUserDetailsAction, getUsersCollectionAction } from "./action";
 
 interface UserCollection {
   uuid: string;
@@ -31,8 +22,7 @@ interface UserStateI {
 
 const usersAdapter = createEntityAdapter<UserCollection, EntityId>({
   selectId: (user: UserCollection) => user._id,
-  sortComparer: (a: UserCollection, b: UserCollection) =>
-    a.full_name.localeCompare(b.full_name),
+  sortComparer: (a: UserCollection, b: UserCollection) => a.full_name.localeCompare(b.full_name),
 });
 
 const userSlice = createSlice({
@@ -53,38 +43,26 @@ const userSlice = createSlice({
       .addCase(getUsersCollectionAction.pending, (state: any) => {
         state.isLoading = true;
       })
-      .addCase(
-        getUsersCollectionAction.fulfilled,
-        (state: any, action: PayloadAction<UserCollection[]>) => {
-          state.isLoading = false;
-          usersAdapter.upsertMany(state, action.payload);
-        }
-      )
+      .addCase(getUsersCollectionAction.fulfilled, (state: any, action: PayloadAction<UserCollection[]>) => {
+        state.isLoading = false;
+        usersAdapter.upsertMany(state, action.payload);
+      })
       .addCase(getUsersCollectionAction.rejected, (state: any, action) => {
         state.errorMsg = action.error;
       })
       .addCase(getUserDetailsAction.pending, (state: any) => {
         state.isLoading = true;
       })
-      .addCase(
-        getUserDetailsAction.fulfilled,
-        (state: any, action: PayloadAction<any>) => {
-          state.isLoading = false;
-          state.userDetails = action.payload;
-        }
-      )
-      .addCase(
-        changePassword.pending,
-        (state: any, action: PayloadAction<any>) => {
-          state.isLoading = true;
-        }
-      )
-      .addCase(
-        changePassword.fulfilled,
-        (state: any, action: PayloadAction<any>) => {
-          state.isLoading = false;
-        }
-      );
+      .addCase(getUserDetailsAction.fulfilled, (state: any, action: PayloadAction<any>) => {
+        state.isLoading = false;
+        state.userDetails = action.payload;
+      })
+      .addCase(changePassword.pending, (state: any, action: PayloadAction<any>) => {
+        state.isLoading = true;
+      })
+      .addCase(changePassword.fulfilled, (state: any, action: PayloadAction<any>) => {
+        state.isLoading = false;
+      });
   },
 });
 

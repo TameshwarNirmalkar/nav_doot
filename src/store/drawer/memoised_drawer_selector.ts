@@ -1,5 +1,5 @@
-import { createSelector } from '@reduxjs/toolkit';
-import { selectDrawerById } from '.';
+import { createSelector } from "@reduxjs/toolkit";
+import { selectDrawerById } from ".";
 
 export const selectIsCollapsedById = createSelector(
   // 1. Input Selector: Returns the 'drawer' object

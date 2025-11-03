@@ -364,7 +364,7 @@ export default function AuthorizedLayout({ children }: { children: React.ReactNo
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
 
-  let selectedMenu = useMemo(() => {
+  const selectedMenu = useMemo(() => {
     const keyArray = pathname.split('/').filter((i) => i);
     return keyArray;
   }, [pathname]) as string[];

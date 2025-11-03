@@ -1,6 +1,6 @@
-import { createEntityAdapter, createSelector, createSlice, type EntityId } from '@reduxjs/toolkit';
-import type { AppState } from '../store_config';
-import { getDrawerListAction } from './action';
+import { createEntityAdapter, createSelector, createSlice, type EntityId } from "@reduxjs/toolkit";
+import type { AppState } from "../store_config";
+import { getDrawerListAction } from "./action";
 
 export interface DrawerListEntity {
   drawerId: string;
@@ -17,10 +17,10 @@ const drawerAdapter = createEntityAdapter<DrawerListEntity, EntityId>({
 });
 
 const drawerSlice = createSlice({
-  name: 'DRAWER_SLICE',
+  name: "DRAWER_SLICE",
   initialState: drawerAdapter.getInitialState<DrawerStateI>({
     isLoading: false,
-    errorMsg: '',
+    errorMsg: "",
   }),
   reducers: {
     drawerUpdate: drawerAdapter.setOne,

@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
-import { selectZoneList } from '@src/store/zone';
-import { addZoneAction, getZoneListAction } from '@src/store/zone/action';
-import { App, Button, Drawer, Flex, Form, Input, Popover, Select, Space } from 'antd';
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import { HiPlusCircle } from 'react-icons/hi';
-import { RiCloseLine } from 'react-icons/ri';
+import { useAppDispatch, useAppSelector } from "@src/store/redux_hooks";
+import { selectZoneList } from "@src/store/zone";
+import { addZoneAction, getZoneListAction } from "@src/store/zone/action";
+import { App, Button, Drawer, Flex, Form, Input, Popover, Select, Space } from "antd";
+import React, { memo, useCallback, useEffect, useState } from "react";
+import { HiPlusCircle } from "react-icons/hi";
+import { RiCloseLine } from "react-icons/ri";
 
 export default memo(function ZoneForm() {
   const zoneFormInstance = Form.useFormInstance();
   const allZones = useAppSelector(selectZoneList);
   const dispatch = useAppDispatch();
 
-  const [zone_name, setZoneName] = useState<string>('');
+  const [zone_name, setZoneName] = useState<string>("");
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
   const { message } = App.useApp();
@@ -25,18 +25,18 @@ export default memo(function ZoneForm() {
   const onSave = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
     e.preventDefault();
     if (!zone_name) {
-      message.error('Field should not be empty');
+      message.error("Field should not be empty");
     } else {
       dispatch(
         addZoneAction({
           zone_name: zone_name
-            .split(' ')
+            .split(" ")
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' '),
+            .join(" "),
           zone_id: allZones.length + 1,
         }),
       );
-      setZoneName('');
+      setZoneName("");
       onDrawerClose();
     }
   };
@@ -70,15 +70,9 @@ export default memo(function ZoneForm() {
           </Space>
         }
         name="zone_id"
-        rules={[{ required: true, message: 'Required' }]}
+        rules={[{ required: true, message: "Required" }]}
       >
-        <Select
-          placeholder="Select Zone/Region"
-          optionFilterProp="label"
-          filterSort={(optionA, optionB) => (optionA?.zone_name ?? '').toLowerCase().localeCompare((optionB?.zone_name ?? '').toLowerCase())}
-          fieldNames={{ label: 'zone_name', value: 'zone_id' }}
-          options={allZones}
-        />
+        <Select placeholder="Select Zone/Region" optionFilterProp="label" filterSort={(optionA, optionB) => (optionA?.zone_name ?? "").toLowerCase().localeCompare((optionB?.zone_name ?? "").toLowerCase())} fieldNames={{ label: "zone_name", value: "zone_id" }} options={allZones} />
       </Form.Item>
 
       <Drawer

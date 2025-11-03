@@ -1,6 +1,6 @@
-import type { AppState } from '@redux-store/store_config';
-import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from '@reduxjs/toolkit';
-import { addVendorAction, getVendorAction, updateVendorAction } from './action';
+import type { AppState } from "@redux-store/store_config";
+import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from "@reduxjs/toolkit";
+import { addVendorAction, getVendorAction, updateVendorAction } from "./action";
 
 export interface VendorsCollection {
   id: string;
@@ -38,11 +38,11 @@ const VendorsEntityAdapter = createEntityAdapter<VendorsCollection, EntityId>({
 });
 
 const vendorsEntitySlice = createSlice({
-  name: 'VENDORS_SLICE',
+  name: "VENDORS_SLICE",
   initialState: VendorsEntityAdapter.getInitialState<VendorsStateI>({
     isLoading: false,
     error: false,
-    message: '',
+    message: "",
   }),
   reducers: {
     addVendors: VendorsEntityAdapter.addOne,

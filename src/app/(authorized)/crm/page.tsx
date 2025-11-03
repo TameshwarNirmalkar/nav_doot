@@ -1,7 +1,7 @@
-import { Button, Card, Col, Divider, Flex, Result, Row, Statistic, Typography } from 'antd';
-import Link from 'next/link';
-import { BiUserCircle, BiUserPlus } from 'react-icons/bi';
-import { BsArrowUpCircle, BsPlusCircle } from 'react-icons/bs';
+import { Button, Card, Col, Divider, Flex, Result, Row, Statistic, Typography } from "antd";
+import Link from "next/link";
+import { BiUserCircle, BiUserPlus } from "react-icons/bi";
+import { BsArrowUpCircle, BsPlusCircle } from "react-icons/bs";
 
 export default function CrmPage() {
   return (
@@ -16,51 +16,27 @@ export default function CrmPage() {
           <div>
             <div>
               <h2 className="text-xl font-bold mb-4">Overview</h2>
-              <h3>
-                NavDoot CRM is designed to enhance your customer interactions and help you stay ahead in the competitive market. With features like sales tracking, contact
-                management, and insightful analytics, it's the perfect tool for modern businesses.
-              </h3>
+              <h3>NavDoot CRM is designed to enhance your customer interactions and help you stay ahead in the competitive market. With features like sales tracking, contact management, and insightful analytics, it's the perfect tool for modern businesses.</h3>
             </div>
 
             <Row gutter={[16, 16]} className="mt-5">
               <Col span={8}>
                 <Card variant="borderless">
-                  <Statistic
-                    title={<h1 className="text-2xl text-black-500">Sales Traking</h1>}
-                    value={11.28}
-                    precision={2}
-                    valueStyle={{ color: '#3f8600' }}
-                    prefix={<BsArrowUpCircle />}
-                    suffix="%"
-                  />
+                  <Statistic title={<h1 className="text-2xl text-black-500">Sales Traking</h1>} value={11.28} precision={2} valueStyle={{ color: "#3f8600" }} prefix={<BsArrowUpCircle />} suffix="%" />
                   <Divider />
                   <h3 className="mt-2">Monitor your sales pipeline, close deals faster, and improve revenue forecasts with our intuitive tracking system.</h3>
                 </Card>
               </Col>
               <Col span={8}>
                 <Card variant="borderless">
-                  <Statistic
-                    title={<h1 className="text-2xl text-black-500">Contact Management</h1>}
-                    value={9.3}
-                    precision={2}
-                    valueStyle={{ color: 'orange' }}
-                    prefix={<BiUserPlus />}
-                    suffix="%"
-                  />
+                  <Statistic title={<h1 className="text-2xl text-black-500">Contact Management</h1>} value={9.3} precision={2} valueStyle={{ color: "orange" }} prefix={<BiUserPlus />} suffix="%" />
                   <Divider />
                   <h3 className="mt-2">Monitor your sales pipeline, close deals faster, and improve revenue forecasts with our intuitive tracking system.</h3>
                 </Card>
               </Col>
               <Col span={8}>
                 <Card variant="borderless">
-                  <Statistic
-                    title={<h1 className="text-2xl text-black-500">Analytics & Reporting</h1>}
-                    value={9.3}
-                    precision={2}
-                    valueStyle={{ color: 'orange' }}
-                    prefix={<BiUserPlus />}
-                    suffix="%"
-                  />
+                  <Statistic title={<h1 className="text-2xl text-black-500">Analytics & Reporting</h1>} value={9.3} precision={2} valueStyle={{ color: "orange" }} prefix={<BiUserPlus />} suffix="%" />
                   <Divider />
                   <h3 className="mt-2">Monitor your sales pipeline, close deals faster, and improve revenue forecasts with our intuitive tracking system.</h3>
                 </Card>

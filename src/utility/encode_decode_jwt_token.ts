@@ -30,10 +30,7 @@ const JWT_SECRET_KEY: Secret = "vyakar@arosys";
  * @returns {string | null} The encoded JWT token or null if an error occurs.
  */
 
-const EncodeToken = (
-  payload: UserPayload,
-  expiresIn: string | any = "1m"
-): string | null => {
+const EncodeToken = (payload: UserPayload, expiresIn: string | any = "1m"): string | null => {
   try {
     const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn });
     return token;
@@ -51,7 +48,7 @@ const EncodeToken = (
  * @returns {DecodedPayload | null} The decoded payload if the token is valid, otherwise null.
  */
 const DecodeToken = (
-  token: string
+  token: string,
   // secret: Secret
 ): DecodedPayload | string => {
   try {
@@ -64,7 +61,7 @@ const DecodeToken = (
 };
 
 const VerifyJWTToken = (
-  token: string
+  token: string,
   // secret: Secret
 ): DecodedPayload | string => {
   try {

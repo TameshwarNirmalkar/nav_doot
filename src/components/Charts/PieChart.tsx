@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
-import { Pie } from '@ant-design/plots';
-import React, { memo } from 'react';
+import { Pie } from "@ant-design/plots";
+import React, { memo } from "react";
 
 const PieChart = () => {
   const config = {
     height: 300,
     data: [
-      { type: 'Category 1', value: 27 },
-      { type: 'Category 2', value: 25 },
-      { type: 'Category 3', value: 18 },
-      { type: 'Category 4', value: 15 },
-      { type: 'Category 5', value: 10 },
-      { type: 'Category 6', value: 5 },
+      { type: "Category 1", value: 27 },
+      { type: "Category 2", value: 25 },
+      { type: "Category 3", value: 18 },
+      { type: "Category 4", value: 15 },
+      { type: "Category 5", value: 10 },
+      { type: "Category 6", value: 5 },
     ],
-    angleField: 'value',
-    colorField: 'type',
+    angleField: "value",
+    colorField: "type",
     innerRadius: 0.6,
     label: {
-      text: 'value',
+      text: "value",
       style: {
-        fontWeight: 'bold',
+        fontWeight: "bold",
       },
     },
     legend: false,
@@ -33,14 +33,14 @@ const PieChart = () => {
     // },
     annotations: [
       {
-        type: 'text',
+        type: "text",
         style: {
-          text: 'Tata Motors',
-          x: '50%',
-          y: '50%',
-          textAlign: 'center',
+          text: "Tata Motors",
+          x: "50%",
+          y: "50%",
+          textAlign: "center",
           fontSize: 20,
-          fontStyle: 'bold',
+          fontStyle: "bold",
         },
       },
     ],

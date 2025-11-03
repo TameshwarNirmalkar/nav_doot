@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import SelectWithAdd from '@src/components/SelectWithAdd/SelectWithAdd';
-import { selectBranchTypeList } from '@src/store/branch_type';
-import { addBranchTypeAction } from '@src/store/branch_type/action';
-import { branchTypeIsLoading } from '@src/store/branch_type/memo_branchtype_selector';
-import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
-import { Form, FormInstance, Input, Select } from 'antd';
-import TextArea from 'antd/es/input/TextArea';
-import React, { memo, useCallback } from 'react';
+import SelectWithAdd from "@src/components/SelectWithAdd/SelectWithAdd";
+import { selectBranchTypeList } from "@src/store/branch_type";
+import { addBranchTypeAction } from "@src/store/branch_type/action";
+import { branchTypeIsLoading } from "@src/store/branch_type/memo_branchtype_selector";
+import { useAppDispatch, useAppSelector } from "@src/store/redux_hooks";
+import { Form, FormInstance, Input, Select } from "antd";
+import TextArea from "antd/es/input/TextArea";
+import React, { memo, useCallback } from "react";
 
 const AddAgentsFormComponent = () => {
   const addAgentsForm = Form.useFormInstance();
@@ -37,7 +37,7 @@ const AddAgentsFormComponent = () => {
   //   addAgentsForm.setFieldValue('branchtype_name', opt.field_name);
   // }, []);
   const onParentBranchTypeSelect = useCallback((opt: any) => {
-    addAgentsForm.setFieldValue('parent_branch_name', opt.field_name);
+    addAgentsForm.setFieldValue("parent_branch_name", opt.field_name);
   }, []);
 
   const onAddBranch = useCallback((txt: string) => {
@@ -54,11 +54,11 @@ const AddAgentsFormComponent = () => {
           <Input hidden />
         </Form.Item>
 
-        <Form.Item label="Vendor Name" name="vendor_name" rules={[{ required: true, message: 'Required' }]}>
+        <Form.Item label="Vendor Name" name="vendor_name" rules={[{ required: true, message: "Required" }]}>
           <Input placeholder="Enter Vendor Name" />
         </Form.Item>
 
-        <Form.Item label="Pan Number" name="pan_number" rules={[{ required: true, message: 'Required' }]}>
+        <Form.Item label="Pan Number" name="pan_number" rules={[{ required: true, message: "Required" }]}>
           <Input placeholder="Enter Pan Number" />
         </Form.Item>
 
@@ -72,27 +72,19 @@ const AddAgentsFormComponent = () => {
           onItemSelectHandler={onBranchTypeSelect}
         /> */}
 
-        <SelectWithAdd
-          dropDownList={branchTypeList.map((el) => ({ field_name: el.branchtype_name, field_id: el.branchtype_id }))}
-          loadingState={isBranchLoading}
-          field_id="parent_branch_code"
-          formItemLabel="Parent Branch"
-          buttonLabel="Add"
-          onAddHandler={onAddBranch}
-          onItemSelectHandler={onParentBranchTypeSelect}
-        />
-        <Form.Item label="GST Number" name="gst_number" rules={[{ required: true, message: 'Required' }]}>
+        <SelectWithAdd dropDownList={branchTypeList.map((el) => ({ field_name: el.branchtype_name, field_id: el.branchtype_id }))} loadingState={isBranchLoading} field_id="parent_branch_code" formItemLabel="Parent Branch" buttonLabel="Add" onAddHandler={onAddBranch} onItemSelectHandler={onParentBranchTypeSelect} />
+        <Form.Item label="GST Number" name="gst_number" rules={[{ required: true, message: "Required" }]}>
           <Input placeholder="Enter GST Number" />
         </Form.Item>
-        <Form.Item label="Contact Person" name="contact_person" rules={[{ required: true, message: 'Required' }]}>
+        <Form.Item label="Contact Person" name="contact_person" rules={[{ required: true, message: "Required" }]}>
           <Input placeholder="Enter Contact Person" />
         </Form.Item>
-        <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Required' }]}>
+        <Form.Item label="Email" name="email" rules={[{ required: true, message: "Required" }]}>
           <Input placeholder="Enter Email" />
         </Form.Item>
       </div>
       <div>
-        <Form.Item label="Phone" name="phone" rules={[{ required: true, message: 'Required' }]}>
+        <Form.Item label="Phone" name="phone" rules={[{ required: true, message: "Required" }]}>
           <Input placeholder="Enter Phone Number" />
         </Form.Item>
         <Form.Item label="Alternate Phone" name="alternate_phone">
@@ -108,10 +100,10 @@ const AddAgentsFormComponent = () => {
           />
         </Form.Item> */}
 
-        <Form.Item label="Postal Code" name="postal_code" rules={[{ required: true, message: 'Required' }]}>
+        <Form.Item label="Postal Code" name="postal_code" rules={[{ required: true, message: "Required" }]}>
           <Input placeholder="Enter postal code." />
         </Form.Item>
-        <Form.Item label="Address" name="address" rules={[{ required: true, message: 'Required' }]}>
+        <Form.Item label="Address" name="address" rules={[{ required: true, message: "Required" }]}>
           <TextArea rows={5} cols={6} placeholder="Enter Address" />
         </Form.Item>
       </div>

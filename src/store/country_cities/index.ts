@@ -1,6 +1,6 @@
-import type { AppState } from '@redux-store/store_config';
-import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from '@reduxjs/toolkit';
-import { getAllCitiesBasedOnCountryAndStateAction, getAllCountriesWithFlagAction, getAllStatesBasedOnCountryAction } from './action';
+import type { AppState } from "@redux-store/store_config";
+import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from "@reduxjs/toolkit";
+import { getAllCitiesBasedOnCountryAndStateAction, getAllCountriesWithFlagAction, getAllStatesBasedOnCountryAction } from "./action";
 
 interface CountryCitiesCollection {
   id: string;
@@ -35,11 +35,11 @@ const countryCitiesEntityAdapter = createEntityAdapter<CountryCitiesCollection, 
 });
 
 const countryCityEntitySlice = createSlice({
-  name: 'COUNTRY_CITIES_SLICE',
+  name: "COUNTRY_CITIES_SLICE",
   initialState: countryCitiesEntityAdapter.getInitialState<CountryCityStateI>({
     isLoading: false,
     error: false,
-    msg: '',
+    msg: "",
     stateList: [],
     cityList: [],
   }),
@@ -72,10 +72,6 @@ const countryCityEntitySlice = createSlice({
 
 export const selectCountryCitySliceState = (state: AppState) => state.country_cities;
 
-export const {
-  selectAll: selectCountryCityList,
-  selectById: selectCountryCityById,
-  selectIds: selectCountryCityIds,
-} = countryCitiesEntityAdapter.getSelectors(selectCountryCitySliceState);
+export const { selectAll: selectCountryCityList, selectById: selectCountryCityById, selectIds: selectCountryCityIds } = countryCitiesEntityAdapter.getSelectors(selectCountryCitySliceState);
 
 export default countryCityEntitySlice.reducer;

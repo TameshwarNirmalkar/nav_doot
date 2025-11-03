@@ -1,6 +1,6 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getAllLocationAction = createAsyncThunk('GET_ALL_LOCATION', async () => {
+export const getAllLocationAction = createAsyncThunk("GET_ALL_LOCATION", async () => {
   try {
     // const res = await fetch(`/location`, {
     //   method: 'GET',
@@ -14,32 +14,32 @@ export const getAllLocationAction = createAsyncThunk('GET_ALL_LOCATION', async (
     // }));
     return [
       {
-        id: 'fdsf34234sfds',
-        city_name: 'Bhilai',
+        id: "fdsf34234sfds",
+        city_name: "Bhilai",
         city_code: 57981,
-        country_name: 'India',
+        country_name: "India",
         country_code: 101,
-        postal_code: '490024',
-        state_name: 'Chhattisgarh',
+        postal_code: "490024",
+        state_name: "Chhattisgarh",
         state_code: 4040,
-        zone_code: 'EST',
-        zone_name: 'East',
-        created_date: new Date().toLocaleDateString('en-GB'),
-        updated_date: new Date().toLocaleDateString('en-GB'),
+        zone_code: "EST",
+        zone_name: "East",
+        created_date: new Date().toLocaleDateString("en-GB"),
+        updated_date: new Date().toLocaleDateString("en-GB"),
       },
       {
-        id: 'fdsf342d432',
-        city_name: 'Durg',
+        id: "fdsf342d432",
+        city_name: "Durg",
         city_code: 131801,
-        country_name: 'India',
+        country_name: "India",
         country_code: 101,
-        postal_code: '490023',
-        state_name: 'Chhattisgarh',
+        postal_code: "490023",
+        state_name: "Chhattisgarh",
         state_code: 4040,
-        zone_code: 'WST',
-        zone_name: 'West',
-        created_date: new Date().toLocaleDateString('en-GB'),
-        updated_date: new Date().toLocaleDateString('en-GB'),
+        zone_code: "WST",
+        zone_name: "West",
+        created_date: new Date().toLocaleDateString("en-GB"),
+        updated_date: new Date().toLocaleDateString("en-GB"),
       },
     ];
   } catch (error: any) {
@@ -47,7 +47,7 @@ export const getAllLocationAction = createAsyncThunk('GET_ALL_LOCATION', async (
   }
 });
 
-export const addLocationAction = createAsyncThunk<any[], any>('ADD_LOCATION', async (args: any) => {
+export const addLocationAction = createAsyncThunk<any[], any>("ADD_LOCATION", async (args: any) => {
   try {
     // const res = await fetch(`/location`, {
     //   method: 'POST',

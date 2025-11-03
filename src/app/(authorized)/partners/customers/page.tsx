@@ -1,10 +1,6 @@
-import { Breadcrumb, Space } from 'antd';
-import CustomerWrapper from './_components/CustomerWrapper';
-import { PiCaretDoubleRightBold, PiCaretDoubleRightDuotone } from 'react-icons/pi';
-import { TbCaretRightFilled } from 'react-icons/tb';
-import { BiCaretRight } from 'react-icons/bi';
-import { IoCaretForwardSharp } from 'react-icons/io5';
 import BreadcrumbComponent from '@src/components/BreadcrumbComponent/BreadcrumbComponent';
+import { Space } from 'antd';
+import CustomerWrapper from './_components/CustomerWrapper';
 
 export default function BranchesPage() {
   return (

@@ -1,17 +1,17 @@
-import BreadcrumbComponent from '@src/components/BreadcrumbComponent/BreadcrumbComponent';
-import BarChart from '@src/components/Charts/BarChart';
-import PieChart from '@src/components/Charts/PieChart';
-import TableComponent from '@src/components/Tables/TableComponent';
-import { Breadcrumb, Card, Col, Divider, Flex, Row, Statistic } from 'antd';
-import { BiSolidPlaneAlt } from 'react-icons/bi';
-import { FaArrowUp, FaTrainSubway, FaTruck } from 'react-icons/fa6';
+import BreadcrumbComponent from "@src/components/BreadcrumbComponent/BreadcrumbComponent";
+import BarChart from "@src/components/Charts/BarChart";
+import PieChart from "@src/components/Charts/PieChart";
+import TableComponent from "@src/components/Tables/TableComponent";
+import { Breadcrumb, Card, Col, Divider, Flex, Row, Statistic } from "antd";
+import { BiSolidPlaneAlt } from "react-icons/bi";
+import { FaArrowUp, FaTrainSubway, FaTruck } from "react-icons/fa6";
 
 export default function PurchasePage() {
   return (
     <div>
-      <BreadcrumbComponent items={[{ title: 'Dashboard' }, { title: 'Purchase' }]} />
+      <BreadcrumbComponent items={[{ title: "Dashboard" }, { title: "Purchase" }]} />
 
-      <Row align={'middle'} gutter={[16, 16]}>
+      <Row align={"middle"} gutter={[16, 16]}>
         <Col span={8}>
           <Card title="Invoicing By Road">
             <BarChart />
@@ -29,7 +29,7 @@ export default function PurchasePage() {
         </Col>
       </Row>
 
-      <Row align={'middle'} gutter={[16, 16]}>
+      <Row align={"middle"} gutter={[16, 16]}>
         <Col span={8}>
           <Card
             title={
@@ -39,7 +39,7 @@ export default function PurchasePage() {
               </Flex>
             }
           >
-            <Statistic title="Active Consignment" value={60} precision={2} valueStyle={{ color: '#3f8600' }} prefix={<FaArrowUp />} suffix="%" />
+            <Statistic title="Active Consignment" value={60} precision={2} valueStyle={{ color: "#3f8600" }} prefix={<FaArrowUp />} suffix="%" />
           </Card>
         </Col>
         <Col span={8}>
@@ -51,7 +51,7 @@ export default function PurchasePage() {
               </Flex>
             }
           >
-            <Statistic title="Active Consignment" value={50} precision={2} valueStyle={{ color: '#3f8600' }} prefix={<FaArrowUp />} suffix="%" />
+            <Statistic title="Active Consignment" value={50} precision={2} valueStyle={{ color: "#3f8600" }} prefix={<FaArrowUp />} suffix="%" />
           </Card>
         </Col>
         <Col span={8}>
@@ -63,12 +63,12 @@ export default function PurchasePage() {
               </Flex>
             }
           >
-            <Statistic title="Active Consignment" value={80} precision={2} valueStyle={{ color: '#3f8600' }} prefix={<FaArrowUp />} suffix="%" />
+            <Statistic title="Active Consignment" value={80} precision={2} valueStyle={{ color: "#3f8600" }} prefix={<FaArrowUp />} suffix="%" />
           </Card>
         </Col>
       </Row>
       <Divider size="small" />
-      <Row align={'middle'} gutter={[16, 16]}>
+      <Row align={"middle"} gutter={[16, 16]}>
         <Col span={24}>
           <Card title="Deliveries">
             <TableComponent />

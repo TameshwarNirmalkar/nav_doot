@@ -1,10 +1,5 @@
 import type { ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
-import {
-  type TypedUseSelectorHook,
-  useDispatch,
-  useSelector,
-  useStore,
-} from "react-redux";
+import { type TypedUseSelectorHook, useDispatch, useSelector, useStore } from "react-redux";
 import type { AppState, AppStore } from "./store_config";
 
 export type TDispatch = ThunkDispatch<AppState, void, UnknownAction>;

@@ -1,6 +1,6 @@
-import type { AppState } from '@redux-store/store_config';
-import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from '@reduxjs/toolkit';
-import { addZoneAction, getZoneListAction } from './action';
+import type { AppState } from "@redux-store/store_config";
+import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from "@reduxjs/toolkit";
+import { addZoneAction, getZoneListAction } from "./action";
 
 interface ZoneCollection {
   zone_id: number;
@@ -19,11 +19,11 @@ const zoneEntityAdapter = createEntityAdapter<ZoneCollection, EntityId>({
 });
 
 const zoneEntitySlice = createSlice({
-  name: 'ZONE_SLICE',
+  name: "ZONE_SLICE",
   initialState: zoneEntityAdapter.getInitialState<ZoneStateI>({
     isLoading: false,
     error: false,
-    message: '',
+    message: "",
   }),
   reducers: {
     addZone: zoneEntityAdapter.addOne,

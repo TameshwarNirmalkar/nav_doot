@@ -1,7 +1,7 @@
-import { type ThemeConfig, theme } from 'antd';
+import { type ThemeConfig, theme } from "antd";
 
-const grayColor = '#504f4f';
-const grayBgcolor = '#2e2e2e';
+const grayColor = "#504f4f";
+const grayBgcolor = "#2e2e2e";
 
 const customTheme: ThemeConfig = {
   algorithm: theme.compactAlgorithm,
@@ -110,25 +110,25 @@ const customTheme: ThemeConfig = {
   //   },
   // },
   token: {
-    colorPrimary: '#f97316',
-    colorInfo: '#ff8316',
-    colorError: '#cc0000',
+    colorPrimary: "#f97316",
+    colorInfo: "#ff8316",
+    colorError: "#cc0000",
     fontSize: 14,
   },
   components: {
     Menu: {
       itemBg: grayBgcolor, // Optional: Change the selected item's background and text color as well
-      itemColor: 'white',
-      itemSelectedColor: 'white', // Optional: Change the text color of all unselected items
-      itemActiveBg: 'white',
+      itemColor: "white",
+      itemSelectedColor: "white", // Optional: Change the text color of all unselected items
+      itemActiveBg: "white",
       itemSelectedBg: grayColor,
       itemHoverBg: grayColor,
-      itemHoverColor: 'white',
-      subMenuItemSelectedColor: 'white',
+      itemHoverColor: "white",
+      subMenuItemSelectedColor: "white",
 
-      horizontalItemSelectedColor: 'white',
+      horizontalItemSelectedColor: "white",
       horizontalItemHoverBg: grayColor,
-      horizontalItemHoverColor: 'white',
+      horizontalItemHoverColor: "white",
       subMenuItemBg: grayBgcolor,
       horizontalItemBorderRadius: 3,
     },
@@ -139,7 +139,7 @@ const customTheme: ThemeConfig = {
       padding: 0,
     },
     Layout: {
-      triggerColor: '#FFF', // This token controls the color of the text and icons in the Sider trigger
+      triggerColor: "#FFF", // This token controls the color of the text and icons in the Sider trigger
       triggerBg: grayBgcolor, // Optional: Change the background color when the trigger is hovered
     },
 
@@ -157,9 +157,9 @@ const customTheme: ThemeConfig = {
     },
     Breadcrumb: {
       separatorMargin: 3,
-      separatorColor: '#f97316',
-      linkHoverColor: '#f97316',
-      itemColor: '#f97316',
+      separatorColor: "#f97316",
+      linkHoverColor: "#f97316",
+      itemColor: "#f97316",
     },
   },
 };

@@ -1,6 +1,6 @@
-import { PayloadAction, createEntityAdapter, createSelector, createSlice, type EntityId } from '@reduxjs/toolkit';
-import type { AppState } from '../store_config';
-import { getMenuListAction } from './action';
+import { PayloadAction, createEntityAdapter, createSelector, createSlice, type EntityId } from "@reduxjs/toolkit";
+import type { AppState } from "../store_config";
+import { getMenuListAction } from "./action";
 
 export interface MenuListEntity {
   key: string;
@@ -18,11 +18,11 @@ const mainMenuEntityAdapter = createEntityAdapter<MenuListEntity, EntityId>({
 });
 
 const mainMenuEntitySlice = createSlice({
-  name: 'MAIN_MENU_SLICE',
+  name: "MAIN_MENU_SLICE",
   initialState: mainMenuEntityAdapter.getInitialState<MenuStateI>({
     isLoading: false,
     error: false,
-    message: '',
+    message: "",
   }),
   reducers: {
     updateMainMenu: mainMenuEntityAdapter.updateOne,

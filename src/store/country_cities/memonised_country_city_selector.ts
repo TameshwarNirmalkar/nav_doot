@@ -1,5 +1,5 @@
-import { createSelector } from '@reduxjs/toolkit';
-import { selectCountryCityList, selectCountryCitySliceState } from '.';
+import { createSelector } from "@reduxjs/toolkit";
+import { selectCountryCityList, selectCountryCitySliceState } from ".";
 
 export const countryCityIsLoading = createSelector([selectCountryCitySliceState], (countryState) => countryState.isLoading);
 // export const selectAllCountryCityEntitiesMemoized = createSelector([selectCountryCityList], (countryCityList) => countryCityList);

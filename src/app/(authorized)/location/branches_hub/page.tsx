@@ -1,5 +1,5 @@
-import BranchTypeTable from './_components/BranchTypeTable';
-import BranchesForm from './_components/BranchesForm';
+import BranchTypeTable from "./_components/BranchTypeTable";
+import BranchesForm from "./_components/BranchesForm";
 
 export default function BranchesHubsPage() {
   return (

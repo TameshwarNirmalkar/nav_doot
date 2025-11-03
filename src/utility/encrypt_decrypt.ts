@@ -228,10 +228,7 @@ export const decrypt = (encrypted: string | undefined): string | undefined => {
 
   let decrypted = "";
 
-  if (
-    !Number.isNaN(parseInt(randCode)) &&
-    lastFour === KEYARR[Number(randCode)]
-  ) {
+  if (!Number.isNaN(parseInt(randCode)) && lastFour === KEYARR[Number(randCode)]) {
     let toFind = "";
     let counter = 0;
     const text = encrypted.slice(1, -4);

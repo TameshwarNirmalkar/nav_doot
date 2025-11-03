@@ -88,7 +88,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       async authorize(credentials: any) {
         // The object returned here is passed to the 'signIn' and 'jwt' callbacks.
         return await userService.authenticate({
-          ...credentials
+          ...credentials,
         });
       },
     }),

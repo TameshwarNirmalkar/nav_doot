@@ -1,6 +1,6 @@
-import type { AppState } from '@redux-store/store_config';
-import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from '@reduxjs/toolkit';
-import { getCustomersAction } from './action';
+import type { AppState } from "@redux-store/store_config";
+import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from "@reduxjs/toolkit";
+import { getCustomersAction } from "./action";
 
 interface CustomersCollection {
   id: string;
@@ -37,11 +37,11 @@ const customersEntityAdapter = createEntityAdapter<CustomersCollection, EntityId
 });
 
 const customesEntitySlice = createSlice({
-  name: 'CUSTOMERS_SLICE',
+  name: "CUSTOMERS_SLICE",
   initialState: customersEntityAdapter.getInitialState<CustomersStateI>({
     isLoading: false,
     error: false,
-    message: '',
+    message: "",
   }),
   reducers: {
     addCustomer: customersEntityAdapter.addOne,

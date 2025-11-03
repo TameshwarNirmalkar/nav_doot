@@ -1,6 +1,6 @@
-import type { AppState } from '@redux-store/store_config';
-import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from '@reduxjs/toolkit';
-import { getAgentAction, addAgentAction, updateAgentAction } from './action';
+import type { AppState } from "@redux-store/store_config";
+import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from "@reduxjs/toolkit";
+import { getAgentAction, addAgentAction, updateAgentAction } from "./action";
 
 export interface AgentsCollection {
   id: string;
@@ -36,11 +36,11 @@ const AgentsEntityAdapter = createEntityAdapter<AgentsCollection, EntityId>({
 });
 
 const agentsEntitySlice = createSlice({
-  name: 'AGENTS_SLICE',
+  name: "AGENTS_SLICE",
   initialState: AgentsEntityAdapter.getInitialState<AgentsStateI>({
     isLoading: false,
     error: false,
-    message: '',
+    message: "",
   }),
   reducers: {
     addAgent: AgentsEntityAdapter.addOne,

@@ -1,6 +1,6 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getMenuListAction = createAsyncThunk('GET_MENU_LIST', async () => {
+export const getMenuListAction = createAsyncThunk("GET_MENU_LIST", async () => {
   try {
     const generateMenuItems = [];
     return [];

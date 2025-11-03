@@ -1,8 +1,4 @@
-import {
-  type Action,
-  configureStore,
-  type ThunkAction,
-} from "@reduxjs/toolkit";
+import { type Action, configureStore, type ThunkAction } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
 // import { config } from "dotenv";
@@ -25,8 +21,7 @@ export const makeStore = () => {
           ignoreActions: true,
         },
       }).concat([]),
-    enhancers: (getDefaultEnhancers) =>
-      getDefaultEnhancers({ autoBatch: { type: "tick" } }).concat([]),
+    enhancers: (getDefaultEnhancers) => getDefaultEnhancers({ autoBatch: { type: "tick" } }).concat([]),
   });
 };
 
@@ -36,12 +31,7 @@ export const store = makeStore();
 export type AppStore = ReturnType<typeof makeStore>;
 export type AppState = ReturnType<typeof store.getState>;
 export type AppDispatch = ReturnType<typeof store.dispatch>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  AppState,
-  unknown,
-  Action<string>
->;
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppState, unknown, Action<string>>;
 
 // optional, but required for refetchOnFocus/refetchOnReconnect/refetchOnMountOrArgChange  etc behaviors
 setupListeners(store.dispatch);

@@ -41,8 +41,7 @@ declare global {
     }
   }
 
-  
-    interface RuleSetRule {
+  interface RuleSetRule {
     test?: RegExp | RegExp[];
     include?: string | RegExp | (string | RegExp)[];
     exclude?: string | RegExp | (string | RegExp)[];
@@ -60,8 +59,7 @@ declare global {
     sideEffects?: boolean;
     resourceQuery?: RegExp | RegExp[];
     mimetype?: string;
-    }
-  
+  }
 
   interface Element {
     _reactRoot?: any;
