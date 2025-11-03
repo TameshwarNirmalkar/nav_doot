@@ -1,0 +1,29 @@
+{
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "prettier.printWidth": 180,
+  "biome.printWidth": 180,
+  "prettier.singleQuote": true,
+  "biome.singleQuote": true,
+  "prettier.trailingComma": "all",
+  "biome.trailingComma": "all",
+  "prettier.arrowParens": "always",
+  "biome.arrowParens": "always",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "javascript.format.indentSwitchCase": true,
+  "javascript.preferences.organizeImports": {},
+  "editor.showUnused": true,
+  "markdown.validate.unusedLinkDefinitions.enabled": "hint",
+  "javascript.format.enable": true,
+  "typescript.format.enable": true,
+  "editor.formatOnSave": true,
+  "typescript.autoClosingTags": true,
+  "typescript.format.indentSwitchCase": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": true,
+  "typescript.format.semicolons": "insert",
+  "typescript.preferences.organizeImports": {
+    "caseSensitivity": "caseSensitive"
+  }
+}
