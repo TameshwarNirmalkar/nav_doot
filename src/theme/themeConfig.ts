@@ -1,7 +1,7 @@
 import { type ThemeConfig, theme } from 'antd';
 
 const grayColor = '#504f4f';
-const grayBgcolor = '#2e2e2e';
+const grayBgcolor = '#02001c';
 
 const customTheme: ThemeConfig = {
   algorithm: theme.compactAlgorithm,

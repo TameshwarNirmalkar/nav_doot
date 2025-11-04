@@ -22,16 +22,7 @@ import { MdDashboardCustomize, MdDeliveryDining, MdGpsFixed, MdOutlineContactPho
 import { PiApplePodcastsLogoFill, PiMapPinSimpleAreaFill, PiUsersFill } from 'react-icons/pi';
 import { RiCustomerService2Fill, RiPagesLine, RiTimeZoneFill, RiUploadCloud2Fill, RiUserSettingsLine } from 'react-icons/ri';
 import { SiGitbook, SiNaver, SiProducthunt, SiVictoriametrics } from 'react-icons/si';
-import {
-  TbBinaryTree2Filled,
-  TbBrandGoogleAnalytics,
-  TbGpsFilled,
-  TbLayoutSidebarLeftCollapse,
-  TbLayoutSidebarRightCollapse,
-  TbShoppingBagSearch,
-  TbTimelineEventPlus,
-  TbTransactionRupee,
-} from 'react-icons/tb';
+import { TbBinaryTree2Filled, TbBrandGoogleAnalytics, TbGpsFilled, TbLayoutSidebarLeftCollapse, TbLayoutSidebarRightCollapse, TbShoppingBagSearch, TbTimelineEventPlus, TbTransactionRupee } from 'react-icons/tb';
 
 const siderStyle: React.CSSProperties = {
   overflow: 'auto',
@@ -42,7 +33,7 @@ const siderStyle: React.CSSProperties = {
   bottom: 0,
   scrollbarWidth: 'thin',
   scrollbarGutter: 'auto',
-  backgroundColor: '#2e2e2e',
+  backgroundColor: '#02001c',
   border: 'none',
 };
 
@@ -171,35 +162,37 @@ const items: Array<MenuItem> = [
       //   icon: <IoIosBarcode size={20} />,
       //   label: <Link href={'/location/postal_code'}>Postal Code</Link>,
       // },
+      {
+        key: 'partners',
+        icon: <FaHandsHelping size={20} />,
+        label: <Link href={'/partners'}>Partners</Link>,
+      },
     ],
   },
-  {
-    key: 'partners',
-    icon: <FaHandsHelping size={20} />,
-    label: <Link href={'/partners'}>Partners</Link>,
-    // children: [
-    //   {
-    //     key: 'customers',
-    //     icon: <RiCustomerService2Fill size={20} />,
-    //     label: <Link href={'/partners/customers'}>Customers</Link>,
-    //   },
-    //   {
-    //     key: 'vendors',
-    //     icon: <TbTimelineEventPlus size={20} />,
-    //     label: <Link href={'/partners/vendors'}>Vendors</Link>,
-    //   },
-    //   {
-    //     key: 'franchisees',
-    //     icon: <TbBinaryTree2Filled size={20} />,
-    //     label: <Link href={'/partners/franchisees'}>Franchisees</Link>,
-    //   },
-    //   {
-    //     key: 'agents',
-    //     icon: <MdDeliveryDining size={20} />,
-    //     label: <Link href={'/partners/agents'}>Agents/Associates</Link>,
-    //   },
-    // ],
-  },
+
+  // children: [
+  //   {
+  //     key: 'customers',
+  //     icon: <RiCustomerService2Fill size={20} />,
+  //     label: <Link href={'/partners/customers'}>Customers</Link>,
+  //   },
+  //   {
+  //     key: 'vendors',
+  //     icon: <TbTimelineEventPlus size={20} />,
+  //     label: <Link href={'/partners/vendors'}>Vendors</Link>,
+  //   },
+  //   {
+  //     key: 'franchisees',
+  //     icon: <TbBinaryTree2Filled size={20} />,
+  //     label: <Link href={'/partners/franchisees'}>Franchisees</Link>,
+  //   },
+  //   {
+  //     key: 'agents',
+  //     icon: <MdDeliveryDining size={20} />,
+  //     label: <Link href={'/partners/agents'}>Agents/Associates</Link>,
+  //   },
+  // ],
+  // },
   {
     key: 'contracts',
     icon: <MdOutlineContactPhone size={20} />,
