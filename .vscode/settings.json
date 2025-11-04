@@ -2,8 +2,8 @@
   "editor.fontFamily": "MesloLGS NF",
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
-  "prettier.printWidth": 180,
-  "biome.printWidth": 180,
+  "prettier.printWidth": 320,
+  "biome.printWidth": 320,
   "prettier.singleQuote": true,
   "biome.singleQuote": true,
   "prettier.trailingComma": "all",
@@ -26,5 +26,8 @@
   "typescript.format.semicolons": "insert",
   "typescript.preferences.organizeImports": {
     "caseSensitivity": "caseSensitive"
+  },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "always"
   }
 }

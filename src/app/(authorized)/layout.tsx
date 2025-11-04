@@ -176,29 +176,29 @@ const items: Array<MenuItem> = [
   {
     key: 'partners',
     icon: <FaHandsHelping size={20} />,
-    label: 'Partners',
-    children: [
-      {
-        key: 'customers',
-        icon: <RiCustomerService2Fill size={20} />,
-        label: <Link href={'/partners/customers'}>Customers</Link>,
-      },
-      {
-        key: 'vendors',
-        icon: <TbTimelineEventPlus size={20} />,
-        label: <Link href={'/partners/vendors'}>Vendors</Link>,
-      },
-      {
-        key: 'franchisees',
-        icon: <TbBinaryTree2Filled size={20} />,
-        label: <Link href={'/partners/franchisees'}>Franchisees</Link>,
-      },
-      {
-        key: 'agents',
-        icon: <MdDeliveryDining size={20} />,
-        label: <Link href={'/partners/agents'}>Agents/Associates</Link>,
-      },
-    ],
+    label: <Link href={'/partners'}>Partners</Link>,
+    // children: [
+    //   {
+    //     key: 'customers',
+    //     icon: <RiCustomerService2Fill size={20} />,
+    //     label: <Link href={'/partners/customers'}>Customers</Link>,
+    //   },
+    //   {
+    //     key: 'vendors',
+    //     icon: <TbTimelineEventPlus size={20} />,
+    //     label: <Link href={'/partners/vendors'}>Vendors</Link>,
+    //   },
+    //   {
+    //     key: 'franchisees',
+    //     icon: <TbBinaryTree2Filled size={20} />,
+    //     label: <Link href={'/partners/franchisees'}>Franchisees</Link>,
+    //   },
+    //   {
+    //     key: 'agents',
+    //     icon: <MdDeliveryDining size={20} />,
+    //     label: <Link href={'/partners/agents'}>Agents/Associates</Link>,
+    //   },
+    // ],
   },
   {
     key: 'contracts',
@@ -355,9 +355,9 @@ const items: Array<MenuItem> = [
   // },
 ];
 export default function AuthorizedLayout({ children }: { children: React.ReactNode }) {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
+  // const {
+  //   token: { colorBgContainer },
+  // } = theme.useToken();
 
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
@@ -402,7 +402,7 @@ export default function AuthorizedLayout({ children }: { children: React.ReactNo
         <div className="shadow-gray-200 shadow-md p-10 flex w-full mb-3" style={{ padding: '9px 20px', backgroundColor: 'white', position: 'sticky', top: 0, zIndex: 1 }}>
           <div className="align-middle justify-between flex w-full">
             <div className="">
-              <Input style={{ width: 500 }} />
+              <Input style={{ width: 500 }} placeholder="Search" />
             </div>
             <div>
               <MainHeader />
