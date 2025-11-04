@@ -1,24 +1,26 @@
 'use client';
 
-import { v4 as uuidv4 } from 'uuid';
-import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
-import { Button, Card, Drawer, Flex, Form, Popconfirm, Space } from 'antd';
-import { getAllLocationAction } from '@src/store/location/action';
-import { selectIsCollapsedById } from '@src/store/drawer/memoised_drawer_selector';
-import { addDrawer, drawerUpdate } from '@src/store/drawer';
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { BiEdit } from 'react-icons/bi';
-import { TbTrash } from 'react-icons/tb';
-import AddCountry from './AddCountry';
-import { RiCloseLine } from 'react-icons/ri';
-import { addLocation, removeLocation, selectLocationList, updateLocation } from '@src/store/location';
-import { AppState } from '@src/store/store_config';
-import { getAllCitiesBasedOnCountryAndStateAction, getAllCountriesWithFlagAction, getAllStatesBasedOnCountryAction } from '@src/store/country_cities/action';
-import { countryCityIsLoading } from '@src/store/country_cities/memonised_country_city_selector';
-import { getZoneListAction } from '@src/store/zone/action';
 import IconLoader from '@src/components/IconLoader/IconLoader';
 import TableComponent from '@src/components/Tables/TableComponent';
+import { getAllCitiesBasedOnCountryAndStateAction, getAllCountriesWithFlagAction, getAllStatesBasedOnCountryAction } from '@src/store/country_cities/action';
+import { countryCityIsLoading } from '@src/store/country_cities/memonised_country_city_selector';
+import { addDrawer, drawerUpdate } from '@src/store/drawer';
+import { selectIsCollapsedById } from '@src/store/drawer/memoised_drawer_selector';
+import { addLocation, removeLocation, selectLocationList, updateLocation } from '@src/store/location';
+import { getAllLocationAction } from '@src/store/location/action';
+import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
+import { AppState } from '@src/store/store_config';
+import { getZoneListAction } from '@src/store/zone/action';
 import { getUniqueFilters } from '@src/utility/common_function';
+import { Button, Card, Checkbox, Drawer, Flex, Form, Input, Menu, MenuProps, Popconfirm, Space } from 'antd';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { BiEdit } from 'react-icons/bi';
+import { FaEye } from 'react-icons/fa';
+import { LuSquarePlus } from 'react-icons/lu';
+import { RiCloseLine, RiFilter3Fill } from 'react-icons/ri';
+import { TbFilterPlus, TbTrash } from 'react-icons/tb';
+import { v4 as uuidv4 } from 'uuid';
+import AddCountry from './AddCountry';
 
 const LocationTableList = () => {
   const [addCountryForm] = Form.useForm();
@@ -45,6 +47,7 @@ const LocationTableList = () => {
       dataIndex: 'country_name',
       key: 'country_name',
       filters: filterFields.countryName,
+      filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string | number | boolean, record: any) => {
         return record.country_name.toLowerCase() === value;
       },
@@ -85,28 +88,30 @@ const LocationTableList = () => {
       dataIndex: 'postal_code',
       key: 'postal_code',
     },
+    // {
+    //   title: 'Created Date',
+    //   dataIndex: 'created_date',
+    //   key: 'created_date',
+    // },
+    // {
+    //   title: 'Modified Date',
+    //   dataIndex: 'updated_date',
+    //   key: 'updated_date',
+    // },
     {
-      title: 'Created Date',
-      dataIndex: 'created_date',
-      key: 'created_date',
-    },
-    {
-      title: 'Modified Date',
-      dataIndex: 'updated_date',
-      key: 'updated_date',
-    },
-    {
-      title: 'Action',
+      title: <div className="text-center">Action</div>,
       dataIndex: 'id',
       key: 'id',
+      width: 120,
       render: (text: string, row: any) => (
-        <Space>
+        <Flex gap={10} justify="center" align="center">
+          <FaEye size={20} color="gray" className="cursor-pointer" onClick={() => onEdit(row)} />
           <BiEdit size={20} color="green" className="cursor-pointer" onClick={() => onEdit(row)} />
 
           <Popconfirm title="Delete" description="Are you sure to delete this record?" okText="Yes" cancelText="No" onConfirm={() => onRemoveLocation(row)}>
             <TbTrash size={20} color="#c00" className="cursor-pointer" />
           </Popconfirm>
-        </Space>
+        </Flex>
       ),
     },
   ];
@@ -140,9 +145,7 @@ const LocationTableList = () => {
   const onSave = useCallback(async () => {
     const values = await addCountryForm.getFieldsValue(true);
     if (values.id) {
-      dispatch(
-        updateLocation({ id: values.id, changes: { ...values, created_date: new Date().toLocaleDateString('en-GB'), updated_date: new Date().toLocaleDateString('en-GB') } }),
-      );
+      dispatch(updateLocation({ id: values.id, changes: { ...values, created_date: new Date().toLocaleDateString('en-GB'), updated_date: new Date().toLocaleDateString('en-GB') } }));
     } else {
       dispatch(addLocation({ ...values, id: uuidv4(), created_date: new Date().toLocaleDateString('en-GB'), updated_date: new Date().toLocaleDateString('en-GB') }));
     }
@@ -173,15 +176,35 @@ const LocationTableList = () => {
     },
     [onOpenDrawer],
   );
+  type MenuItem = Required<MenuProps>['items'][number];
+
+  const filterMenu: Array<MenuItem> = columns.map((el, i) => ({
+    label: (
+      <Space>
+        <Checkbox />
+        <span>{el.title}</span>
+      </Space>
+    ),
+    key: `${el.title}_${i}`,
+  }));
 
   return (
     <>
       <Card
-        title={<>Serviceable Area</>}
+        title={
+          <Space size={'large'}>
+            <div>Serviceable Area</div>
+            <Input placeholder="Location Search" style={{ width: 340 }} />
+          </Space>
+        }
         extra={
           <Space>
             <IconLoader showLoader={isLoading} />
-            <Button type="primary" onClick={onShowAdd} disabled={showAdd}>
+            {/* <Menu items={filterMenu} /> */}
+            <Button type="primary" icon={<TbFilterPlus />}>
+              Add Filter
+            </Button>
+            <Button type="primary" onClick={onShowAdd} disabled={showAdd} icon={<LuSquarePlus size={15} />}>
               Add
             </Button>
           </Space>
@@ -199,7 +222,7 @@ const LocationTableList = () => {
       <Drawer
         title={
           <Flex justify="space-between">
-            <span>{id ? 'Edit Location' : 'Add Location'}</span>
+            <span>Add Location</span>
             <RiCloseLine size={20} onClick={onDrawerClose} />
           </Flex>
         }
@@ -209,7 +232,7 @@ const LocationTableList = () => {
         footer={
           <Flex justify="end">
             <Space>
-              <Button onClick={onDrawerClose}>Cancel</Button>
+              <Button onClick={onDrawerClose}>Close</Button>
               <Button type="primary" onClick={onSave}>
                 Save
               </Button>
@@ -221,6 +244,11 @@ const LocationTableList = () => {
           <Form form={addCountryForm} layout="vertical">
             <AddCountry formInst={addCountryForm} onCancelHandler={() => setShowAddd(false)} onSaveHandler={() => setShowAddd(false)} />
           </Form>
+
+          {/* <>Created By</>
+          <>Created Date</>
+          <>Updated By</>
+          <>Updated Date</> */}
         </div>
       </Drawer>
     </>

@@ -231,9 +231,9 @@ const items: Array<MenuItem> = [
         label: <Link href={'/settings/permission'}>Permission</Link>,
       },
       {
-        key: 'api_integraion',
+        key: 'company_info',
         icon: <FaUserShield size={20} />,
-        label: <Link href={'/settings/api_integraion'}>API Integration</Link>,
+        label: <Link href={'/settings/company_info'}>Company Info</Link>,
       },
       {
         key: 'system_logs',
