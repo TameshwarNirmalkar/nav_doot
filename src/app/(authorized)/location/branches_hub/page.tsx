@@ -1,11 +1,14 @@
-import BranchTypeTable from "./_components/BranchTypeTable";
-import BranchesForm from "./_components/BranchesForm";
+import { Breadcrumb, Card, Space } from 'antd';
+import BranchesWrapper from './_components/BranchesWrapper';
+import BreadcrumbComponent from '@src/components/BreadcrumbComponent/BreadcrumbComponent';
 
-export default function BranchesHubsPage() {
+export default function BranchesPage() {
   return (
-    <div>
-      <BranchesForm />
-      <BranchTypeTable />
+    <div className="mt-3">
+      <BreadcrumbComponent items={[{ title: 'Partner' }, { title: 'Branches' }]} />
+      <Space direction="vertical" className="flex w-full">
+        <BranchesWrapper />
+      </Space>
     </div>
   );
 }

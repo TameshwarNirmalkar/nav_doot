@@ -122,134 +122,134 @@ const items: Array<MenuItem> = [
   },
   {
     key: 'setup_manage',
-    icon: <MdDashboardCustomize size={20} />,
-    label: 'Setup & Manage',
+    // icon: <MdDashboardCustomize size={20} />,
+    label: <div className="border-b">Setup & Manage</div>,
+    disabled: true,
+  },
+  {
+    key: 'location',
+    icon: <ImLocation size={20} />,
+    label: 'Network',
     children: [
       {
-        key: 'location',
-        icon: <ImLocation size={20} />,
-        label: 'Network',
-        children: [
-          {
-            key: 'zone',
-            icon: <RiTimeZoneFill size={20} />,
-            label: <Link href={'/location/zone'}>Zone/Region</Link>,
-          },
-          {
-            key: 'branches_hub',
-            icon: <ImEarth size={20} />,
-            label: <Link href={'/location/branches_hub'}>Branches/Hubs</Link>,
-          },
-          {
-            key: 'serviceable_area',
-            icon: <PiMapPinSimpleAreaFill size={20} />,
-            label: <Link href={'/location/serviceable_area'}>Serviceable Area</Link>,
-          },
-          // {
-          //   key: 'region',
-          //   icon: <FaMapLocationDot size={20} />,
-          //   label: <Link href={'/location/region'}>Region</Link>,
-          // },
-          // {
-          //   key: 'state',
-          //   icon: <GiMatterStates size={20} />,
-          //   label: <Link href={'/location/state'}>State</Link>,
-          // },
-          // {
-          //   key: 'city',
-          //   icon: <FaTreeCity size={20} />,
-          //   label: <Link href={'/location/city'}>City</Link>,
-          // },
-          // {
-          //   key: 'postal_code',
-          //   icon: <IoIosBarcode size={20} />,
-          //   label: <Link href={'/location/postal_code'}>Postal Code</Link>,
-          // },
-        ],
+        key: 'serviceable_area',
+        icon: <PiMapPinSimpleAreaFill size={20} />,
+        label: <Link href={'/location/serviceable_area'}>Serviceable Area</Link>,
       },
       {
-        key: 'partners',
-        icon: <FaHandsHelping size={20} />,
-        label: 'Partners',
-        children: [
-          {
-            key: 'branches',
-            icon: <CgListTree size={20} />,
-            label: <Link href={'/partners/branches'}>Branches</Link>,
-          },
-          {
-            key: 'customers',
-            icon: <RiCustomerService2Fill size={20} />,
-            label: <Link href={'/partners/customers'}>Customers</Link>,
-          },
-          {
-            key: 'vendors',
-            icon: <TbTimelineEventPlus size={20} />,
-            label: <Link href={'/partners/vendors'}>Vendors</Link>,
-          },
-          {
-            key: 'franchisees',
-            icon: <TbBinaryTree2Filled size={20} />,
-            label: <Link href={'/partners/franchisees'}>Franchisees</Link>,
-          },
-          {
-            key: 'agents',
-            icon: <MdDeliveryDining size={20} />,
-            label: <Link href={'/partners/agents'}>Agents/Associates</Link>,
-          },
-        ],
+        key: 'branches_hub',
+        icon: <ImEarth size={20} />,
+        label: <Link href={'/location/branches_hub'}>Branches/Hubs</Link>,
+      },
+      // {
+      //   key: 'branches_type',
+      //   icon: <ImEarth size={20} />,
+      //   label: <Link href={'/location/branches_type'}>Branche Type</Link>,
+      // },
+      // {
+      //   key: 'zone',
+      //   icon: <RiTimeZoneFill size={20} />,
+      //   label: <Link href={'/location/zone'}>Zone/Region</Link>,
+      // },
+      // {
+      //   key: 'region',
+      //   icon: <FaMapLocationDot size={20} />,
+      //   label: <Link href={'/location/region'}>Region</Link>,
+      // },
+      // {
+      //   key: 'state',
+      //   icon: <GiMatterStates size={20} />,
+      //   label: <Link href={'/location/state'}>State</Link>,
+      // },
+      // {
+      //   key: 'city',
+      //   icon: <FaTreeCity size={20} />,
+      //   label: <Link href={'/location/city'}>City</Link>,
+      // },
+      // {
+      //   key: 'postal_code',
+      //   icon: <IoIosBarcode size={20} />,
+      //   label: <Link href={'/location/postal_code'}>Postal Code</Link>,
+      // },
+    ],
+  },
+  {
+    key: 'partners',
+    icon: <FaHandsHelping size={20} />,
+    label: 'Partners',
+    children: [
+      {
+        key: 'customers',
+        icon: <RiCustomerService2Fill size={20} />,
+        label: <Link href={'/partners/customers'}>Customers</Link>,
       },
       {
-        key: 'contracts',
-        icon: <MdOutlineContactPhone size={20} />,
-        label: 'Contracts',
-        children: [
-          {
-            key: 'rfqs',
-            icon: <IoIosCreate size={20} />,
-            label: <Link href={'/contracts/rfqs'}>RFQs</Link>,
-          },
-          {
-            key: 'proposals',
-            icon: <ImBooks size={20} />,
-            label: <Link href={'/contracts/proposals'}>Praposals</Link>,
-          },
-          {
-            key: 'agreements',
-            icon: <FaLayerGroup size={20} />,
-            label: <Link href={'/contracts/agreements'}>Agreements</Link>,
-          },
-        ],
+        key: 'vendors',
+        icon: <TbTimelineEventPlus size={20} />,
+        label: <Link href={'/partners/vendors'}>Vendors</Link>,
       },
       {
-        key: 'settings',
-        icon: <RiUserSettingsLine size={20} />,
-        label: 'Settings',
-        children: [
-          {
-            key: 'users_role',
-            icon: <FaUsers size={20} />,
-            label: <Link href={'/settings/users_roles'}>Team</Link>,
-          },
-          {
-            key: 'permission',
-            icon: <FaUserGear size={20} />,
-            label: <Link href={'/settings/permission'}>Permission</Link>,
-          },
-          {
-            key: 'api_integraion',
-            icon: <FaUserShield size={20} />,
-            label: <Link href={'/settings/api_integraion'}>API Integration</Link>,
-          },
-          {
-            key: 'system_logs',
-            icon: <GrSystem size={20} />,
-            label: <Link href={'/settings/system_logs'}>System Logs</Link>,
-          },
-        ],
+        key: 'franchisees',
+        icon: <TbBinaryTree2Filled size={20} />,
+        label: <Link href={'/partners/franchisees'}>Franchisees</Link>,
+      },
+      {
+        key: 'agents',
+        icon: <MdDeliveryDining size={20} />,
+        label: <Link href={'/partners/agents'}>Agents/Associates</Link>,
       },
     ],
   },
+  {
+    key: 'contracts',
+    icon: <MdOutlineContactPhone size={20} />,
+    label: 'Contracts',
+    children: [
+      {
+        key: 'rfqs',
+        icon: <IoIosCreate size={20} />,
+        label: <Link href={'/contracts/rfqs'}>RFQs</Link>,
+      },
+      {
+        key: 'proposals',
+        icon: <ImBooks size={20} />,
+        label: <Link href={'/contracts/proposals'}>Praposals</Link>,
+      },
+      {
+        key: 'agreements',
+        icon: <FaLayerGroup size={20} />,
+        label: <Link href={'/contracts/agreements'}>Agreements</Link>,
+      },
+    ],
+  },
+  {
+    key: 'settings',
+    icon: <RiUserSettingsLine size={20} />,
+    label: 'Settings',
+    children: [
+      {
+        key: 'users_role',
+        icon: <FaUsers size={20} />,
+        label: <Link href={'/settings/users_roles'}>Team</Link>,
+      },
+      {
+        key: 'permission',
+        icon: <FaUserGear size={20} />,
+        label: <Link href={'/settings/permission'}>Permission</Link>,
+      },
+      {
+        key: 'api_integraion',
+        icon: <FaUserShield size={20} />,
+        label: <Link href={'/settings/api_integraion'}>API Integration</Link>,
+      },
+      {
+        key: 'system_logs',
+        icon: <GrSystem size={20} />,
+        label: <Link href={'/settings/system_logs'}>System Logs</Link>,
+      },
+    ],
+  },
+
   // {
   //   key: 'transaction',
   //   icon: <TbTransactionRupee size={20} />,
