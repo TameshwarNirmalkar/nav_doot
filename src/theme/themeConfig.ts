@@ -125,7 +125,7 @@ const customTheme: ThemeConfig = {
       itemHoverBg: grayColor,
       itemHoverColor: 'white',
       subMenuItemSelectedColor: 'white',
-      itemDisabledColor: 'white',
+      itemDisabledColor: '#939393',
 
       horizontalItemSelectedColor: 'white',
       horizontalItemHoverBg: grayColor,
