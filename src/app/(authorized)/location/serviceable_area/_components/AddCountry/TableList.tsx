@@ -1,5 +1,6 @@
 'use client';
 
+import FilterColumnComponent from '@src/components/FilterColumnComponent/FilterColumnComponent';
 import IconLoader from '@src/components/IconLoader/IconLoader';
 import TableComponent from '@src/components/Tables/TableComponent';
 import { getAllCitiesBasedOnCountryAndStateAction, getAllCountriesWithFlagAction, getAllStatesBasedOnCountryAction } from '@src/store/country_cities/action';
@@ -12,7 +13,7 @@ import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
 import { AppState } from '@src/store/store_config';
 import { getZoneListAction } from '@src/store/zone/action';
 import { getUniqueFilters } from '@src/utility/common_function';
-import { Button, Card, Checkbox, Drawer, Flex, Form, Input, Menu, MenuProps, Popconfirm, Space } from 'antd';
+import { Button, Card, Checkbox, Drawer, Dropdown, Flex, Form, Input, Menu, MenuProps, Popconfirm, Space } from 'antd';
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { FaEye } from 'react-icons/fa';
@@ -178,16 +179,6 @@ const LocationTableList = () => {
   );
   type MenuItem = Required<MenuProps>['items'][number];
 
-  const filterMenu: Array<MenuItem> = columns.map((el, i) => ({
-    label: (
-      <Space>
-        <Checkbox />
-        <span>{el.title}</span>
-      </Space>
-    ),
-    key: `${el.title}_${i}`,
-  }));
-
   return (
     <>
       <Card
@@ -201,9 +192,12 @@ const LocationTableList = () => {
           <Space>
             <IconLoader showLoader={isLoading} />
             {/* <Menu items={filterMenu} /> */}
-            <Button type="primary" icon={<TbFilterPlus />}>
-              Add Filter
-            </Button>
+            <FilterColumnComponent tableColumns={columns} />
+            {/* <Dropdown menu={{ items: filterMenu }} placement="bottomRight" onOpenChange={handleOpenChange} open={true}>
+              <Button type="primary" icon={<TbFilterPlus />}>
+                Add Filter
+              </Button>
+            </Dropdown> */}
             <Button type="primary" onClick={onShowAdd} disabled={showAdd} icon={<LuSquarePlus size={15} />}>
               Add
             </Button>
