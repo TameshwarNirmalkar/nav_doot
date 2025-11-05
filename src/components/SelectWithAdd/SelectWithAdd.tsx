@@ -17,9 +17,10 @@ interface SelectWithAddI<T extends Record<string, any>> {
   onAddHandler: (txt: string) => void;
   onItemSelectHandler?: (options: any) => void;
   formPlaceholder?: string;
+  htmlProps: { tabIndex: number };
 }
 
-export default memo(function SelectWithAdd({ dropDownList, field_id, loadingState, buttonLabel, formItemLabel, onAddHandler, onItemSelectHandler, formPlaceholder }: SelectWithAddI<FieldListType>) {
+export default memo(function SelectWithAdd({ dropDownList, field_id, loadingState, buttonLabel, formItemLabel, onAddHandler, onItemSelectHandler, formPlaceholder, htmlProps }: SelectWithAddI<FieldListType>) {
   const inputRef = useRef<InputRef>(null);
   const [local_name, setLocalName] = useState<string>('');
   const { message } = App.useApp();
@@ -46,6 +47,7 @@ export default memo(function SelectWithAdd({ dropDownList, field_id, loadingStat
       rules={[{ required: true, message: 'Required' }]}
     >
       <Select
+        tabIndex={htmlProps.tabIndex}
         style={{ width: '100%' }}
         placeholder={formPlaceholder || 'Select Branch'}
         optionFilterProp="label"

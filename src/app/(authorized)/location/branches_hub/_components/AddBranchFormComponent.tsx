@@ -91,17 +91,36 @@ const AddBranchForm = () => {
             <Input placeholder="Enter Branch Name" tabIndex={1} />
           </Form.Item>
 
-          <SelectWithAdd dropDownList={branchTypeList.map((el) => ({ field_name: el.branchtype_name, field_id: el.branchtype_id }))} loadingState={isBranchLoading} field_id="branchtype_id" formItemLabel="Parent Branch" buttonLabel="Add" onAddHandler={onAddBranch} onItemSelectHandler={onBranchTypeSelect} />
+          <SelectWithAdd
+            htmlProps={{ tabIndex: 3 }}
+            dropDownList={branchTypeList.map((el) => ({ field_name: el.branchtype_name, field_id: el.branchtype_id }))}
+            loadingState={isBranchLoading}
+            field_id="branchtype_id"
+            formItemLabel="Parent Branch"
+            buttonLabel="Add"
+            onAddHandler={onAddBranch}
+            onItemSelectHandler={onBranchTypeSelect}
+          />
 
           <Form.Item label="GST Number" name="gst_number" rules={[{ required: true, message: 'Required' }]}>
-            <Input placeholder="Enter GST Number" />
+            <Input placeholder="Enter GST Number" tabIndex={5} />
           </Form.Item>
         </div>
         <div>
-          <SelectWithAdd dropDownList={branchTypeList.map((el) => ({ field_name: el.branchtype_name, field_id: el.branchtype_id }))} loadingState={isBranchLoading} field_id="branchtype_id" formItemLabel="Branch Type" buttonLabel="Add" onAddHandler={onAddBranch} onItemSelectHandler={onBranchTypeSelect} />
+          <SelectWithAdd
+            htmlProps={{ tabIndex: 2 }}
+            dropDownList={branchTypeList.map((el) => ({ field_name: el.branchtype_name, field_id: el.branchtype_id }))}
+            loadingState={isBranchLoading}
+            field_id="branchtype_id"
+            formItemLabel="Branch Type"
+            buttonLabel="Add"
+            onAddHandler={onAddBranch}
+            onItemSelectHandler={onBranchTypeSelect}
+          />
 
           <Form.Item label="Allow Scan" name="allow_scan" rules={[{ required: true, message: 'Required' }]}>
             <Select
+              tabIndex={4}
               placeholder="Select Allow Scan"
               options={[
                 { label: 'Yes', value: 'Y' },
@@ -118,37 +137,37 @@ const AddBranchForm = () => {
       <div className="grid grid-cols-2 gap-4">
         <div>
           <Form.Item label="Contact Person" name="contact_person" rules={[{ required: true, message: 'Required' }]}>
-            <Input placeholder="Enter Contact Person" />
+            <Input placeholder="Enter Contact Person" tabIndex={6} />
           </Form.Item>
           <Form.Item label="Phone" name="phone" rules={[{ required: true, message: 'Required' }]}>
-            <Input placeholder="Enter Phone Number" />
+            <Input placeholder="Enter Phone Number" tabIndex={8} />
           </Form.Item>
 
           <Form.Item label="Postal Code" name="postal_code" rules={[{ required: true, message: 'Required' }]}>
-            <Input placeholder="Enter postal code." />
+            <Input placeholder="Enter postal code." tabIndex={10} />
           </Form.Item>
 
           <Form.Item label="State" name="state_code" rules={[{ required: true, message: 'Required' }]}>
-            <Select showSearch placeholder="Select State" filterSort={(optionA, optionB) => (optionA.name ?? '').toLowerCase().localeCompare((optionB.name ?? '').toLowerCase())} fieldNames={{ label: 'name', value: 'id' }} optionFilterProp="name" options={allStates} onSelect={onStateSelect} />
+            <Select tabIndex={12} showSearch placeholder="Select State" filterSort={(optionA, optionB) => (optionA.name ?? '').toLowerCase().localeCompare((optionB.name ?? '').toLowerCase())} fieldNames={{ label: 'name', value: 'id' }} optionFilterProp="name" options={allStates} onSelect={onStateSelect} />
           </Form.Item>
         </div>
         <div>
           <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Required' }]}>
-            <Input placeholder="Enter Email" />
+            <Input placeholder="Enter Email" tabIndex={7} />
           </Form.Item>
           <Form.Item label="Alternate Phone" name="alternate_phone">
-            <Input placeholder="Enter Alternate Phone Number" />
+            <Input placeholder="Enter Alternate Phone Number" tabIndex={9} />
           </Form.Item>
           <Form.Item label="City" name="city_code" rules={[{ required: true, message: 'Required' }]}>
-            <Select showSearch placeholder="Select City" filterSort={(optionA, optionB) => (optionA.name ?? '').toLowerCase().localeCompare((optionB.name ?? '').toLowerCase())} options={allCities} optionFilterProp="name" fieldNames={{ label: 'name', value: 'id' }} onSelect={onCitySelect} />
+            <Select tabIndex={11} showSearch placeholder="Select City" filterSort={(optionA, optionB) => (optionA.name ?? '').toLowerCase().localeCompare((optionB.name ?? '').toLowerCase())} options={allCities} optionFilterProp="name" fieldNames={{ label: 'name', value: 'id' }} onSelect={onCitySelect} />
           </Form.Item>
           <Form.Item label="Country" name="country_code" rules={[{ required: true, message: 'Required' }]}>
-            <Select showSearch placeholder="Select Country" optionFilterProp="name" filterSort={(optionA, optionB) => (optionA?.name ?? '').toLowerCase().localeCompare((optionB?.name ?? '').toLowerCase())} fieldNames={{ label: 'name', value: 'id' }} options={allCountries} onSelect={onCountrySelect} />
+            <Select tabIndex={13} showSearch placeholder="Select Country" optionFilterProp="name" filterSort={(optionA, optionB) => (optionA?.name ?? '').toLowerCase().localeCompare((optionB?.name ?? '').toLowerCase())} fieldNames={{ label: 'name', value: 'id' }} options={allCountries} onSelect={onCountrySelect} />
           </Form.Item>
         </div>
       </div>
       <Form.Item label="Address" name="address" rules={[{ required: true, message: 'Required' }]}>
-        <TextArea rows={2} cols={2} placeholder="Enter Address" />
+        <TextArea rows={2} cols={2} placeholder="Enter Address" tabIndex={14} />
       </Form.Item>
     </>
   );
