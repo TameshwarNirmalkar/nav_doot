@@ -4,11 +4,11 @@ import BranchesWrapper from './_components/BranchesWrapper';
 
 export default function BranchesPage() {
   return (
-    <div className="mt-3">
-      <BreadcrumbComponent items={[{ title: 'Partner' }, { title: 'Branches' }]} />
-      <Space direction="vertical" className="flex w-full">
-        <BranchesWrapper />
-      </Space>
+    <div>
+      {/* <BreadcrumbComponent items={[{ title: 'Partner' }, { title: 'Branches' }]} /> */}
+      {/* <Space direction="vertical" className="flex w-full"> */}
+      <BranchesWrapper />
+      {/* </Space> */}
     </div>
   );
 }

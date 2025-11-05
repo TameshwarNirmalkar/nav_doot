@@ -4,11 +4,11 @@ import { Breadcrumb, Space } from 'antd';
 
 export default function ServiceableAreaPage() {
   return (
-    <div className="mt-3">
+    <div>
       {/* <BreadcrumbComponent items={[{ title: 'Network' }, { title: 'Serviceable Area' }]} /> */}
-      <Space direction="vertical" className="flex w-full">
-        <LocationTableList />
-      </Space>
+      {/* <Space direction="vertical" className="flex w-full"> */}
+      <LocationTableList />
+      {/* </Space> */}
     </div>
   );
 }

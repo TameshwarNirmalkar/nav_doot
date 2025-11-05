@@ -132,6 +132,11 @@ const items: Array<MenuItem> = [
         icon: <ImEarth size={20} />,
         label: <Link href={'/location/branches_hub'}>Branches/Hubs</Link>,
       },
+      {
+        key: 'partners',
+        icon: <FaHandsHelping size={20} />,
+        label: <Link href={'/location/partners'}>Partners</Link>,
+      },
       // {
       //   key: 'branches_type',
       //   icon: <ImEarth size={20} />,
@@ -162,11 +167,6 @@ const items: Array<MenuItem> = [
       //   icon: <IoIosBarcode size={20} />,
       //   label: <Link href={'/location/postal_code'}>Postal Code</Link>,
       // },
-      {
-        key: 'partners',
-        icon: <FaHandsHelping size={20} />,
-        label: <Link href={'/partners'}>Partners</Link>,
-      },
     ],
   },
 
