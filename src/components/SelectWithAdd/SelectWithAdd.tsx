@@ -1,5 +1,4 @@
 import { App, Button, Divider, Form, Input, InputRef, Select, Space } from 'antd';
-import { OptionProps } from 'antd/es/select';
 import React, { memo, useCallback, useRef, useState } from 'react';
 import IconLoader from '../IconLoader/IconLoader';
 
@@ -17,7 +16,7 @@ interface SelectWithAddI<T extends Record<string, any>> {
   onAddHandler: (txt: string) => void;
   onItemSelectHandler?: (options: any) => void;
   formPlaceholder?: string;
-  htmlProps: { tabIndex: number };
+  htmlProps?: { tabIndex: number };
 }
 
 export default memo(function SelectWithAdd({ dropDownList, field_id, loadingState, buttonLabel, formItemLabel, onAddHandler, onItemSelectHandler, formPlaceholder, htmlProps }: SelectWithAddI<FieldListType>) {
@@ -29,11 +28,14 @@ export default memo(function SelectWithAdd({ dropDownList, field_id, loadingStat
     setLocalName(event.target.value);
   };
 
-  const onItemSelect = useCallback((_fldval: FieldListType, option: any) => {
-    if (typeof onItemSelectHandler === 'function') {
-      onItemSelectHandler(option);
-    }
-  }, []);
+  const onItemSelect = useCallback(
+    (_fldval: FieldListType, option: any) => {
+      if (typeof onItemSelectHandler === 'function') {
+        onItemSelectHandler(option);
+      }
+    },
+    [onItemSelectHandler],
+  );
 
   return (
     <Form.Item
@@ -47,7 +49,7 @@ export default memo(function SelectWithAdd({ dropDownList, field_id, loadingStat
       rules={[{ required: true, message: 'Required' }]}
     >
       <Select
-        tabIndex={htmlProps.tabIndex}
+        tabIndex={htmlProps?.tabIndex}
         style={{ width: '100%' }}
         placeholder={formPlaceholder || 'Select Branch'}
         optionFilterProp="label"
