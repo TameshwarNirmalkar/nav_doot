@@ -1,5 +1,5 @@
 import BreadcrumbComponent from '@src/components/BreadcrumbComponent/BreadcrumbComponent';
-import { Breadcrumb, Card, Space } from 'antd';
+import { Space } from 'antd';
 import BranchesWrapper from './_components/BranchesWrapper';
 
 export default function BranchesPage() {
