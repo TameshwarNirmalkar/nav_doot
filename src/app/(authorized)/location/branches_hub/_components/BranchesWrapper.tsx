@@ -1,52 +1,54 @@
-'use client';
-import TableComponent from '@src/components/Tables/TableComponent';
-import { getbranchTypeListAction } from '@src/store/branch_type/action';
-import { addBranch, removeBranch, selectBranchesList, updadateBranch } from '@src/store/branches';
-import { getBranchesAction } from '@src/store/branches/action';
-import { getAllStatesBasedOnCountryAction } from '@src/store/country_cities/action';
-import { addDrawer, drawerUpdate } from '@src/store/drawer';
-import { selectIsCollapsedById } from '@src/store/drawer/memoised_drawer_selector';
-import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
-import { AppState } from '@src/store/store_config';
-import { getUniqueFilters } from '@src/utility/common_function';
-import { Button, Card, Drawer, Flex, Form, Popconfirm, Space, Table, TableColumnsType } from 'antd';
-import React, { memo, useCallback, useEffect, useMemo } from 'react';
-import { BiEdit } from 'react-icons/bi';
-import { RiCloseLine, RiFilter3Fill } from 'react-icons/ri';
-import { TbTrash } from 'react-icons/tb';
-import { v4 as uuidv4 } from 'uuid';
-import AddBranchFormComponent from './AddBranchFormComponent';
+"use client";
+import DropdownWithCheckboxes from "@src/components/FilterColumnComponent/FilterComponents";
+import TableComponent from "@src/components/Tables/TableComponent";
+import { getbranchTypeListAction } from "@src/store/branch_type/action";
+import { addBranch, removeBranch, selectBranchesList, updadateBranch } from "@src/store/branches";
+import { getBranchesAction } from "@src/store/branches/action";
+import { getAllStatesBasedOnCountryAction } from "@src/store/country_cities/action";
+import { addDrawer, drawerUpdate } from "@src/store/drawer";
+import { selectIsCollapsedById } from "@src/store/drawer/memoised_drawer_selector";
+import { useAppDispatch, useAppSelector } from "@src/store/redux_hooks";
+import { AppState } from "@src/store/store_config";
+import { getUniqueFilters } from "@src/utility/common_function";
+import { Button, Card, Drawer, Flex, Form, Popconfirm, Space, Table, TableColumnsType } from "antd";
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { BiEdit } from "react-icons/bi";
+import { RiCloseLine, RiFilter3Fill } from "react-icons/ri";
+import { TbTrash } from "react-icons/tb";
+import { v4 as uuidv4 } from "uuid";
+import AddBranchFormComponent from "./AddBranchFormComponent";
 
 const BranchesWrapper = () => {
   const dispatch = useAppDispatch();
   const [addBranchForm] = Form.useForm();
-  const id = Form.useWatch('id', addBranchForm);
-  const isCollapsed = useAppSelector((state: AppState) => selectIsCollapsedById(state, 'add_branch_drawer'));
+  const id = Form.useWatch("id", addBranchForm);
+  const isCollapsed = useAppSelector((state: AppState) => selectIsCollapsedById(state, "add_branch_drawer"));
   const allBranches = useAppSelector(selectBranchesList);
+  const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
 
   useEffect(() => {
-    dispatch(addDrawer({ drawerId: 'add_branch_drawer', isCollapsed: false }));
+    dispatch(addDrawer({ drawerId: "add_branch_drawer", isCollapsed: false }));
     // dispatch(getAllStatesBasedOnCountryAction({ country: 'India' }));
-    dispatch(getAllStatesBasedOnCountryAction({ country: '101' }));
+    dispatch(getAllStatesBasedOnCountryAction({ country: "101" }));
     dispatch(getBranchesAction());
     dispatch(getbranchTypeListAction());
   }, [dispatch]);
 
   const filterFields = useMemo(() => {
     return {
-      branchName: getUniqueFilters(allBranches, 'branch_name'),
-      branchType: getUniqueFilters(allBranches, 'branchtype_name'),
-      parentBranch: getUniqueFilters(allBranches, 'parent_branch_name'),
-      cityName: getUniqueFilters(allBranches, 'city_name'),
-      stateName: getUniqueFilters(allBranches, 'state_name'),
+      branchName: getUniqueFilters(allBranches, "branch_name"),
+      branchType: getUniqueFilters(allBranches, "branchtype_name"),
+      parentBranch: getUniqueFilters(allBranches, "parent_branch_name"),
+      cityName: getUniqueFilters(allBranches, "city_name"),
+      stateName: getUniqueFilters(allBranches, "state_name"),
     };
   }, [allBranches]);
 
   const columns: any = [
     {
-      title: 'Branch Name',
-      dataIndex: 'branch_name',
-      key: 'branch_name',
+      title: "Branch Name",
+      dataIndex: "branch_name",
+      key: "branch_name",
       filtered: true,
       filters: filterFields.branchName,
       filterIcon: <RiFilter3Fill size={20} />,
@@ -56,9 +58,9 @@ const BranchesWrapper = () => {
       filterMultiple: true,
     },
     {
-      title: 'Branch Type',
-      dataIndex: 'branchtype_name',
-      key: 'branchtype_name',
+      title: "Branch Type",
+      dataIndex: "branchtype_name",
+      key: "branchtype_name",
       filters: filterFields.branchType,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string, record: any): boolean => {
@@ -67,9 +69,9 @@ const BranchesWrapper = () => {
       filterMultiple: true,
     },
     {
-      title: 'Parent Branch',
-      dataIndex: 'parent_branch_name',
-      key: 'parent_branch_name',
+      title: "Parent Branch",
+      dataIndex: "parent_branch_name",
+      key: "parent_branch_name",
       filters: filterFields.parentBranch,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string, record: any): boolean => {
@@ -78,14 +80,14 @@ const BranchesWrapper = () => {
       filterMultiple: true,
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
     },
     {
-      title: 'City',
-      dataIndex: 'city_name',
-      key: 'city_name',
+      title: "City",
+      dataIndex: "city_name",
+      key: "city_name",
       filters: filterFields.cityName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string, record: any): boolean => {
@@ -94,9 +96,9 @@ const BranchesWrapper = () => {
       filterMultiple: true,
     },
     {
-      title: 'State',
-      dataIndex: 'state_name',
-      key: 'state_name',
+      title: "State",
+      dataIndex: "state_name",
+      key: "state_name",
       filters: filterFields.stateName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string, record: any): boolean => {
@@ -105,19 +107,19 @@ const BranchesWrapper = () => {
       filterMultiple: true,
     },
     {
-      title: 'Created Date',
-      dataIndex: 'created_date',
-      key: 'created_date',
+      title: "Created Date",
+      dataIndex: "created_date",
+      key: "created_date",
     },
     {
-      title: 'Modified Date',
-      dataIndex: 'updated_date',
-      key: 'updated_date',
+      title: "Modified Date",
+      dataIndex: "updated_date",
+      key: "updated_date",
     },
     {
-      title: 'Action',
-      dataIndex: 'id',
-      key: 'id',
+      title: "Action",
+      dataIndex: "id",
+      key: "id",
       render: (text: string, row: any) => (
         <Space>
           <BiEdit size={20} color="green" className="cursor-pointer" onClick={() => onBranchEdit(row)} />
@@ -130,10 +132,18 @@ const BranchesWrapper = () => {
     },
   ];
 
+  const filteredColumns = useMemo(() => {
+      if (!selectedColumns.length) {
+        return columns;
+      } else {
+        return columns.filter((el: {dataIndex: string}) => !selectedColumns.includes(el.dataIndex));
+      }
+    }, [selectedColumns, columns]);
+
   const onOpenDrawer = useCallback(() => {
     dispatch(
       drawerUpdate({
-        drawerId: 'add_branch_drawer',
+        drawerId: "add_branch_drawer",
         isCollapsed: true,
       }),
     );
@@ -142,7 +152,7 @@ const BranchesWrapper = () => {
   const onDrawerClose = useCallback(() => {
     dispatch(
       drawerUpdate({
-        drawerId: 'add_branch_drawer',
+        drawerId: "add_branch_drawer",
         isCollapsed: false,
       }),
     );
@@ -153,12 +163,12 @@ const BranchesWrapper = () => {
     try {
       const val = await addBranchForm.validateFields();
       if (val.id) {
-        dispatch(updadateBranch({ id: val.id, changes: { ...val, updated_date: new Date().toLocaleDateString('en-GB') } }));
+        dispatch(updadateBranch({ id: val.id, changes: { ...val, updated_date: new Date().toLocaleDateString("en-GB") } }));
       } else {
-        dispatch(addBranch({ ...val, id: uuidv4(), created_date: new Date().toLocaleDateString('en-GB'), updated_date: new Date().toLocaleDateString('en-GB') }));
+        dispatch(addBranch({ ...val, id: uuidv4(), created_date: new Date().toLocaleDateString("en-GB"), updated_date: new Date().toLocaleDateString("en-GB") }));
       }
     } catch (error) {
-      console.log('error ====== ', error);
+      console.log("error ====== ", error);
     } finally {
       onDrawerClose();
     }
@@ -184,22 +194,27 @@ const BranchesWrapper = () => {
       <Card
         title="Branch Gateway"
         extra={
-          <Button type="primary" onClick={onOpenDrawer}>
-            Add
-          </Button>
+          <Space>
+            <DropdownWithCheckboxes tableColumns={columns} onFilterChangeValue={(val: string[]) => {
+                setSelectedColumns(val);
+              }} />
+            <Button type="primary" onClick={onOpenDrawer}>
+              Add
+            </Button>
+          </Space>
         }
       >
-        <TableComponent rowKey={'id'} columns={columns} dataSource={allBranches} />
+        <TableComponent rowKey={"id"} columns={filteredColumns} dataSource={allBranches} />
       </Card>
 
       <Drawer
         title={
           <Flex justify="space-between">
-            <span>{id ? 'Edit' : 'Add'} Branch</span>
+            <span>{id ? "Edit" : "Add"} Branch</span>
             <RiCloseLine size={20} onClick={onDrawerClose} className="cursor-pointer" />
           </Flex>
         }
-        width={'60%'}
+        width={"60%"}
         open={isCollapsed}
         closable={false}
         maskClosable={false}
