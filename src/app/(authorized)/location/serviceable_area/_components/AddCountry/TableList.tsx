@@ -23,6 +23,8 @@ import { TbFilterPlus, TbTrash } from 'react-icons/tb';
 import { v4 as uuidv4 } from 'uuid';
 import AddCountry from './AddCountry';
 
+type MenuItem = Required<MenuProps>['items'][number];
+
 const LocationTableList = () => {
   const [addCountryForm] = Form.useForm();
   const dispatch = useAppDispatch();
@@ -30,6 +32,7 @@ const LocationTableList = () => {
   const isCollapsed = useAppSelector((state: AppState) => selectIsCollapsedById(state, 'add_location_drawer'));
   const isLoading = useAppSelector(countryCityIsLoading);
   const [showAdd, setShowAddd] = useState<boolean>(false);
+  const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
 
   const id = Form.useWatch('id', addCountryForm);
 
@@ -100,7 +103,7 @@ const LocationTableList = () => {
     //   key: 'updated_date',
     // },
     {
-      title: <div className="text-center">Action</div>,
+      title: 'Action',
       dataIndex: 'id',
       key: 'id',
       width: 120,
@@ -116,6 +119,14 @@ const LocationTableList = () => {
       ),
     },
   ];
+
+  const filteredColumns = useMemo(() => {
+    if (!selectedColumns.length) {
+      return columns;
+    } else {
+      return columns.filter((el) => !selectedColumns.includes(el.dataIndex));
+    }
+  }, [selectedColumns]);
 
   useEffect(() => {
     dispatch(getAllCountriesWithFlagAction());
@@ -177,7 +188,6 @@ const LocationTableList = () => {
     },
     [onOpenDrawer],
   );
-  type MenuItem = Required<MenuProps>['items'][number];
 
   return (
     <>
@@ -192,7 +202,12 @@ const LocationTableList = () => {
           <Space>
             <IconLoader showLoader={isLoading} />
             {/* <Menu items={filterMenu} /> */}
-            <FilterColumnComponent tableColumns={columns} />
+            <FilterColumnComponent
+              tableColumns={columns}
+              onFilterChangeValue={(val: string[]) => {
+                setSelectedColumns(val);
+              }}
+            />
             {/* <Dropdown menu={{ items: filterMenu }} placement="bottomRight" onOpenChange={handleOpenChange} open={true}>
               <Button type="primary" icon={<TbFilterPlus />}>
                 Add Filter
@@ -210,7 +225,7 @@ const LocationTableList = () => {
         {/* ) : (
            </Form>
            */}
-        <TableComponent rowKey={'id'} columns={columns} dataSource={locationList} bordered />
+        <TableComponent rowKey={'id'} columns={filteredColumns} dataSource={locationList} bordered />
       </Card>
 
       <Drawer

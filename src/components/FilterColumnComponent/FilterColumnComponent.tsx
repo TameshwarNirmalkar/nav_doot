@@ -1,54 +1,70 @@
 'use client';
 
-import { Button, Checkbox, CheckboxChangeEvent, Dropdown, MenuProps } from 'antd';
+import type { GetProp, MenuProps, SelectProps } from 'antd';
+import { Button, Checkbox, CheckboxChangeEvent, Dropdown, Select, Tag } from 'antd';
 import React, { memo, useCallback, useMemo, useState } from 'react';
 import { TbFilterPlus } from 'react-icons/tb';
 
-export default memo(function FilterColumnComponent({ tableColumns }: { tableColumns: Array<any> }) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [checkedItems, setCheckedItems] = useState<string[]>([]);
+// type MenuItem = GetProp<MenuProps, 'items'>[number];
 
-  const onCheckBoxChange = useCallback(
-    (e: CheckboxChangeEvent, item: { [key: string]: string }) => {
-      const isChecked = e.target.checked;
-      const itemId = item.dataIndex;
-      if (isChecked) {
-        setCheckedItems([...checkedItems, item.dataIndex]);
-      } else {
-        setCheckedItems(checkedItems.filter((elf: any) => elf !== itemId));
+// interface ItemProps {
+//   label: string;
+//   value: string;
+// }
+
+type TagRenderProps = Parameters<NonNullable<SelectProps['tagRender']>>[0];
+
+interface CustomTagRenderProps extends TagRenderProps {
+  title?: string;
+}
+
+type CustomTagRender = (props: CustomTagRenderProps) => React.ReactElement;
+
+export default memo(function FilterColumnComponent({ tableColumns, onFilterChangeValue }: { tableColumns: Array<any>; onFilterChangeValue?: (val: string[]) => void }) {
+  // const [checkedValues, setCheckedValues] = useState<string[]>([]);
+  // const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  // console.log('====== ', selectedValues);
+
+  const optiions = useMemo(() => {
+    return tableColumns.map((el) => ({
+      label: el.title,
+      value: el.dataIndex,
+    }));
+  }, [tableColumns]);
+
+  const handleSelectChange = useCallback(
+    (values: string[]) => {
+      // setSelectedValues(values);
+      if (typeof onFilterChangeValue === 'function') {
+        onFilterChangeValue(values);
       }
     },
-    [checkedItems],
+    [onFilterChangeValue],
   );
 
-  const filterMenu: MenuProps['items'] = useMemo(() => {
-    return tableColumns.map((el, i) => ({
-      label: (
-        <Checkbox onChange={(e: CheckboxChangeEvent) => onCheckBoxChange(e, el)} title={el.title}>
-          {el.title}
-        </Checkbox>
-      ),
-      key: `${el.title}_${i}`,
-    }));
-  }, [tableColumns, onCheckBoxChange]);
+  // const handleCheckboxChange = (value: string, e: CheckboxChangeEvent) => {
+  //   const isChecked = e.target.checked;
+  //   if (isChecked) {
+  //     setCheckedValues((prev) => [...prev, value]);
+  //   } else {
+  //     setCheckedValues((prev) => prev.filter((v) => v !== value));
+  //   }
+  // };
 
-  const handleOpenChange = useCallback((nextOpen: boolean) => {
-    if (!nextOpen) {
-      setIsOpen(false);
-    }
-  }, []);
+  const tagRender: CustomTagRender = (props) => {
+    const { label, closable, onClose } = props;
 
-  const openDropDown = useCallback(() => {
-    setIsOpen(true);
-  }, []);
+    const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
+      event.preventDefault();
+      event.stopPropagation();
+    };
 
-  return (
-    <div>
-      <Dropdown menu={{ items: filterMenu }} placement="bottomRight" trigger={['click']} onOpenChange={handleOpenChange} open={isOpen}>
-        <Button type="primary" icon={<TbFilterPlus />} onClick={openDropDown}>
-          Add Filter
-        </Button>
-      </Dropdown>
-    </div>
-  );
+    return (
+      <Tag onMouseDown={onPreventMouseDown} closable={closable} onClose={onClose}>
+        {label}
+      </Tag>
+    );
+  };
+
+  return <Select mode="multiple" showSearch={false} tagRender={tagRender} placeholder="Select Columns to Filter" style={{ width: 350 }} suffixIcon={<TbFilterPlus size={18} color="#F97316" />} maxTagCount="responsive" onChange={handleSelectChange} options={optiions} />;
 });
