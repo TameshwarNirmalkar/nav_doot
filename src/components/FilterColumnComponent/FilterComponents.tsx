@@ -32,7 +32,8 @@ const DropdownWithCheckboxes = ({ tableColumns, onFilterChangeValue }: { tableCo
 
   const renderDropdownContent = () => (
     <div
-    className="bg-white rounded p-2 w-45 shadow-2xl shadow-gray-300 border-gray-500"
+    className="bg-white rounded p-2 shadow-2xl shadow-gray-300 border-gray-500"
+    style={{width: 190}}
       onClick={(e) => e.stopPropagation()}
     >
       {/* <Space direction="vertical" style={{ width: "100%" }}> */}

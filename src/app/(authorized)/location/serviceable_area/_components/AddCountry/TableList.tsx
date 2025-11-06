@@ -1,50 +1,51 @@
-'use client';
+"use client";
 
-import FilterColumnComponent from '@src/components/FilterColumnComponent/FilterColumnComponent';
-import IconLoader from '@src/components/IconLoader/IconLoader';
-import TableComponent from '@src/components/Tables/TableComponent';
-import TableFilterableColumn from '@src/components/Tables/TableFilterIcons';
-import { getAllCitiesBasedOnCountryAndStateAction, getAllCountriesWithFlagAction, getAllStatesBasedOnCountryAction } from '@src/store/country_cities/action';
-import { countryCityIsLoading } from '@src/store/country_cities/memonised_country_city_selector';
-import { addDrawer, drawerUpdate } from '@src/store/drawer';
-import { selectIsCollapsedById } from '@src/store/drawer/memoised_drawer_selector';
-import { addLocation, removeLocation, selectLocationList, updateLocation } from '@src/store/location';
-import { getAllLocationAction } from '@src/store/location/action';
-import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
-import { AppState } from '@src/store/store_config';
-import { getZoneListAction } from '@src/store/zone/action';
-import { getUniqueFilters } from '@src/utility/common_function';
-import { Button, Card, Checkbox, Drawer, Dropdown, Flex, Form, Input, Menu, MenuProps, Popconfirm, Space, TableProps } from 'antd';
-import { AnyObject } from 'antd/es/_util/type';
-import { ColumnProps, ColumnsType, ColumnType } from 'antd/es/table';
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { BiEdit } from 'react-icons/bi';
-import { FaEye } from 'react-icons/fa';
-import { LuSquarePlus } from 'react-icons/lu';
-import { RiCloseLine, RiFilter3Fill } from 'react-icons/ri';
-import { TbFilterPlus, TbTrash } from 'react-icons/tb';
-import { v4 as uuidv4 } from 'uuid';
-import AddCountry from './AddCountry';
+import FilterColumnComponent from "@src/components/FilterColumnComponent/FilterColumnComponent";
+import DropdownWithCheckboxes from "@src/components/FilterColumnComponent/FilterComponents";
+import IconLoader from "@src/components/IconLoader/IconLoader";
+import TableComponent from "@src/components/Tables/TableComponent";
+import TableFilterableColumn from "@src/components/Tables/TableFilterIcons";
+import { getAllCitiesBasedOnCountryAndStateAction, getAllCountriesWithFlagAction, getAllStatesBasedOnCountryAction } from "@src/store/country_cities/action";
+import { countryCityIsLoading } from "@src/store/country_cities/memonised_country_city_selector";
+import { addDrawer, drawerUpdate } from "@src/store/drawer";
+import { selectIsCollapsedById } from "@src/store/drawer/memoised_drawer_selector";
+import { addLocation, removeLocation, selectLocationList, updateLocation } from "@src/store/location";
+import { getAllLocationAction } from "@src/store/location/action";
+import { useAppDispatch, useAppSelector } from "@src/store/redux_hooks";
+import { AppState } from "@src/store/store_config";
+import { getZoneListAction } from "@src/store/zone/action";
+import { getUniqueFilters } from "@src/utility/common_function";
+import { Button, Card, Checkbox, Drawer, Dropdown, Flex, Form, Input, Menu, MenuProps, Popconfirm, Space, TableProps } from "antd";
+import { AnyObject } from "antd/es/_util/type";
+import { ColumnProps, ColumnsType, ColumnType } from "antd/es/table";
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { BiEdit } from "react-icons/bi";
+import { FaEye } from "react-icons/fa";
+import { LuSquarePlus } from "react-icons/lu";
+import { RiCloseLine, RiFilter3Fill } from "react-icons/ri";
+import { TbFilterPlus, TbTrash } from "react-icons/tb";
+import { v4 as uuidv4 } from "uuid";
+import AddCountry from "./AddCountry";
 
-type MenuItem = Required<MenuProps>['items'][number];
+type MenuItem = Required<MenuProps>["items"][number];
 
 const LocationTableList = () => {
   const [addCountryForm] = Form.useForm();
   const dispatch = useAppDispatch();
   const locationList = useAppSelector(selectLocationList);
-  const isCollapsed = useAppSelector((state: AppState) => selectIsCollapsedById(state, 'add_location_drawer'));
+  const isCollapsed = useAppSelector((state: AppState) => selectIsCollapsedById(state, "add_location_drawer"));
   const isLoading = useAppSelector(countryCityIsLoading);
   const [showAdd, setShowAddd] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
 
-  const id = Form.useWatch('id', addCountryForm);
+  const id = Form.useWatch("id", addCountryForm);
 
   const filterFields = useMemo(() => {
     return {
-      countryName: getUniqueFilters(locationList, 'country_name'),
-      stateName: getUniqueFilters(locationList, 'state_name'),
-      cityName: getUniqueFilters(locationList, 'city_name'),
-      zoneName: getUniqueFilters(locationList, 'zone_name'),
+      countryName: getUniqueFilters(locationList, "country_name"),
+      stateName: getUniqueFilters(locationList, "state_name"),
+      cityName: getUniqueFilters(locationList, "city_name"),
+      zoneName: getUniqueFilters(locationList, "zone_name"),
     };
   }, [locationList]);
 
@@ -52,9 +53,9 @@ const LocationTableList = () => {
 
   const columns: any[] = [
     {
-      title: 'Country',
-      dataIndex: 'country_name',
-      key: 'country_name',
+      title: "Country",
+      dataIndex: "country_name",
+      key: "country_name",
       filters: filterFields.countryName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string, record: any) => {
@@ -63,9 +64,9 @@ const LocationTableList = () => {
       filterMultiple: true,
     },
     {
-      title: 'Region/Zone',
-      dataIndex: 'zone_name',
-      key: 'zone_name',
+      title: "Region/Zone",
+      dataIndex: "zone_name",
+      key: "zone_name",
       filters: filterFields.zoneName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string | number | boolean, record: any) => {
@@ -74,9 +75,9 @@ const LocationTableList = () => {
       filterMultiple: true,
     },
     {
-      title: 'State',
-      dataIndex: 'state_name',
-      key: 'state_name',
+      title: "State",
+      dataIndex: "state_name",
+      key: "state_name",
       filters: filterFields.stateName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string | number | boolean, record: any) => {
@@ -85,9 +86,9 @@ const LocationTableList = () => {
       filterMultiple: true,
     },
     {
-      title: 'City',
-      dataIndex: 'city_name',
-      key: 'city_name',
+      title: "City",
+      dataIndex: "city_name",
+      key: "city_name",
       filters: filterFields.cityName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string | number | boolean, record: any) => {
@@ -96,9 +97,9 @@ const LocationTableList = () => {
       filterMultiple: true,
     },
     {
-      title: 'Postal Code',
-      dataIndex: 'postal_code',
-      key: 'postal_code',
+      title: "Postal Code",
+      dataIndex: "postal_code",
+      key: "postal_code",
     },
     // {
     //   title: 'Created Date',
@@ -111,9 +112,9 @@ const LocationTableList = () => {
     //   key: 'updated_date',
     // },
     {
-      title: 'Action',
-      dataIndex: 'id',
-      key: 'id',
+      title: "Action",
+      dataIndex: "id",
+      key: "id",
       width: 120,
       render: (text: string, row: any) => (
         <Flex gap={10} justify="center" align="center">
@@ -140,13 +141,13 @@ const LocationTableList = () => {
     dispatch(getAllCountriesWithFlagAction());
     dispatch(getAllLocationAction());
     dispatch(getZoneListAction());
-    dispatch(addDrawer({ drawerId: 'add_location_drawer', isCollapsed: false }));
+    dispatch(addDrawer({ drawerId: "add_location_drawer", isCollapsed: false }));
   }, [dispatch]);
 
   const onOpenDrawer = useCallback(() => {
     dispatch(
       drawerUpdate({
-        drawerId: 'add_location_drawer',
+        drawerId: "add_location_drawer",
         isCollapsed: true,
       }),
     );
@@ -155,7 +156,7 @@ const LocationTableList = () => {
   const onDrawerClose = useCallback(() => {
     dispatch(
       drawerUpdate({
-        drawerId: 'add_location_drawer',
+        drawerId: "add_location_drawer",
         isCollapsed: false,
       }),
     );
@@ -165,9 +166,9 @@ const LocationTableList = () => {
   const onSave = useCallback(async () => {
     const values = await addCountryForm.getFieldsValue(true);
     if (values.id) {
-      dispatch(updateLocation({ id: values.id, changes: { ...values, created_date: new Date().toLocaleDateString('en-GB'), updated_date: new Date().toLocaleDateString('en-GB') } }));
+      dispatch(updateLocation({ id: values.id, changes: { ...values, created_date: new Date().toLocaleDateString("en-GB"), updated_date: new Date().toLocaleDateString("en-GB") } }));
     } else {
-      dispatch(addLocation({ ...values, id: uuidv4(), created_date: new Date().toLocaleDateString('en-GB'), updated_date: new Date().toLocaleDateString('en-GB') }));
+      dispatch(addLocation({ ...values, id: uuidv4(), created_date: new Date().toLocaleDateString("en-GB"), updated_date: new Date().toLocaleDateString("en-GB") }));
     }
     onDrawerClose();
   }, [onDrawerClose, addCountryForm, dispatch]);
@@ -201,7 +202,7 @@ const LocationTableList = () => {
     <>
       <Card
         title={
-          <Space size={'large'}>
+          <Space size={"large"}>
             <div>Serviceable Area</div>
             <Input placeholder="Location Search" style={{ width: 340 }} />
           </Space>
@@ -210,7 +211,7 @@ const LocationTableList = () => {
           <Space>
             <IconLoader showLoader={isLoading} />
             {/* <Menu items={filterMenu} /> */}
-            <FilterColumnComponent
+            <DropdownWithCheckboxes
               tableColumns={columns}
               onFilterChangeValue={(val: string[]) => {
                 setSelectedColumns(val);
@@ -233,7 +234,7 @@ const LocationTableList = () => {
         {/* ) : (
            </Form>
            */}
-        <TableComponent rowKey={'id'} columns={filteredColumns} dataSource={locationList} bordered />
+        <TableComponent rowKey={"id"} columns={filteredColumns} dataSource={locationList} bordered />
       </Card>
 
       <Drawer
