@@ -1,16 +1,9 @@
 'use client';
 
-import type { GetProp, MenuProps, SelectProps } from 'antd';
-import { Button, Checkbox, CheckboxChangeEvent, Dropdown, Select, Tag } from 'antd';
+import type { SelectProps } from 'antd';
+import { Select, Tag } from 'antd';
 import React, { memo, useCallback, useMemo, useState } from 'react';
 import { TbFilterPlus } from 'react-icons/tb';
-
-// type MenuItem = GetProp<MenuProps, 'items'>[number];
-
-// interface ItemProps {
-//   label: string;
-//   value: string;
-// }
 
 type TagRenderProps = Parameters<NonNullable<SelectProps['tagRender']>>[0];
 

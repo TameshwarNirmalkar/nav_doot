@@ -12,7 +12,7 @@ import { getUniqueFilters } from '@src/utility/common_function';
 import { Button, Card, Drawer, Flex, Form, Popconfirm, Space, Table, TableColumnsType } from 'antd';
 import React, { memo, useCallback, useEffect, useMemo } from 'react';
 import { BiEdit } from 'react-icons/bi';
-import { RiCloseLine } from 'react-icons/ri';
+import { RiCloseLine, RiFilter3Fill } from 'react-icons/ri';
 import { TbTrash } from 'react-icons/tb';
 import { v4 as uuidv4 } from 'uuid';
 import AddBranchFormComponent from './AddBranchFormComponent';
@@ -49,6 +49,7 @@ const BranchesWrapper = () => {
       key: 'branch_name',
       filtered: true,
       filters: filterFields.branchName,
+      filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string, record: any): boolean => {
         return record.branch_name.toLowerCase() === value;
       },
@@ -59,6 +60,7 @@ const BranchesWrapper = () => {
       dataIndex: 'branchtype_name',
       key: 'branchtype_name',
       filters: filterFields.branchType,
+      filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string, record: any): boolean => {
         return record.branchtype_name.toLowerCase() === value;
       },
@@ -69,6 +71,7 @@ const BranchesWrapper = () => {
       dataIndex: 'parent_branch_name',
       key: 'parent_branch_name',
       filters: filterFields.parentBranch,
+      filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string, record: any): boolean => {
         return record.parent_branch_name.toLowerCase() === value;
       },
@@ -84,6 +87,7 @@ const BranchesWrapper = () => {
       dataIndex: 'city_name',
       key: 'city_name',
       filters: filterFields.cityName,
+      filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string, record: any): boolean => {
         return record.city_name.toLowerCase() === value;
       },
@@ -94,6 +98,7 @@ const BranchesWrapper = () => {
       dataIndex: 'state_name',
       key: 'state_name',
       filters: filterFields.stateName,
+      filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string, record: any): boolean => {
         return record.state_name.toLowerCase() === value;
       },

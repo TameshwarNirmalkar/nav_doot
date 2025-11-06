@@ -3,6 +3,7 @@
 import FilterColumnComponent from '@src/components/FilterColumnComponent/FilterColumnComponent';
 import IconLoader from '@src/components/IconLoader/IconLoader';
 import TableComponent from '@src/components/Tables/TableComponent';
+import TableFilterableColumn from '@src/components/Tables/TableFilterIcons';
 import { getAllCitiesBasedOnCountryAndStateAction, getAllCountriesWithFlagAction, getAllStatesBasedOnCountryAction } from '@src/store/country_cities/action';
 import { countryCityIsLoading } from '@src/store/country_cities/memonised_country_city_selector';
 import { addDrawer, drawerUpdate } from '@src/store/drawer';
@@ -13,7 +14,9 @@ import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
 import { AppState } from '@src/store/store_config';
 import { getZoneListAction } from '@src/store/zone/action';
 import { getUniqueFilters } from '@src/utility/common_function';
-import { Button, Card, Checkbox, Drawer, Dropdown, Flex, Form, Input, Menu, MenuProps, Popconfirm, Space } from 'antd';
+import { Button, Card, Checkbox, Drawer, Dropdown, Flex, Form, Input, Menu, MenuProps, Popconfirm, Space, TableProps } from 'antd';
+import { AnyObject } from 'antd/es/_util/type';
+import { ColumnProps, ColumnsType, ColumnType } from 'antd/es/table';
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { FaEye } from 'react-icons/fa';
@@ -45,6 +48,8 @@ const LocationTableList = () => {
     };
   }, [locationList]);
 
+  // TableProps<ColumnType<ColumnProps<AnyObject>>>
+
   const columns: any[] = [
     {
       title: 'Country',
@@ -52,7 +57,7 @@ const LocationTableList = () => {
       key: 'country_name',
       filters: filterFields.countryName,
       filterIcon: <RiFilter3Fill size={20} />,
-      onFilter: (value: string | number | boolean, record: any) => {
+      onFilter: (value: string, record: any) => {
         return record.country_name.toLowerCase() === value;
       },
       filterMultiple: true,
@@ -62,6 +67,7 @@ const LocationTableList = () => {
       dataIndex: 'zone_name',
       key: 'zone_name',
       filters: filterFields.zoneName,
+      filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string | number | boolean, record: any) => {
         return record.zone_name.toLowerCase() === value;
       },
@@ -72,6 +78,7 @@ const LocationTableList = () => {
       dataIndex: 'state_name',
       key: 'state_name',
       filters: filterFields.stateName,
+      filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string | number | boolean, record: any) => {
         return record.state_name.toLowerCase() === value;
       },
@@ -82,6 +89,7 @@ const LocationTableList = () => {
       dataIndex: 'city_name',
       key: 'city_name',
       filters: filterFields.cityName,
+      filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string | number | boolean, record: any) => {
         return record.city_name.toLowerCase() === value;
       },
@@ -126,7 +134,7 @@ const LocationTableList = () => {
     } else {
       return columns.filter((el) => !selectedColumns.includes(el.dataIndex));
     }
-  }, [selectedColumns]);
+  }, [selectedColumns, columns]);
 
   useEffect(() => {
     dispatch(getAllCountriesWithFlagAction());
