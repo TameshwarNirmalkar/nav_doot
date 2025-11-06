@@ -21,7 +21,7 @@ interface CustomersCollection {
   postal_code: number;
   state_code: number;
   state_name: string;
-  create_date: string;
+  created_date: string;
   updated_date: string;
 }
 

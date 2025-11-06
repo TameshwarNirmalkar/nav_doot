@@ -52,7 +52,7 @@ const DropdownWithCheckboxes = ({ tableColumns, onFilterChangeValue }: { tableCo
       popupRender={renderDropdownContent}
       trigger={["click"]}
     >
-      <Button type="primary" icon={<TbFilterCheck />}>
+      <Button type="primary" icon={<TbFilterCheck />} style={{width: 190}}>
         <Space>
           Select Columns ({checkedList.length})
           {/* <IoCaretDown /> */}
