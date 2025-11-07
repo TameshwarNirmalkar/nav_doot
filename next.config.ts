@@ -18,13 +18,13 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   eslint: {
     /** Only run ESLint on these directories with `next lint` and `next build`. */
     dirs: ["src"],
     /** Do not run ESLint during production builds (`next build`). */
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
   images: {
     formats: ["image/webp"],
