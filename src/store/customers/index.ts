@@ -8,6 +8,7 @@ interface CustomersCollection {
   allow_scan: string;
   alternate_phone: number;
   customer_name: string;
+  pan_number: string;
   // branch_name: string;
   // branch_type: number;
   city_code: number;

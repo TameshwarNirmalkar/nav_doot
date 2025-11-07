@@ -8,11 +8,11 @@ import { selectCountryCityList } from '@src/store/country_cities';
 import { getAllCitiesBasedOnCountryAndStateAction, getAllStatesBasedOnCountryAction } from '@src/store/country_cities/action';
 import { selectAllCities, selectAllState } from '@src/store/country_cities/memonised_country_city_selector';
 import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
-import { Divider, Form, FormInstance, Input, Select } from 'antd';
+import { Divider, Form, Input, Select } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import React, { memo, useCallback } from 'react';
 
-const AddCustomerForm = () => {
+const AddPartnerForm = () => {
   const addCustomerForm = Form.useFormInstance();
   const dispatch = useAppDispatch();
   const branchTypeList = useAppSelector(selectBranchTypeList);
@@ -177,4 +177,4 @@ const AddCustomerForm = () => {
   );
 };
 
-export default memo(AddCustomerForm);
+export default memo(AddPartnerForm);
