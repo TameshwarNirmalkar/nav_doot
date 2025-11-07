@@ -1,4 +1,5 @@
 import { createEntityAdapter, createSlice, type EntityId, EntityState, PayloadAction } from '@reduxjs/toolkit';
+import { toSnakeCaseKeysInArray } from '@src/utility/common_function';
 import type { AppState } from '../store_config';
 import { getListByPincodeAction } from './action';
 
@@ -43,6 +44,7 @@ const PincodeEntitySlice = createSlice({
       })
       .addCase(getListByPincodeAction.fulfilled, (state: any, action: PayloadAction<PincodeEntity[]>) => {
         state.isLoading = true;
+        // const compiledData = toSnakeCaseKeysInArray(action.payload.PostOffice);
         PincodeEntityAdapter.upsertMany(state, action.payload);
       });
   },
