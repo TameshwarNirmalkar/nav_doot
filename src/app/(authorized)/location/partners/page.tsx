@@ -1,4 +1,4 @@
-import PartnerWrapper from './_components/PartnerWrapper';
+import PartnerWrapper from "./_components/PartnerWrapper";
 
 export default function PartnerPage() {
   return (

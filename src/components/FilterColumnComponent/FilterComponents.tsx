@@ -9,19 +9,21 @@ const DropdownWithCheckboxes = ({ tableColumns, onFilterChangeValue }: { tableCo
   const [checkedList, setCheckedList] = useState<string[]>([]);
 
   const optiions = useMemo(() => {
-      return tableColumns.map((el) => ({
-        label: el.title,
-        value: el.dataIndex,
-      }));
-    }, [tableColumns]);
+    return tableColumns.map((el) => ({
+      label: el.title,
+      value: el.dataIndex,
+    }));
+  }, [tableColumns]);
 
-
-    const onGroupChange = useCallback((list: string[]) => {
+  const onGroupChange = useCallback(
+    (list: string[]) => {
       setCheckedList(list);
       if (typeof onFilterChangeValue === "function") {
         onFilterChangeValue(list);
       }
-    }, [onFilterChangeValue]);
+    },
+    [onFilterChangeValue],
+  );
 
   // const selectAll = tableColumns.map((el) => (el.dataIndex));
   // const allChecked = checkedList.length === optiions.length;
@@ -31,31 +33,23 @@ const DropdownWithCheckboxes = ({ tableColumns, onFilterChangeValue }: { tableCo
   // };
 
   const renderDropdownContent = () => (
-    <div
-    className="bg-white rounded p-2 shadow-2xl shadow-gray-300 border-gray-500"
-    style={{width: 190}}
-      onClick={(e) => e.stopPropagation()}
-    >
+    <div className="bg-white rounded p-2 shadow-2xl shadow-gray-300 border-gray-500" style={{ width: 190 }} onClick={(e) => e.stopPropagation()}>
       {/* <Space direction="vertical" style={{ width: "100%" }}> */}
-        {/* <div className="border-b border-gray-200 py-2">
+      {/* <div className="border-b border-gray-200 py-2">
           <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={allChecked}>
             Select All
           </Checkbox>
         </div> */}
-        <CheckboxGroup options={optiions} value={checkedList} onChange={onGroupChange} className="flex flex-col gap-2"  />
+      <CheckboxGroup options={optiions} value={checkedList} onChange={onGroupChange} className="flex flex-col gap-2" />
       {/* </Space> */}
     </div>
   );
 
   return (
-    <Dropdown
-      popupRender={renderDropdownContent}
-      trigger={["click"]}
-    >
-      <Button type="primary" icon={<TbFilterCheck />} style={{width: 190}}>
+    <Dropdown popupRender={renderDropdownContent} trigger={["click"]}>
+      <Button type="primary" icon={<TbFilterCheck />} style={{ width: 190 }}>
         <Space>
-          Select Columns ({checkedList.length})
-          {/* <IoCaretDown /> */}
+          Select Columns ({checkedList.length}){/* <IoCaretDown /> */}
         </Space>
       </Button>
     </Dropdown>

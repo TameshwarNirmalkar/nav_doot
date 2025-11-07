@@ -1,4 +1,4 @@
-import BranchesWrapper from './_components/BranchesWrapper';
+import BranchesWrapper from "./_components/BranchesWrapper";
 
 export default function BranchesPage() {
   return (

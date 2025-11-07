@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Table } from 'antd';
-import type { ColumnsType, TableProps } from 'antd/es/table';
-import React, { memo } from 'react';
+import { Table } from "antd";
+import type { ColumnsType, TableProps } from "antd/es/table";
+import React, { memo } from "react";
 
 interface CustomTableProps<T> {
   titleText?: string;

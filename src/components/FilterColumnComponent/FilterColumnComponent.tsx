@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import type { SelectProps } from 'antd';
-import { Select, Tag } from 'antd';
-import React, { memo, useCallback, useMemo, useState } from 'react';
-import { TbFilterPlus } from 'react-icons/tb';
+import type { SelectProps } from "antd";
+import { Select, Tag } from "antd";
+import React, { memo, useCallback, useMemo, useState } from "react";
+import { TbFilterPlus } from "react-icons/tb";
 
-type TagRenderProps = Parameters<NonNullable<SelectProps['tagRender']>>[0];
+type TagRenderProps = Parameters<NonNullable<SelectProps["tagRender"]>>[0];
 
 interface CustomTagRenderProps extends TagRenderProps {
   title?: string;
@@ -28,7 +28,7 @@ export default memo(function FilterColumnComponent({ tableColumns, onFilterChang
   const handleSelectChange = useCallback(
     (values: string[]) => {
       // setSelectedValues(values);
-      if (typeof onFilterChangeValue === 'function') {
+      if (typeof onFilterChangeValue === "function") {
         onFilterChangeValue(values);
       }
     },

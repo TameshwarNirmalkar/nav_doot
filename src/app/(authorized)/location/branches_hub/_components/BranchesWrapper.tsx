@@ -133,12 +133,12 @@ const BranchesWrapper = () => {
   ];
 
   const filteredColumns = useMemo(() => {
-      if (!selectedColumns.length) {
-        return columns;
-      } else {
-        return columns.filter((el: {dataIndex: string}) => !selectedColumns.includes(el.dataIndex));
-      }
-    }, [selectedColumns, columns]);
+    if (!selectedColumns.length) {
+      return columns;
+    } else {
+      return columns.filter((el: { dataIndex: string }) => !selectedColumns.includes(el.dataIndex));
+    }
+  }, [selectedColumns, columns]);
 
   const onOpenDrawer = useCallback(() => {
     dispatch(
@@ -195,9 +195,12 @@ const BranchesWrapper = () => {
         title="Branch Gateway"
         extra={
           <Space>
-            <DropdownWithCheckboxes tableColumns={columns} onFilterChangeValue={(val: string[]) => {
+            <DropdownWithCheckboxes
+              tableColumns={columns}
+              onFilterChangeValue={(val: string[]) => {
                 setSelectedColumns(val);
-              }} />
+              }}
+            />
             <Button type="primary" onClick={onOpenDrawer}>
               Add
             </Button>
