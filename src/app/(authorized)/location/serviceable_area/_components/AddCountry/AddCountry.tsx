@@ -39,7 +39,7 @@ const AddCountry = ({ formInst, onCancelHandler, onSaveHandler }: { formInst?: F
       addCountryForm.setFieldValue("country_name", opt.name);
       dispatch(getAllStatesBasedOnCountryAction({ country: val }));
     },
-    [dispatch],
+    [dispatch, addCountryForm.setFieldValue],
   );
 
   const onStateSelect = useCallback(
@@ -48,21 +48,21 @@ const AddCountry = ({ formInst, onCancelHandler, onSaveHandler }: { formInst?: F
       addCountryForm.setFieldValue("state_name", opt.name);
       dispatch(getAllCitiesBasedOnCountryAndStateAction({ country: formVal.country, state: val }));
     },
-    [dispatch],
+    [dispatch, addCountryForm.getFieldsValue, addCountryForm.setFieldValue],
   );
 
   const onCitySelect = useCallback(
     async (val: string, opt: any) => {
       addCountryForm.setFieldValue("city_name", opt.name);
     },
-    [dispatch],
+    [addCountryForm.setFieldValue],
   );
 
   const onZoneSelect = useCallback(
     async (val: string, opt: any) => {
       addCountryForm.setFieldValue("zone_name", opt.zone_name);
     },
-    [dispatch],
+    [addCountryForm.setFieldValue],
   );
 
   // const addNewZone = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {

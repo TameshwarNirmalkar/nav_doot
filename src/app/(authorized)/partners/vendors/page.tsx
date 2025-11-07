@@ -1,7 +1,6 @@
+import BreadcrumbComponent from "@src/components/BreadcrumbComponent/BreadcrumbComponent";
 import { Space } from "antd";
 import VendorWrapper from "./_components/VendorWrapper";
-
-import BreadcrumbComponent from "@src/components/BreadcrumbComponent/BreadcrumbComponent";
 
 export default function VendorsPage() {
   return (

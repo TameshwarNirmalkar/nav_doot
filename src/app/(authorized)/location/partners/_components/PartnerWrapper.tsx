@@ -26,7 +26,7 @@ const PartnerWrapper = () => {
   const id = Form.useWatch("id", pertnerForm);
   const isCollapsed = useAppSelector((state: AppState) => selectIsCollapsedById(state, "add_customers_drawer"));
   const customerList = useAppSelector(selectCustomerList);
-  const isLoading = useAppSelector(customerIsLoading);
+  const _isLoading = useAppSelector(customerIsLoading);
   const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
 
   const filterFields = useMemo(() => {

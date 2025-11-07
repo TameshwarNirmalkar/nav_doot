@@ -1,4 +1,4 @@
-import { PayloadAction, createEntityAdapter, createSelector, createSlice, type EntityId } from "@reduxjs/toolkit";
+import { createEntityAdapter, createSelector, createSlice, type EntityId, PayloadAction } from "@reduxjs/toolkit";
 import type { AppState } from "../store_config";
 import { getMenuListAction } from "./action";
 

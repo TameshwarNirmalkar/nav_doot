@@ -20,7 +20,7 @@ export default memo(function ZoneForm() {
 
   useEffect(() => {
     dispatch(getZoneListAction());
-  }, []);
+  }, [dispatch]);
 
   const onSave = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
     e.preventDefault();
@@ -50,7 +50,7 @@ export default memo(function ZoneForm() {
 
   const onAddZoneHandler = useCallback(() => {
     onDrawerOpen();
-  }, []);
+  }, [onDrawerOpen]);
 
   return (
     <Form name="zoneFormInstance" form={zoneFormInstance}>

@@ -19,7 +19,7 @@ export const getbranchTypeListAction = createAsyncThunk("GET_BRANCH_TYPE", async
       { branchtype_name: "Customers", branchtype_id: 11 },
       { branchtype_name: "Vendor", branchtype_id: 12 },
     ];
-  } catch (error: any) {
+  } catch (_error: any) {
     throw new Error("Error in zone api");
   }
 });
@@ -36,7 +36,7 @@ export const addBranchTypeAction = createAsyncThunk("ADD_BRANCH_TYPE", async (ar
     // return res.countries;
     await delayWaitFor(3000);
     return args;
-  } catch (error: any) {
+  } catch (_error: any) {
     throw new Error("Error in zone api");
   }
 });
@@ -53,7 +53,7 @@ export const updateBranchTypeAction = createAsyncThunk("EDIT_BRANCH_TYPE", async
     // return res.countries;
     await delayWaitFor(3000);
     return args;
-  } catch (error: any) {
+  } catch (_error: any) {
     throw new Error("Error in zone api");
   }
 });

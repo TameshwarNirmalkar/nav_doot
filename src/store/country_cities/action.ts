@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { CityListI, StateListI } from ".";
+import cityData from "../../assets/data/city.json";
 import countryData from "../../assets/data/country.json";
 import stateData from "../../assets/data/state.json";
-import cityData from "../../assets/data/city.json";
+import { CityListI, StateListI } from ".";
 
 export const getAllCountriesWithFlagAction = createAsyncThunk("GET_ALL_COUNTERIES", async () => {
   try {

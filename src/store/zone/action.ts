@@ -17,7 +17,7 @@ export const getZoneListAction = createAsyncThunk("GET_ZONE", async () => {
       { zone_name: "West", zone_id: 4 },
       { zone_name: "Centeral", zone_id: 5 },
     ];
-  } catch (error: any) {
+  } catch (_error: any) {
     throw new Error("Error in zone api");
   }
 });
@@ -33,7 +33,7 @@ export const addZoneAction = createAsyncThunk("ADD_ZONE", async (args: { zone_na
 
     // return res.countries;
     return args;
-  } catch (error: any) {
+  } catch (_error: any) {
     throw new Error("Error in zone api");
   }
 });

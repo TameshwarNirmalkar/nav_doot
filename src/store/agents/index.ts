@@ -1,6 +1,6 @@
 import type { AppState } from "@redux-store/store_config";
 import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from "@reduxjs/toolkit";
-import { getAgentAction, addAgentAction, updateAgentAction } from "./action";
+import { addAgentAction, getAgentAction, updateAgentAction } from "./action";
 
 export interface AgentsCollection {
   id: string;

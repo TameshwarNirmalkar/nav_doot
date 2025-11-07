@@ -1,24 +1,23 @@
 "use client";
 
+import IconLoader from "@src/components/IconLoader/IconLoader";
+import TableComponent from "@src/components/Tables/TableComponent";
+import { removeAgents, selectAgentList } from "@src/store/agents";
+import { addAgentAction, getAgentAction, updateAgentAction } from "@src/store/agents/action";
+import { agentsIsLoading } from "@src/store/agents/memonised_agents_selector";
+import { getbranchTypeListAction } from "@src/store/branch_type/action";
 import { addDrawer, drawerUpdate } from "@src/store/drawer";
 import { selectIsCollapsedById } from "@src/store/drawer/memoised_drawer_selector";
 import { useAppDispatch, useAppSelector } from "@src/store/redux_hooks";
 import { AppState } from "@src/store/store_config";
+import { getUniqueFilters } from "@src/utility/common_function";
 import { Button, Card, Drawer, Flex, Form, Popconfirm, Space, Spin } from "antd";
 import React, { memo, useCallback, useEffect, useMemo } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { BiEdit } from "react-icons/bi";
 import { RiCloseLine } from "react-icons/ri";
 import { TbTrash } from "react-icons/tb";
+import { v4 as uuidv4 } from "uuid";
 import AddAgentsFormComponent from "./AddAgentsForm";
-import { getbranchTypeListAction } from "@src/store/branch_type/action";
-
-import IconLoader from "@src/components/IconLoader/IconLoader";
-import TableComponent from "@src/components/Tables/TableComponent";
-import { getUniqueFilters } from "@src/utility/common_function";
-import { getAgentAction, addAgentAction, updateAgentAction } from "@src/store/agents/action";
-import { agentsIsLoading } from "@src/store/agents/memonised_agents_selector";
-import { removeAgents, selectAgentList } from "@src/store/agents";
 
 const AgentsWrapper = () => {
   const dispatch = useAppDispatch();
@@ -130,7 +129,7 @@ const AgentsWrapper = () => {
       }),
     );
     agentForm.resetFields();
-  }, [dispatch]);
+  }, [dispatch, agentForm.resetFields]);
 
   const onAgentSave = useCallback(async () => {
     try {
@@ -172,16 +171,22 @@ const AgentsWrapper = () => {
     } finally {
       onDrawerClose();
     }
-  }, []);
+  }, [agentForm.validateFields, dispatch, onDrawerClose]);
 
-  const onAgentEdit = useCallback((el: any) => {
-    agentForm.setFieldsValue(el);
-    onOpenDrawer();
-  }, []);
+  const onAgentEdit = useCallback(
+    (el: any) => {
+      agentForm.setFieldsValue(el);
+      onOpenDrawer();
+    },
+    [agentForm.setFieldsValue, onOpenDrawer],
+  );
 
-  const onRemoveVendor = useCallback((el: any) => {
-    dispatch(removeAgents(el.id));
-  }, []);
+  const onRemoveVendor = useCallback(
+    (el: any) => {
+      dispatch(removeAgents(el.id));
+    },
+    [dispatch],
+  );
 
   return (
     <>

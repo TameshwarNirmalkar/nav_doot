@@ -36,13 +36,19 @@ const AddAgentsFormComponent = () => {
   // const onBranchTypeSelect = useCallback((opt: any) => {
   //   addAgentsForm.setFieldValue('branchtype_name', opt.field_name);
   // }, []);
-  const onParentBranchTypeSelect = useCallback((opt: any) => {
-    addAgentsForm.setFieldValue("parent_branch_name", opt.field_name);
-  }, []);
+  const onParentBranchTypeSelect = useCallback(
+    (opt: any) => {
+      addAgentsForm.setFieldValue("parent_branch_name", opt.field_name);
+    },
+    [addAgentsForm.setFieldValue],
+  );
 
-  const onAddBranch = useCallback((txt: string) => {
-    dispatch(addBranchTypeAction({ branchtype_name: txt, branchtype_id: branchTypeList.length }));
-  }, []);
+  const onAddBranch = useCallback(
+    (txt: string) => {
+      dispatch(addBranchTypeAction({ branchtype_name: txt, branchtype_id: branchTypeList.length }));
+    },
+    [branchTypeList.length, dispatch],
+  );
 
   return (
     <div className="grid grid-cols-2 gap-4">

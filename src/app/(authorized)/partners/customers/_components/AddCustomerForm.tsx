@@ -35,16 +35,25 @@ const AddCustomerForm = () => {
   //   [dispatch],
   // );
 
-  const onBranchTypeSelect = useCallback((opt: any) => {
-    addCustomerForm.setFieldValue("branchtype_name", opt.field_name);
-  }, []);
-  const onParentBranchTypeSelect = useCallback((opt: any) => {
-    addCustomerForm.setFieldValue("parent_branch_name", opt.field_name);
-  }, []);
+  const onBranchTypeSelect = useCallback(
+    (opt: any) => {
+      addCustomerForm.setFieldValue("branchtype_name", opt.field_name);
+    },
+    [addCustomerForm.setFieldValue],
+  );
+  const onParentBranchTypeSelect = useCallback(
+    (opt: any) => {
+      addCustomerForm.setFieldValue("parent_branch_name", opt.field_name);
+    },
+    [addCustomerForm.setFieldValue],
+  );
 
-  const onAddBranch = useCallback((txt: string) => {
-    dispatch(addBranchTypeAction({ branchtype_name: txt, branchtype_id: branchTypeList.length }));
-  }, []);
+  const onAddBranch = useCallback(
+    (txt: string) => {
+      dispatch(addBranchTypeAction({ branchtype_name: txt, branchtype_id: branchTypeList.length }));
+    },
+    [branchTypeList.length, dispatch],
+  );
 
   return (
     <div className="grid grid-cols-2 gap-4">

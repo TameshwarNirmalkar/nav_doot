@@ -31,7 +31,7 @@ export async function middleware(request: NextRequest, response: NextResponse) {
   }
 
   const publicPaths = ["/", "/login", "/registration", "/forget_password.*", "/change_password.*", "/set_password.*"];
-  const isPublicPath = publicPaths.some((path) => new RegExp(`^${path}$`).test(pathname));
+  const _isPublicPath = publicPaths.some((path) => new RegExp(`^${path}$`).test(pathname));
   // Handle simple requests
   // 1. Get the current response (or create a new one for headers)
   const modified_response = NextResponse.next();

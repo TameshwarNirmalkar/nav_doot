@@ -1,21 +1,21 @@
 "use client";
 
+import TableComponent from "@src/components/Tables/TableComponent";
+import { getbranchTypeListAction } from "@src/store/branch_type/action";
+import { addCustomer, removeCustomer, selectCustomerList, updadateCustomer } from "@src/store/customers";
+import { getCustomersAction } from "@src/store/customers/action";
+import { customerIsLoading } from "@src/store/customers/memonised_customer_selector";
 import { addDrawer, drawerUpdate } from "@src/store/drawer";
 import { selectIsCollapsedById } from "@src/store/drawer/memoised_drawer_selector";
 import { useAppDispatch, useAppSelector } from "@src/store/redux_hooks";
 import { AppState } from "@src/store/store_config";
 import { Button, Card, Drawer, Flex, Form, Popconfirm, Space, Spin, Table } from "antd";
 import React, { memo, useCallback, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { BiEdit } from "react-icons/bi";
 import { RiCloseLine } from "react-icons/ri";
 import { TbTrash } from "react-icons/tb";
+import { v4 as uuidv4 } from "uuid";
 import AddCustomerForm from "./AddCustomerForm";
-import { getCustomersAction } from "@src/store/customers/action";
-import { addCustomer, removeCustomer, selectCustomerList, updadateCustomer } from "@src/store/customers";
-import { customerIsLoading } from "@src/store/customers/memonised_customer_selector";
-import { getbranchTypeListAction } from "@src/store/branch_type/action";
-import TableComponent from "@src/components/Tables/TableComponent";
 
 const CustomerWrapper = () => {
   const columns = [
@@ -105,7 +105,7 @@ const CustomerWrapper = () => {
       }),
     );
     customerForm.resetFields();
-  }, [dispatch]);
+  }, [dispatch, customerForm.resetFields]);
 
   const onCustomerSave = useCallback(async () => {
     try {
@@ -151,16 +151,22 @@ const CustomerWrapper = () => {
     } finally {
       onDrawerClose();
     }
-  }, []);
+  }, [customerForm.validateFields, dispatch, onDrawerClose]);
 
-  const onCustomerEdit = useCallback((el: any) => {
-    customerForm.setFieldsValue(el);
-    onOpenDrawer();
-  }, []);
+  const onCustomerEdit = useCallback(
+    (el: any) => {
+      customerForm.setFieldsValue(el);
+      onOpenDrawer();
+    },
+    [customerForm.setFieldsValue, onOpenDrawer],
+  );
 
-  const onRemoveCustomer = useCallback((el: any) => {
-    dispatch(removeCustomer(el.id));
-  }, []);
+  const onRemoveCustomer = useCallback(
+    (el: any) => {
+      dispatch(removeCustomer(el.id));
+    },
+    [dispatch],
+  );
 
   return (
     <>

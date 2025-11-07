@@ -1,23 +1,23 @@
 "use client";
 
+import IconLoader from "@src/components/IconLoader/IconLoader";
+import TableComponent from "@src/components/Tables/TableComponent";
+import { getbranchTypeListAction } from "@src/store/branch_type/action";
 import { addDrawer, drawerUpdate } from "@src/store/drawer";
 import { selectIsCollapsedById } from "@src/store/drawer/memoised_drawer_selector";
 import { useAppDispatch, useAppSelector } from "@src/store/redux_hooks";
 import { AppState } from "@src/store/store_config";
+import { removeVendors, selectVendorList } from "@src/store/vendors";
+import { addVendorAction, getVendorAction, updateVendorAction } from "@src/store/vendors/action";
+import { vendorIsLoading } from "@src/store/vendors/memonised_vendors_selector";
+import { getUniqueFilters } from "@src/utility/common_function";
 import { Button, Card, Drawer, Flex, Form, Popconfirm, Space, Spin } from "antd";
 import React, { memo, useCallback, useEffect, useMemo } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { BiEdit } from "react-icons/bi";
 import { RiCloseLine } from "react-icons/ri";
 import { TbTrash } from "react-icons/tb";
+import { v4 as uuidv4 } from "uuid";
 import AddVendorForm from "./AddVendorForm";
-import { getbranchTypeListAction } from "@src/store/branch_type/action";
-import { addVendorAction, getVendorAction, updateVendorAction } from "@src/store/vendors/action";
-import { removeVendors, selectVendorList } from "@src/store/vendors";
-import { vendorIsLoading } from "@src/store/vendors/memonised_vendors_selector";
-import IconLoader from "@src/components/IconLoader/IconLoader";
-import TableComponent from "@src/components/Tables/TableComponent";
-import { getUniqueFilters } from "@src/utility/common_function";
 
 const CustomerWrapper = () => {
   const dispatch = useAppDispatch();
@@ -129,7 +129,7 @@ const CustomerWrapper = () => {
       }),
     );
     vendorForm.resetFields();
-  }, [dispatch]);
+  }, [dispatch, vendorForm.resetFields]);
 
   const onVendorSave = useCallback(async () => {
     try {
@@ -171,16 +171,22 @@ const CustomerWrapper = () => {
     } finally {
       onDrawerClose();
     }
-  }, []);
+  }, [dispatch, onDrawerClose, vendorForm.validateFields]);
 
-  const onVendorEdit = useCallback((el: any) => {
-    vendorForm.setFieldsValue(el);
-    onOpenDrawer();
-  }, []);
+  const onVendorEdit = useCallback(
+    (el: any) => {
+      vendorForm.setFieldsValue(el);
+      onOpenDrawer();
+    },
+    [onOpenDrawer, vendorForm.setFieldsValue],
+  );
 
-  const onRemoveVendor = useCallback((el: any) => {
-    dispatch(removeVendors(el.id));
-  }, []);
+  const onRemoveVendor = useCallback(
+    (el: any) => {
+      dispatch(removeVendors(el.id));
+    },
+    [dispatch],
+  );
 
   return (
     <>

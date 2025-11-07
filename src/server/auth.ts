@@ -1,6 +1,6 @@
+import { cookies } from "next/headers";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { cookies } from "next/headers";
 import { userService } from "./services/userService";
 
 // The core configuration is now exported from the default function.

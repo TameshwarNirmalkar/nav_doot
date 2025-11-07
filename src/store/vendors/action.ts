@@ -64,7 +64,7 @@ export const addVendorAction = createAsyncThunk("ADD_VENDOR_TYPE", async (args: 
     // return res.countries;
     await delayWaitFor(3000);
     return args;
-  } catch (error: any) {
+  } catch (_error: any) {
     throw new Error("Error in zone api");
   }
 });
@@ -81,7 +81,7 @@ export const updateVendorAction = createAsyncThunk("EDIT_VENDOR_TYPE", async (ar
     // return res.countries;
     await delayWaitFor(3000);
     return args;
-  } catch (error: any) {
+  } catch (_error: any) {
     throw new Error("Error in zone api");
   }
 });

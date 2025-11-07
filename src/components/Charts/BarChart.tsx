@@ -1,7 +1,7 @@
 "use client";
 
-import React, { memo } from "react";
 import { Column } from "@ant-design/plots";
+import React, { memo } from "react";
 
 const BarChart = () => {
   const config = {

@@ -64,7 +64,7 @@ export const addAgentAction = createAsyncThunk("ADD_AGENT", async (args: AgentsC
     // return res.countries;
     await delayWaitFor(3000);
     return args;
-  } catch (error: any) {
+  } catch (_error: any) {
     throw new Error("Error in zone api");
   }
 });
@@ -81,7 +81,7 @@ export const updateAgentAction = createAsyncThunk("EDIT_AGENT", async (args: Age
     // return res.countries;
     await delayWaitFor(3000);
     return args;
-  } catch (error: any) {
+  } catch (_error: any) {
     throw new Error("Error in zone api");
   }
 });

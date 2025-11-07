@@ -1,15 +1,15 @@
-import { combineReducers } from "redux";
-import users from "@redux-store/users";
-import country_cities from "@redux-store/country_cities";
-import location from "@redux-store/location";
-import drawer from "@redux-store/drawer";
-import branches from "@redux-store/branches";
-import customers from "@redux-store/customers";
-import vendors from "@redux-store/vendors";
 import agents from "@redux-store/agents";
-import zone from "@redux-store/zone";
-import main_menu from "@redux-store/main_menu";
 import branch_type from "@redux-store/branch_type";
+import branches from "@redux-store/branches";
+import country_cities from "@redux-store/country_cities";
+import customers from "@redux-store/customers";
+import drawer from "@redux-store/drawer";
+import location from "@redux-store/location";
+import main_menu from "@redux-store/main_menu";
+import users from "@redux-store/users";
+import vendors from "@redux-store/vendors";
+import zone from "@redux-store/zone";
+import { combineReducers } from "redux";
 
 export default combineReducers({
   users,

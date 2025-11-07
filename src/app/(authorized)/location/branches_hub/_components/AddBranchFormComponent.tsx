@@ -51,7 +51,7 @@ const AddBranchForm = () => {
     },
     [addBranchForm],
   );
-  const onParentBranchTypeSelect = useCallback(
+  const _onParentBranchTypeSelect = useCallback(
     (opt: any) => {
       addBranchForm.setFieldValue("parent_branch_name", opt.field_name);
     },
