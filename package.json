@@ -8,9 +8,7 @@
     "start": "next start",
     "lint": "biome check",
     "format": "biome format --write",
-    "biome:fix": "biome check --files-ignore-unknown=true",
-    "biome:fix-all": "biome check --files-ignore-unknown=true",
-    "biome:format": "biome format --write"
+    "biome:fix": "biome check --files-ignore-unknown=true"
   },
   "dependencies": {
     "@ant-design/charts": "^2.6.5",
