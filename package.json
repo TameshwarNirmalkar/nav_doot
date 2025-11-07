@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "biome check --write --unsafe --max-diagnostics 1",
+    "lint": "biome check --write --unsafe --diagnostic-level error --max-diagnostics 100",
     "format": "biome format --write",
     "biome:fix": "biome check --files-ignore-unknown=true"
   },

@@ -30,16 +30,15 @@ declare module "next-auth/jwt" {
   }
 }
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace NodeJS {
-    interface ProcessEnv {
-      JWT_SECERT_KEY?: string;
-      JWT_SECERT_REFRESH_KEY?: string;
-      NEXT_PUBLIC_IMBB_SECERET_KEY?: string;
-      NEXT_PUBLIC_API_BASE_URL: string;
-      LOCAL_API_URL: string;
-    }
-  }
+  // namespace NodeJS {
+  //   interface ProcessEnv {
+  //     JWT_SECERT_KEY?: string;
+  //     JWT_SECERT_REFRESH_KEY?: string;
+  //     NEXT_PUBLIC_IMBB_SECERET_KEY?: string;
+  //     NEXT_PUBLIC_API_BASE_URL: string;
+  //     LOCAL_API_URL: string;
+  //   }
+  // }
 
   interface RuleSetRule {
     test?: RegExp | RegExp[];
