@@ -11,11 +11,15 @@ import { addDrawer, drawerUpdate } from '@src/store/drawer';
 import { selectIsCollapsedById } from '@src/store/drawer/memoised_drawer_selector';
 import { addLocation, removeLocation, selectLocationList, updateLocation } from '@src/store/location';
 import { getAllLocationAction } from '@src/store/location/action';
+import { getAllPinCode } from '@src/store/pin_code';
+import { getListByPincodeAction } from '@src/store/pin_code/action';
 import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
 import { AppState } from '@src/store/store_config';
 import { getZoneListAction } from '@src/store/zone/action';
 import { getUniqueFilters } from '@src/utility/common_function';
-import { Button, Card, Drawer, Flex, Form, Input, MenuProps, Popconfirm, Space } from 'antd';
+import { delayWaitFor } from '@src/utility/delay';
+import { Button, Card, Drawer, Flex, Form, Input, MenuProps, Popconfirm, Space, Switch } from 'antd';
+// import Search from 'antd/es/input/Search';
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { FaEye } from 'react-icons/fa';
@@ -25,12 +29,12 @@ import { TbFilterPlus, TbTrash } from 'react-icons/tb';
 import { v4 as uuidv4 } from 'uuid';
 import AddCountry from './AddCountry';
 
-type MenuItem = Required<MenuProps>['items'][number];
+const { Search } = Input;
 
 const LocationTableList = () => {
   const [addCountryForm] = Form.useForm();
   const dispatch = useAppDispatch();
-  const locationList = useAppSelector(selectLocationList);
+  const pincodeList = useAppSelector(getAllPinCode);
   const isCollapsed = useAppSelector((state: AppState) => selectIsCollapsedById(state, 'add_location_drawer'));
   const isLoading = useAppSelector(countryCityIsLoading);
   const [showAdd, setShowAddd] = useState<boolean>(false);
@@ -40,64 +44,71 @@ const LocationTableList = () => {
 
   const filterFields = useMemo(() => {
     return {
-      countryName: getUniqueFilters(locationList, 'country_name'),
-      stateName: getUniqueFilters(locationList, 'state_name'),
-      cityName: getUniqueFilters(locationList, 'city_name'),
-      zoneName: getUniqueFilters(locationList, 'zone_name'),
+      pinCode: getUniqueFilters(pincodeList, 'pincode'),
+      countryName: getUniqueFilters(pincodeList, 'country'),
+      stateName: getUniqueFilters(pincodeList, 'state'),
+      cityName: getUniqueFilters(pincodeList, 'name'),
+      zoneName: getUniqueFilters(pincodeList, 'region'),
     };
-  }, [locationList]);
+  }, [pincodeList]);
 
   // TableProps<ColumnType<ColumnProps<AnyObject>>>
 
   const columns: any[] = [
     {
-      title: 'Country',
-      dataIndex: 'country_name',
-      key: 'country_name',
+      title: 'Pin Code',
+      dataIndex: 'pincode',
+      key: 'pincode',
       filters: filterFields.countryName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string, record: any) => {
-        return record.country_name.toLowerCase() === value;
+        return record.pincode.toLowerCase() === value;
+      },
+      filterMultiple: true,
+    },
+    {
+      title: 'Country',
+      dataIndex: 'country',
+      key: 'country',
+      filters: filterFields.countryName,
+      filterIcon: <RiFilter3Fill size={20} />,
+      onFilter: (value: string, record: any) => {
+        return record.country.toLowerCase() === value;
       },
       filterMultiple: true,
     },
     {
       title: 'Region/Zone',
-      dataIndex: 'zone_name',
-      key: 'zone_name',
+      dataIndex: 'region',
+      key: 'region',
       filters: filterFields.zoneName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string | number | boolean, record: any) => {
-        return record.zone_name.toLowerCase() === value;
+        return record.region.toLowerCase() === value;
       },
       filterMultiple: true,
     },
     {
       title: 'State',
-      dataIndex: 'state_name',
-      key: 'state_name',
+      dataIndex: 'state',
+      key: 'state',
       filters: filterFields.stateName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string | number | boolean, record: any) => {
-        return record.state_name.toLowerCase() === value;
+        return record.state.toLowerCase() === value;
       },
       filterMultiple: true,
     },
     {
       title: 'City',
-      dataIndex: 'city_name',
-      key: 'city_name',
+      dataIndex: 'name',
+      key: 'name',
       filters: filterFields.cityName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string | number | boolean, record: any) => {
-        return record.city_name.toLowerCase() === value;
+        return record.name.toLowerCase() === value;
       },
       filterMultiple: true,
-    },
-    {
-      title: 'Postal Code',
-      dataIndex: 'postal_code',
-      key: 'postal_code',
     },
     // {
     //   title: 'Created Date',
@@ -116,16 +127,21 @@ const LocationTableList = () => {
       width: 120,
       render: (text: string, row: any) => (
         <Flex gap={10} justify="center" align="center">
-          <FaEye size={20} color="gray" className="cursor-pointer" onClick={() => onEdit(row)} />
+          {/* <FaEye size={20} color="gray" className="cursor-pointer" onClick={() => onEdit(row)} />
           <BiEdit size={20} color="green" className="cursor-pointer" onClick={() => onEdit(row)} />
 
           <Popconfirm title="Delete" description="Are you sure to delete this record?" okText="Yes" cancelText="No" onConfirm={() => onRemoveLocation(row)}>
             <TbTrash size={20} color="#c00" className="cursor-pointer" />
-          </Popconfirm>
+          </Popconfirm> */}
+          <Switch loading={false} defaultChecked={false} onChange={onSwitchChange} />
         </Flex>
       ),
     },
   ];
+
+  const onSwitchChange = useCallback((checked: boolean) => {
+    console.log('=========', checked);
+  }, []);
 
   const filteredColumns = useMemo(() => {
     if (!selectedColumns.length) {
@@ -200,9 +216,17 @@ const LocationTableList = () => {
     <>
       <Card
         title={
-          <Space size={'large'}>
+          <Space>
             <div>Serviceable Area</div>
-            <Input placeholder="Location Search" style={{ width: 340 }} />
+            <Search
+              enterButton
+              placeholder="Enter pincode: 110001"
+              style={{ width: 340 }}
+              onSearch={(value, event) => {
+                // delayWaitFor(800);
+                dispatch(getListByPincodeAction({ pin_code: value }));
+              }}
+            />
           </Space>
         }
         extra={
@@ -220,9 +244,9 @@ const LocationTableList = () => {
                 Add Filter
               </Button>
             </Dropdown> */}
-            <Button type="primary" onClick={onShowAdd} disabled={showAdd} icon={<LuSquarePlus size={15} />}>
+            {/* <Button type="primary" onClick={onShowAdd} disabled={showAdd} icon={<LuSquarePlus size={15} />}>
               Add
-            </Button>
+            </Button> */}
           </Space>
         }>
         {/* {showAdd ? (
@@ -231,7 +255,7 @@ const LocationTableList = () => {
         {/* ) : (
            </Form>
            */}
-        <TableComponent rowKey={'id'} columns={filteredColumns} dataSource={locationList} bordered />
+        <TableComponent rowKey={'id'} columns={filteredColumns} dataSource={pincodeList} bordered />
       </Card>
 
       <Drawer

@@ -4,16 +4,18 @@ import type { AppState } from '../store_config';
 import { getListByPincodeAction } from './action';
 
 export interface PincodeEntity {
-  pin_code: EntityId;
+  id: EntityId;
+  pincode: number;
   description: string;
   branch_type: string;
   circle: string;
   district: string;
   division: string;
   region: string;
-  city_name: string;
-  state_name: string;
-  country_name: string;
+  block: string;
+  state: string;
+  country: string;
+  name: string;
 }
 
 export interface PincodeStateI {
@@ -23,7 +25,7 @@ export interface PincodeStateI {
 }
 
 const PincodeEntityAdapter = createEntityAdapter<PincodeEntity, EntityId>({
-  selectId: (drawer: PincodeEntity) => drawer.pin_code,
+  selectId: (drawer: PincodeEntity) => drawer.id,
 });
 
 const PincodeEntitySlice = createSlice({
@@ -42,9 +44,8 @@ const PincodeEntitySlice = createSlice({
       .addCase(getListByPincodeAction.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getListByPincodeAction.fulfilled, (state: any, action: PayloadAction<PincodeEntity[]>) => {
+      .addCase(getListByPincodeAction.fulfilled, (state: any, action: PayloadAction<any>) => {
         state.isLoading = true;
-        // const compiledData = toSnakeCaseKeysInArray(action.payload.PostOffice);
         PincodeEntityAdapter.upsertMany(state, action.payload);
       });
   },
@@ -54,6 +55,6 @@ const PincodeEntitySlice = createSlice({
 export const selectPincodeEntitySliceState = (state: AppState) => state.pin_code;
 
 // Regenerate selectors with the corrected slice selector
-export const { selectById } = PincodeEntityAdapter.getSelectors(selectPincodeEntitySliceState);
+export const { selectById, selectAll: getAllPinCode } = PincodeEntityAdapter.getSelectors(selectPincodeEntitySliceState);
 // export const { drawerUpdate, addDrawer } = PincodeEntitySlice.actions;
 export default PincodeEntitySlice.reducer;

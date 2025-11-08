@@ -123,13 +123,7 @@ const AddCountry = ({ formInst, onCancelHandler, onSaveHandler }: { formInst?: F
       {/* <Row gutter={24} style={{ width: '100%' }}>
         <Col span={12}> */}
       <Form.Item label="Postal Code/Zip Code" name="postal_code" rules={[{ required: true, message: 'Required' }]}>
-        <Input
-          placeholder="Enter postal code."
-          onChange={(e) => {
-            delayWaitFor(800);
-            dispatch(getListByPincodeAction({ pin_code: e.target.value }));
-          }}
-        />
+        <Input placeholder="Enter postal code." />
       </Form.Item>
 
       <Form.Item label="City" name="city_code" rules={[{ required: true, message: 'Required' }]}>

@@ -10,37 +10,33 @@ const getUniqueFilters = <T, K extends keyof T>(data: T[], dataIndex: K): { text
   }));
 };
 
-/**
- * Converts the keys of all objects within an array from CamelCase to snake_case.
- *
- * @param {Array<Object>} arr The input array of objects with CamelCase keys.
- * @returns {Array<Object>} A new array with all object keys converted to snake_case.
- */
-const toSnakeCaseKeysInArray = (arr: { [key: string]: any }[]) => {
-  if (!Array.isArray(arr)) {
-    console.error('Input is not an array.');
-    return arr;
+const toSnakeCase = (str: string) => {
+  if (typeof str !== 'string') return str;
+  return str.replace(/([a-z0-9]|(?<=[A-Z]))([A-Z])/g, '$1_$2').toLowerCase();
+};
+const toSnakeCaseKeys = (item: { [key: string]: any }): { [key: string]: any } => {
+  if (item === null || typeof item !== 'object') {
+    return item;
   }
-
-  // Helper function to convert a single object's keys
-  const convertObjectKeys = (obj: { [key: string]: any }) => {
-    if (typeof obj !== 'object' || obj === null) {
-      return obj;
+  if (Array.isArray(item)) {
+    return item.map(toSnakeCaseKeys);
+  }
+  const newObject: { [key: string]: any } = {};
+  for (const key in item) {
+    if (Object.hasOwn(item, key)) {
+      const newKey = toSnakeCase(key);
+      newObject[newKey] = toSnakeCaseKeys(item[key]);
     }
-    const newObj: { [key: string]: any } = {};
-    for (const key in obj) {
-      if (Object.hasOwn(obj, key)) {
-        const newKey = key.replace(/([A-Z])/g, '_$1').toLowerCase();
-        newObj[newKey] = obj[key];
-      }
-    }
-    return newObj;
-  };
+  }
+  return newObject;
+};
 
-  // Use map to apply the conversion to every object in the array
-  const transformedArray = arr.map(convertObjectKeys);
-
-  return transformedArray;
+const toSnakeCaseKeysInArray = (array: { [key: string]: any }[]) => {
+  if (!Array.isArray(array)) {
+    console.error('Input must be an array.');
+    return array;
+  }
+  return array.map(toSnakeCaseKeys);
 };
 
 export { getUniqueFilters, toSnakeCaseKeysInArray };
