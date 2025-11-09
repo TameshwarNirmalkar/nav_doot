@@ -7,7 +7,6 @@ export const getListByPincodeAction = createAsyncThunk('PIN_CODE/GET_PINCODE', a
       method: 'GET',
     }).then((res) => res.json());
     const caseChange = toSnakeCaseKeysInArray(pin_res[0].PostOffice);
-    console.log('caseChange: ', caseChange);
     return caseChange.map((el) => ({ ...el, id: `${el.pincode}_${el.name.replaceAll(' ', '_')}` }));
   } catch (error: any) {
     return rejectWithValue(error.message);

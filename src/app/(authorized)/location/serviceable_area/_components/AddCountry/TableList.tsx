@@ -261,7 +261,7 @@ const LocationTableList = () => {
         {/* ) : (
            </Form>
            */}
-        <TableComponent rowKey={'id'} columns={filteredColumns} dataSource={pincodeList} bordered />
+        <TableComponent rowKey={'id'} columns={filteredColumns} dataSource={pincodeList} bordered pagination={false} />
       </Card>
 
       <Drawer
