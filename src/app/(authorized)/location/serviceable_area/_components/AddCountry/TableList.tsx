@@ -10,7 +10,7 @@ import { countryCityIsLoading } from '@src/store/country_cities/memonised_countr
 import { addDrawer, drawerUpdate } from '@src/store/drawer';
 import { selectIsCollapsedById } from '@src/store/drawer/memoised_drawer_selector';
 import { addLocation, removeLocation, selectLocationList, updateLocation } from '@src/store/location';
-import { getAllLocationAction } from '@src/store/location/action';
+import { addLocationAction, getAllLocationAction } from '@src/store/location/action';
 import { getAllPinCode } from '@src/store/pin_code';
 import { getListByPincodeAction } from '@src/store/pin_code/action';
 import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
@@ -67,24 +67,13 @@ const LocationTableList = () => {
       filterMultiple: true,
     },
     {
-      title: 'Country',
-      dataIndex: 'country',
-      key: 'country',
-      filters: filterFields.countryName,
-      filterIcon: <RiFilter3Fill size={20} />,
-      onFilter: (value: string, record: any) => {
-        return record.country.toLowerCase() === value;
-      },
-      filterMultiple: true,
-    },
-    {
-      title: 'Region/Zone',
-      dataIndex: 'region',
-      key: 'region',
-      filters: filterFields.zoneName,
+      title: 'City',
+      dataIndex: 'name',
+      key: 'name',
+      filters: filterFields.cityName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string | number | boolean, record: any) => {
-        return record.region.toLowerCase() === value;
+        return record.name.toLowerCase() === value;
       },
       filterMultiple: true,
     },
@@ -100,16 +89,28 @@ const LocationTableList = () => {
       filterMultiple: true,
     },
     {
-      title: 'City',
-      dataIndex: 'name',
-      key: 'name',
-      filters: filterFields.cityName,
+      title: 'Region/Zone',
+      dataIndex: 'region',
+      key: 'region',
+      filters: filterFields.zoneName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string | number | boolean, record: any) => {
-        return record.name.toLowerCase() === value;
+        return record.region.toLowerCase() === value;
       },
       filterMultiple: true,
     },
+    {
+      title: 'Country',
+      dataIndex: 'country',
+      key: 'country',
+      filters: filterFields.countryName,
+      filterIcon: <RiFilter3Fill size={20} />,
+      onFilter: (value: string, record: any) => {
+        return record.country.toLowerCase() === value;
+      },
+      filterMultiple: true,
+    },
+
     // {
     //   title: 'Created Date',
     //   dataIndex: 'created_date',
@@ -133,15 +134,20 @@ const LocationTableList = () => {
           <Popconfirm title="Delete" description="Are you sure to delete this record?" okText="Yes" cancelText="No" onConfirm={() => onRemoveLocation(row)}>
             <TbTrash size={20} color="#c00" className="cursor-pointer" />
           </Popconfirm> */}
-          <Switch loading={false} defaultChecked={false} onChange={onSwitchChange} />
+          <Switch loading={false} defaultChecked={false} onChange={(checked) => onSwitchChange(checked, row)} />
         </Flex>
       ),
     },
   ];
 
-  const onSwitchChange = useCallback((checked: boolean) => {
-    console.log('=========', checked);
-  }, []);
+  const onSwitchChange = useCallback(
+    (checked: boolean, values: any) => {
+      if (checked) {
+        dispatch(addLocationAction({ ...values, created_date: new Date().toLocaleDateString('en-GB'), updated_date: new Date().toLocaleDateString('en-GB') }));
+      }
+    },
+    [dispatch],
+  );
 
   const filteredColumns = useMemo(() => {
     if (!selectedColumns.length) {
@@ -152,9 +158,9 @@ const LocationTableList = () => {
   }, [selectedColumns, columns]);
 
   useEffect(() => {
-    dispatch(getAllCountriesWithFlagAction());
-    dispatch(getAllLocationAction());
-    dispatch(getZoneListAction());
+    // dispatch(getAllCountriesWithFlagAction());
+    // dispatch(getAllLocationAction());
+    // dispatch(getZoneListAction());
     dispatch(addDrawer({ drawerId: 'add_location_drawer', isCollapsed: false }));
   }, [dispatch]);
 

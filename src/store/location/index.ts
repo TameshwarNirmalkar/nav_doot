@@ -1,15 +1,19 @@
-import type { AppState } from "@redux-store/store_config";
-import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from "@reduxjs/toolkit";
-import { getAllLocationAction } from "./action";
+import type { AppState } from '@redux-store/store_config';
+import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from '@reduxjs/toolkit';
+import { addLocationAction, getAllLocationAction } from './action';
 
-interface LocationCollectionI {
+export interface LocationCollectionI {
   id: string;
-  country_name: string;
+  country: string;
   region: string;
-  state_name: string;
-  city_name: string;
-  postal_code: number;
-  zone_name: string;
+  state: string;
+  city: string;
+  pincode: number;
+  district: string;
+  division: string;
+  branch_type: string;
+  block: string;
+  name: string;
 }
 
 interface LocationStateI {
@@ -20,15 +24,15 @@ interface LocationStateI {
 
 const locationEntityAdapter = createEntityAdapter<LocationCollectionI, EntityId>({
   selectId: (country: LocationCollectionI) => country.id,
-  sortComparer: (a: LocationCollectionI, b: LocationCollectionI) => a.country_name.localeCompare(b.country_name),
+  sortComparer: (a: LocationCollectionI, b: LocationCollectionI) => a.name.localeCompare(b.name),
 });
 
 const locationEntitySlice = createSlice({
-  name: "LOCATION_SLICE",
+  name: 'LOCATION_SLICE',
   initialState: locationEntityAdapter.getInitialState<LocationStateI>({
     isLoading: false,
     error: false,
-    message: "",
+    message: '',
   }),
   reducers: {
     addLocation: locationEntityAdapter.addOne,
@@ -43,6 +47,13 @@ const locationEntitySlice = createSlice({
       .addCase(getAllLocationAction.fulfilled, (state: any, action: PayloadAction<LocationCollectionI[]>) => {
         state.isLoading = false;
         locationEntityAdapter.upsertMany(state, action.payload);
+      })
+      .addCase(addLocationAction.pending, (state: LocationStateI) => {
+        state.isLoading = true;
+      })
+      .addCase(addLocationAction.fulfilled, (state: any, action: PayloadAction<LocationCollectionI>) => {
+        state.isLoading = false;
+        locationEntityAdapter.addOne(state, action.payload);
       });
   },
 });
