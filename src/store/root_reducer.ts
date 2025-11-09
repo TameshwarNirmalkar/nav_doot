@@ -7,6 +7,7 @@ import drawer from '@redux-store/drawer';
 import location from '@redux-store/location';
 import main_menu from '@redux-store/main_menu';
 import pin_code from '@redux-store/pin_code';
+import team from '@redux-store/team';
 import users from '@redux-store/users';
 import vendors from '@redux-store/vendors';
 import zone from '@redux-store/zone';
@@ -25,4 +26,5 @@ export default combineReducers({
   main_menu,
   branch_type,
   pin_code,
+  team,
 });
