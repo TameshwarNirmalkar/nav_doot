@@ -20,6 +20,12 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
+  eslint: {
+    /** Only run ESLint on these directories with `next lint` and `next build`. */
+    dirs: ['src'],
+    /** Do not run ESLint during production builds (`next build`). */
+    ignoreDuringBuilds: false,
+  },
   async rewrites() {
     return [
       {
@@ -31,12 +37,7 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  eslint: {
-    /** Only run ESLint on these directories with `next lint` and `next build`. */
-    dirs: ['src'],
-    /** Do not run ESLint during production builds (`next build`). */
-    ignoreDuringBuilds: false,
-  },
+
   images: {
     formats: ['image/webp'],
     localPatterns: [

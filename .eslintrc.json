@@ -1,7 +1,15 @@
 {
   "parser": "@typescript-eslint/parser",
+  // "parser": "@babel/eslint-parser",
   "plugins": ["@typescript-eslint", "react-hooks"],
-  "extends": ["next/core-web-vitals", "eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended"],
+  "extends": ["next/core-web-vitals", "eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended", "plugin:react/jsx-runtime"],
+  // "extends": ["next/core-web-vitals"],
+  "env": {
+    // "browser": true,
+    // "es2025": true
+    "node": true
+  },
+  "root": true,
   "rules": {
     "@typescript-eslint/no-namespace": "error",
     "@typescript-eslint/no-require-imports": "error",
