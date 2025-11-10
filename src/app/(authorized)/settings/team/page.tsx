@@ -4,7 +4,7 @@ import TeamWrapper from './_components/TeamWrapper';
 export default function TeamPage() {
   return (
     <div>
-      <BreadcrumbComponent items={[{ title: 'Settings' }, { title: 'Team' }]} />
+      {/* <BreadcrumbComponent items={[{ title: 'Settings' }, { title: 'Team' }]} /> */}
       <TeamWrapper />
     </div>
   );
