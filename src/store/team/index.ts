@@ -1,7 +1,7 @@
-import { createEntityAdapter, createSlice, type EntityId, EntityState, PayloadAction } from '@reduxjs/toolkit';
-import { toSnakeCaseKeysInArray } from '@src/utility/common_function';
-import type { AppState } from '../store_config';
-import { addTeamAction, getTeamListAction } from './action';
+import { createEntityAdapter, createSlice, type EntityId, EntityState, PayloadAction } from "@reduxjs/toolkit";
+import { toSnakeCaseKeysInArray } from "@src/utility/common_function";
+import type { AppState } from "../store_config";
+import { addTeamAction, getTeamListAction } from "./action";
 
 export interface TeamEntity {
   id: EntityId;
@@ -20,7 +20,7 @@ const TeamEntityAdapter = createEntityAdapter<TeamEntity, EntityId>({
 });
 
 const TeamEntitySlice = createSlice({
-  name: 'TEAM_SLICE',
+  name: "TEAM_SLICE",
   initialState: TeamEntityAdapter.getInitialState<TeamStateI>({
     isLoading: false,
     error: false,

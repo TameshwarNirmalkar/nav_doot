@@ -1,7 +1,7 @@
-import { createEntityAdapter, createSlice, type EntityId, EntityState, PayloadAction } from '@reduxjs/toolkit';
-import { toSnakeCaseKeysInArray } from '@src/utility/common_function';
-import type { AppState } from '../store_config';
-import { getListByPincodeAction } from './action';
+import { createEntityAdapter, createSlice, type EntityId, EntityState, PayloadAction } from "@reduxjs/toolkit";
+import { toSnakeCaseKeysInArray } from "@src/utility/common_function";
+import type { AppState } from "../store_config";
+import { getListByPincodeAction } from "./action";
 
 export interface PincodeEntity {
   id: EntityId;
@@ -29,7 +29,7 @@ const PincodeEntityAdapter = createEntityAdapter<PincodeEntity, EntityId>({
 });
 
 const PincodeEntitySlice = createSlice({
-  name: 'PINCODE_SLICE',
+  name: "PINCODE_SLICE",
   initialState: PincodeEntityAdapter.getInitialState<PincodeStateI>({
     isLoading: false,
     error: false,

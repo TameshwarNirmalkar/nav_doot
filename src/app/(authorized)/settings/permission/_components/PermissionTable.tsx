@@ -1,20 +1,20 @@
-import TableComponent from '@src/components/Tables/TableComponent';
-import { Checkbox, Flex } from 'antd';
-import React, { memo } from 'react';
-import { AiTwotoneDelete } from 'react-icons/ai';
-import { BsFillSendCheckFill } from 'react-icons/bs';
-import { FcDeleteColumn } from 'react-icons/fc';
-import { MdClose, MdDelete, MdOutlineCheck } from 'react-icons/md';
-import { RiSave3Fill } from 'react-icons/ri';
-import { TiUserDelete } from 'react-icons/ti';
-import { v4 as uuidv4 } from 'uuid';
+import TableComponent from "@src/components/Tables/TableComponent";
+import { Checkbox, Flex } from "antd";
+import React, { memo } from "react";
+import { AiTwotoneDelete } from "react-icons/ai";
+import { BsFillSendCheckFill } from "react-icons/bs";
+import { FcDeleteColumn } from "react-icons/fc";
+import { MdClose, MdDelete, MdOutlineCheck } from "react-icons/md";
+import { RiSave3Fill } from "react-icons/ri";
+import { TiUserDelete } from "react-icons/ti";
+import { v4 as uuidv4 } from "uuid";
 
 export default memo(function PermissionTable() {
   const permissionCol: any = [
     {
-      title: '#Id',
-      dataIndex: 'id',
-      key: 'id',
+      title: "#Id",
+      dataIndex: "id",
+      key: "id",
       // filters: filterFields.countryName,
       // filterIcon: <RiFilter3Fill size={20} />,
       // onFilter: (value: string, record: any) => {
@@ -23,9 +23,9 @@ export default memo(function PermissionTable() {
       filterMultiple: true,
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
       // filters: filterFields.cityName,
       // filterIcon: <RiFilter3Fill size={20} />,
       // onFilter: (value: string | number | boolean, record: any) => {
@@ -35,8 +35,8 @@ export default memo(function PermissionTable() {
     },
     {
       title: <Flex justify="center">Read</Flex>,
-      dataIndex: 'read',
-      key: 'read',
+      dataIndex: "read",
+      key: "read",
       width: 150,
       render: (bool: string, row: any) => (
         <Flex justify="center">
@@ -46,8 +46,8 @@ export default memo(function PermissionTable() {
     },
     {
       title: <Flex justify="center">Write</Flex>,
-      dataIndex: 'write',
-      key: 'write',
+      dataIndex: "write",
+      key: "write",
       width: 150,
       render: (bool: string, row: any) => (
         <Flex justify="center">
@@ -57,8 +57,8 @@ export default memo(function PermissionTable() {
     },
     {
       title: <Flex justify="center">Delete</Flex>,
-      dataIndex: 'delete',
-      key: 'delete',
+      dataIndex: "delete",
+      key: "delete",
       width: 150,
       render: (bool: string, row: any) => (
         <Flex justify="center">
@@ -68,8 +68,8 @@ export default memo(function PermissionTable() {
     },
     {
       title: <Flex justify="center">ReadOnly</Flex>,
-      dataIndex: 'read_only',
-      key: 'read_only',
+      dataIndex: "read_only",
+      key: "read_only",
       width: 150,
       render: (bool: string, row: any) => (
         <Flex justify="center">
@@ -79,8 +79,8 @@ export default memo(function PermissionTable() {
     },
     {
       title: <Flex justify="center">Action</Flex>,
-      dataIndex: 'id',
-      key: 'id',
+      dataIndex: "id",
+      key: "id",
       width: 120,
       render: (text: string, row: any) => (
         <Flex align="center" justify="center" gap={8}>
@@ -94,7 +94,7 @@ export default memo(function PermissionTable() {
   const permissionList = [
     {
       id: uuidv4(),
-      email: 'test@test.com',
+      email: "test@test.com",
       read: false,
       write: false,
       delete: false,
@@ -102,7 +102,7 @@ export default memo(function PermissionTable() {
     },
     {
       id: uuidv4(),
-      email: 'dhiraj@gmail.com',
+      email: "dhiraj@gmail.com",
       read: true,
       write: true,
       delete: true,
@@ -110,7 +110,7 @@ export default memo(function PermissionTable() {
     },
     {
       id: uuidv4(),
-      email: 'jiwan.nishad@gmail.com',
+      email: "jiwan.nishad@gmail.com",
       read: false,
       write: true,
       delete: false,
@@ -118,7 +118,7 @@ export default memo(function PermissionTable() {
     },
     {
       id: uuidv4(),
-      email: 'harish.verma@gmail.com',
+      email: "harish.verma@gmail.com",
       read: false,
       write: false,
       delete: true,
@@ -126,5 +126,5 @@ export default memo(function PermissionTable() {
     },
   ];
 
-  return <TableComponent rowKey={'id'} columns={permissionCol} dataSource={permissionList} bordered pagination={false} />;
+  return <TableComponent rowKey={"id"} columns={permissionCol} dataSource={permissionList} bordered pagination={false} />;
 });

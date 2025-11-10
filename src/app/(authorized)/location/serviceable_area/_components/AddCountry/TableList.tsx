@@ -1,33 +1,33 @@
-'use client';
+"use client";
 
-import FilterColumnComponent from '@src/components/FilterColumnComponent/FilterColumnComponent';
-import DropdownWithCheckboxes from '@src/components/FilterColumnComponent/FilterComponents';
-import IconLoader from '@src/components/IconLoader/IconLoader';
-import TableComponent from '@src/components/Tables/TableComponent';
+import FilterColumnComponent from "@src/components/FilterColumnComponent/FilterColumnComponent";
+import DropdownWithCheckboxes from "@src/components/FilterColumnComponent/FilterComponents";
+import IconLoader from "@src/components/IconLoader/IconLoader";
+import TableComponent from "@src/components/Tables/TableComponent";
 
-import { getAllCitiesBasedOnCountryAndStateAction, getAllCountriesWithFlagAction, getAllStatesBasedOnCountryAction } from '@src/store/country_cities/action';
-import { countryCityIsLoading } from '@src/store/country_cities/memonised_country_city_selector';
-import { addDrawer, drawerUpdate } from '@src/store/drawer';
-import { selectIsCollapsedById } from '@src/store/drawer/memoised_drawer_selector';
-import { addLocation, removeLocation, selectLocationList, updateLocation } from '@src/store/location';
-import { addLocationAction, getAllLocationAction } from '@src/store/location/action';
-import { getAllPinCode } from '@src/store/pin_code';
-import { getListByPincodeAction } from '@src/store/pin_code/action';
-import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
-import { AppState } from '@src/store/store_config';
-import { getZoneListAction } from '@src/store/zone/action';
-import { getUniqueFilters } from '@src/utility/common_function';
-import { delayWaitFor } from '@src/utility/delay';
-import { Button, Card, Drawer, Flex, Form, Input, MenuProps, Popconfirm, Space, Switch } from 'antd';
+import { getAllCitiesBasedOnCountryAndStateAction, getAllCountriesWithFlagAction, getAllStatesBasedOnCountryAction } from "@src/store/country_cities/action";
+import { countryCityIsLoading } from "@src/store/country_cities/memonised_country_city_selector";
+import { addDrawer, drawerUpdate } from "@src/store/drawer";
+import { selectIsCollapsedById } from "@src/store/drawer/memoised_drawer_selector";
+import { addLocation, removeLocation, selectLocationList, updateLocation } from "@src/store/location";
+import { addLocationAction, getAllLocationAction } from "@src/store/location/action";
+import { getAllPinCode } from "@src/store/pin_code";
+import { getListByPincodeAction } from "@src/store/pin_code/action";
+import { useAppDispatch, useAppSelector } from "@src/store/redux_hooks";
+import { AppState } from "@src/store/store_config";
+import { getZoneListAction } from "@src/store/zone/action";
+import { getUniqueFilters } from "@src/utility/common_function";
+import { delayWaitFor } from "@src/utility/delay";
+import { Button, Card, Drawer, Flex, Form, Input, MenuProps, Popconfirm, Space, Switch } from "antd";
 // import Search from 'antd/es/input/Search';
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { BiEdit } from 'react-icons/bi';
-import { FaEye } from 'react-icons/fa';
-import { LuSquarePlus } from 'react-icons/lu';
-import { RiCloseLine, RiFilter3Fill } from 'react-icons/ri';
-import { TbFilterPlus, TbTrash } from 'react-icons/tb';
-import { v4 as uuidv4 } from 'uuid';
-import AddCountry from './AddCountry';
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { BiEdit } from "react-icons/bi";
+import { FaEye } from "react-icons/fa";
+import { LuSquarePlus } from "react-icons/lu";
+import { RiCloseLine, RiFilter3Fill } from "react-icons/ri";
+import { TbFilterPlus, TbTrash } from "react-icons/tb";
+import { v4 as uuidv4 } from "uuid";
+import AddCountry from "./AddCountry";
 
 const { Search } = Input;
 
@@ -35,20 +35,20 @@ const LocationTableList = () => {
   const [addCountryForm] = Form.useForm();
   const dispatch = useAppDispatch();
   const pincodeList = useAppSelector(getAllPinCode);
-  const isCollapsed = useAppSelector((state: AppState) => selectIsCollapsedById(state, 'add_location_drawer'));
+  const isCollapsed = useAppSelector((state: AppState) => selectIsCollapsedById(state, "add_location_drawer"));
   const isLoading = useAppSelector(countryCityIsLoading);
-  const [showAdd, setShowAddd] = useState<boolean>(false);
+  const [_showAdd, setShowAddd] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
 
-  const _id = Form.useWatch('id', addCountryForm);
+  const _id = Form.useWatch("id", addCountryForm);
 
   const filterFields = useMemo(() => {
     return {
-      pinCode: getUniqueFilters(pincodeList, 'pincode'),
-      countryName: getUniqueFilters(pincodeList, 'country'),
-      stateName: getUniqueFilters(pincodeList, 'state'),
-      cityName: getUniqueFilters(pincodeList, 'name'),
-      zoneName: getUniqueFilters(pincodeList, 'region'),
+      pinCode: getUniqueFilters(pincodeList, "pincode"),
+      countryName: getUniqueFilters(pincodeList, "country"),
+      stateName: getUniqueFilters(pincodeList, "state"),
+      cityName: getUniqueFilters(pincodeList, "name"),
+      zoneName: getUniqueFilters(pincodeList, "region"),
     };
   }, [pincodeList]);
 
@@ -56,9 +56,9 @@ const LocationTableList = () => {
 
   const columns: any[] = [
     {
-      title: 'Pin Code',
-      dataIndex: 'pincode',
-      key: 'pincode',
+      title: "Pin Code",
+      dataIndex: "pincode",
+      key: "pincode",
       filters: filterFields.countryName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string, record: any) => {
@@ -67,9 +67,9 @@ const LocationTableList = () => {
       filterMultiple: true,
     },
     {
-      title: 'City',
-      dataIndex: 'name',
-      key: 'name',
+      title: "City",
+      dataIndex: "name",
+      key: "name",
       filters: filterFields.cityName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string | number | boolean, record: any) => {
@@ -78,9 +78,9 @@ const LocationTableList = () => {
       filterMultiple: true,
     },
     {
-      title: 'State',
-      dataIndex: 'state',
-      key: 'state',
+      title: "State",
+      dataIndex: "state",
+      key: "state",
       filters: filterFields.stateName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string | number | boolean, record: any) => {
@@ -89,9 +89,9 @@ const LocationTableList = () => {
       filterMultiple: true,
     },
     {
-      title: 'Region/Zone',
-      dataIndex: 'region',
-      key: 'region',
+      title: "Region/Zone",
+      dataIndex: "region",
+      key: "region",
       filters: filterFields.zoneName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string | number | boolean, record: any) => {
@@ -100,9 +100,9 @@ const LocationTableList = () => {
       filterMultiple: true,
     },
     {
-      title: 'Country',
-      dataIndex: 'country',
-      key: 'country',
+      title: "Country",
+      dataIndex: "country",
+      key: "country",
       filters: filterFields.countryName,
       filterIcon: <RiFilter3Fill size={20} />,
       onFilter: (value: string, record: any) => {
@@ -122,9 +122,9 @@ const LocationTableList = () => {
     //   key: 'updated_date',
     // },
     {
-      title: 'Action',
-      dataIndex: 'id',
-      key: 'id',
+      title: "Action",
+      dataIndex: "id",
+      key: "id",
       width: 120,
       render: (text: string, row: any) => (
         <Flex gap={10} justify="center" align="center">
@@ -143,7 +143,7 @@ const LocationTableList = () => {
   const onSwitchChange = useCallback(
     (checked: boolean, values: any) => {
       if (checked) {
-        dispatch(addLocationAction({ ...values, created_date: new Date().toLocaleDateString('en-GB'), updated_date: new Date().toLocaleDateString('en-GB') }));
+        dispatch(addLocationAction({ ...values, created_date: new Date().toLocaleDateString("en-GB"), updated_date: new Date().toLocaleDateString("en-GB") }));
       }
     },
     [dispatch],
@@ -161,13 +161,13 @@ const LocationTableList = () => {
     // dispatch(getAllCountriesWithFlagAction());
     // dispatch(getAllLocationAction());
     // dispatch(getZoneListAction());
-    dispatch(addDrawer({ drawerId: 'add_location_drawer', isCollapsed: false }));
+    dispatch(addDrawer({ drawerId: "add_location_drawer", isCollapsed: false }));
   }, [dispatch]);
 
   const onOpenDrawer = useCallback(() => {
     dispatch(
       drawerUpdate({
-        drawerId: 'add_location_drawer',
+        drawerId: "add_location_drawer",
         isCollapsed: true,
       }),
     );
@@ -176,7 +176,7 @@ const LocationTableList = () => {
   const onDrawerClose = useCallback(() => {
     dispatch(
       drawerUpdate({
-        drawerId: 'add_location_drawer',
+        drawerId: "add_location_drawer",
         isCollapsed: false,
       }),
     );
@@ -186,14 +186,14 @@ const LocationTableList = () => {
   const onSave = useCallback(async () => {
     const values = await addCountryForm.getFieldsValue(true);
     if (values.id) {
-      dispatch(updateLocation({ id: values.id, changes: { ...values, created_date: new Date().toLocaleDateString('en-GB'), updated_date: new Date().toLocaleDateString('en-GB') } }));
+      dispatch(updateLocation({ id: values.id, changes: { ...values, created_date: new Date().toLocaleDateString("en-GB"), updated_date: new Date().toLocaleDateString("en-GB") } }));
     } else {
-      dispatch(addLocation({ ...values, id: uuidv4(), created_date: new Date().toLocaleDateString('en-GB'), updated_date: new Date().toLocaleDateString('en-GB') }));
+      dispatch(addLocation({ ...values, id: uuidv4(), created_date: new Date().toLocaleDateString("en-GB"), updated_date: new Date().toLocaleDateString("en-GB") }));
     }
     onDrawerClose();
   }, [onDrawerClose, addCountryForm, dispatch]);
 
-  const onEdit = useCallback(
+  const _onEdit = useCallback(
     async (el: any) => {
       await dispatch(getAllStatesBasedOnCountryAction({ country: el.country_code }));
       await dispatch(getAllCitiesBasedOnCountryAndStateAction({ country: el.country_code, state: el.state_code }));
@@ -203,14 +203,14 @@ const LocationTableList = () => {
     [addCountryForm, onOpenDrawer, dispatch],
   );
 
-  const onRemoveLocation = useCallback(
+  const _onRemoveLocation = useCallback(
     (val: any) => {
       dispatch(removeLocation(val.id));
     },
     [dispatch],
   );
 
-  const onShowAdd = useCallback(
+  const _onShowAdd = useCallback(
     (val: any) => {
       // setShowAddd(true);
       onOpenDrawer();
@@ -254,14 +254,15 @@ const LocationTableList = () => {
               Add
             </Button> */}
           </Space>
-        }>
+        }
+      >
         {/* {showAdd ? (
           <Form form={addCountryForm} layout="vertical">
           {/* <AddCountry formInst={addCountryForm} onCancelHandler={() => setShowAddd(false)} onSaveHandler={() => setShowAddd(false)} /> */}
         {/* ) : (
            </Form>
            */}
-        <TableComponent rowKey={'id'} columns={filteredColumns} dataSource={pincodeList} bordered pagination={false} />
+        <TableComponent rowKey={"id"} columns={filteredColumns} dataSource={pincodeList} bordered pagination={false} />
       </Card>
 
       <Drawer
@@ -283,7 +284,8 @@ const LocationTableList = () => {
               </Button>
             </Space>
           </Flex>
-        }>
+        }
+      >
         <div>
           <Form form={addCountryForm} layout="vertical">
             <AddCountry formInst={addCountryForm} onCancelHandler={() => setShowAddd(false)} onSaveHandler={() => setShowAddd(false)} />

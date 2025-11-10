@@ -11,11 +11,11 @@ const getUniqueFilters = <T, K extends keyof T>(data: T[], dataIndex: K): { text
 };
 
 const toSnakeCase = (str: string) => {
-  if (typeof str !== 'string') return str;
-  return str.replace(/([a-z0-9]|(?<=[A-Z]))([A-Z])/g, '$1_$2').toLowerCase();
+  if (typeof str !== "string") return str;
+  return str.replace(/([a-z0-9]|(?<=[A-Z]))([A-Z])/g, "$1_$2").toLowerCase();
 };
 const toSnakeCaseKeys = (item: { [key: string]: any }): { [key: string]: any } => {
-  if (item === null || typeof item !== 'object') {
+  if (item === null || typeof item !== "object") {
     return item;
   }
   if (Array.isArray(item)) {
@@ -33,7 +33,7 @@ const toSnakeCaseKeys = (item: { [key: string]: any }): { [key: string]: any } =
 
 const toSnakeCaseKeysInArray = (array: { [key: string]: any }[]) => {
   if (!Array.isArray(array)) {
-    console.error('Input must be an array.');
+    console.error("Input must be an array.");
     return array;
   }
   return array.map(toSnakeCaseKeys);

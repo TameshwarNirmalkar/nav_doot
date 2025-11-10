@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { MailOutlined, PlusOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons';
-import IconLoader from '@src/components/IconLoader/IconLoader';
-import { Button, Flex, Form, Input, message, Upload, UploadFile, UploadProps } from 'antd';
-import React, { memo, useState } from 'react';
+import { MailOutlined, PlusOutlined, UploadOutlined, UserOutlined } from "@ant-design/icons";
+import IconLoader from "@src/components/IconLoader/IconLoader";
+import { Button, Flex, Form, Input, message, Upload, UploadFile, UploadProps } from "antd";
+import React, { memo, useState } from "react";
 
 const { TextArea } = Input;
 
@@ -15,7 +15,7 @@ interface ProfileFormValues {
 }
 
 export default memo(function ProfileForm() {
-  const profileForm = Form.useFormInstance();
+  const _profileForm = Form.useFormInstance();
 
   return (
     <div>
@@ -27,9 +27,10 @@ export default memo(function ProfileForm() {
         rules={[
           {
             required: true,
-            message: 'Please input your Full Name!',
+            message: "Please input your Full Name!",
           },
-        ]}>
+        ]}
+      >
         <Input prefix={<UserOutlined />} placeholder="Enter your full name" />
       </Form.Item>
 
@@ -40,13 +41,14 @@ export default memo(function ProfileForm() {
         rules={[
           {
             required: true,
-            message: 'Please input your Email!',
+            message: "Please input your Email!",
           },
           {
-            type: 'email',
-            message: 'The input is not valid E-mail!',
+            type: "email",
+            message: "The input is not valid E-mail!",
           },
-        ]}>
+        ]}
+      >
         <Input prefix={<MailOutlined />} placeholder="Enter your email address" />
       </Form.Item>
 
@@ -57,13 +59,14 @@ export default memo(function ProfileForm() {
         rules={[
           {
             required: false, // Making description optional
-            message: 'Please write a brief description!',
+            message: "Please write a brief description!",
           },
           {
             max: 300,
-            message: 'Description must be less than 300 characters.',
+            message: "Description must be less than 300 characters.",
           },
-        ]}>
+        ]}
+      >
         <TextArea rows={4} placeholder="Tell us a little about yourself (max 300 characters)" />
       </Form.Item>
 

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { MailOutlined, PlusOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons';
-import IconLoader from '@src/components/IconLoader/IconLoader';
-import { Button, Flex, Form, Input, message, Upload, UploadFile, UploadProps } from 'antd';
-import React, { memo, useState } from 'react';
+import { MailOutlined, PlusOutlined, UploadOutlined, UserOutlined } from "@ant-design/icons";
+import IconLoader from "@src/components/IconLoader/IconLoader";
+import { Button, Flex, Form, Input, message, Upload, UploadFile, UploadProps } from "antd";
+import React, { memo, useState } from "react";
 
 const { TextArea } = Input;
 
@@ -15,7 +15,7 @@ interface ProfileFormValues {
 }
 
 export default memo(function CompanyForm() {
-  const profileForm = Form.useFormInstance();
+  const _profileForm = Form.useFormInstance();
 
   return (
     <div>
@@ -26,9 +26,10 @@ export default memo(function CompanyForm() {
         rules={[
           {
             required: true,
-            message: 'Please input your Full Name!',
+            message: "Please input your Full Name!",
           },
-        ]}>
+        ]}
+      >
         <Input placeholder="Enter your full name" />
       </Form.Item>
 
@@ -39,9 +40,10 @@ export default memo(function CompanyForm() {
         rules={[
           {
             required: true,
-            message: 'Required',
+            message: "Required",
           },
-        ]}>
+        ]}
+      >
         <Input placeholder="Enter your owner name" />
       </Form.Item>
 
@@ -52,13 +54,14 @@ export default memo(function CompanyForm() {
         rules={[
           {
             required: true,
-            message: 'Please input your company email!',
+            message: "Please input your company email!",
           },
           {
-            type: 'email',
-            message: 'The input is not valid E-mail!',
+            type: "email",
+            message: "The input is not valid E-mail!",
           },
-        ]}>
+        ]}
+      >
         <Input placeholder="Enter your company email address" />
       </Form.Item>
 
@@ -69,9 +72,10 @@ export default memo(function CompanyForm() {
         rules={[
           {
             required: true,
-            message: 'Please input your GST Number',
+            message: "Please input your GST Number",
           },
-        ]}>
+        ]}
+      >
         <Input placeholder="Enter your email address" />
       </Form.Item>
 
@@ -82,13 +86,14 @@ export default memo(function CompanyForm() {
         rules={[
           {
             required: true,
-            message: 'Please write a brief address!',
+            message: "Please write a brief address!",
           },
           {
             max: 250,
-            message: 'Description must be less than 250 characters.',
+            message: "Description must be less than 250 characters.",
           },
-        ]}>
+        ]}
+      >
         <TextArea rows={4} placeholder="Tell us a little about yourself (max 250 characters)" />
       </Form.Item>
 
@@ -99,13 +104,14 @@ export default memo(function CompanyForm() {
         rules={[
           {
             required: false,
-            message: 'Please write a brief description!',
+            message: "Please write a brief description!",
           },
           {
             max: 300,
-            message: 'Description must be less than 300 characters.',
+            message: "Description must be less than 300 characters.",
           },
-        ]}>
+        ]}
+      >
         <TextArea rows={4} placeholder="Tell us a little about yourself (max 300 characters)" />
       </Form.Item>
     </div>
