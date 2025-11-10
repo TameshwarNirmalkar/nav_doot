@@ -18,11 +18,11 @@ const MainHeader = () => {
       label: <Link href={'/my_profile'}>My Profile</Link>,
       icon: <RiProfileFill size={16} />,
     },
-    {
-      key: 'company_profile',
-      label: 'Company Profile',
-      icon: <PiUserCircleDashedFill size={16} />,
-    },
+    // {
+    //   key: 'company_profile',
+    //   label: 'Company Profile',
+    //   icon: <PiUserCircleDashedFill size={16} />,
+    // },
     {
       key: 'settings',
       label: 'Settings',

@@ -221,7 +221,7 @@ const items: Array<MenuItem> = [
     label: 'Settings',
     children: [
       {
-        key: 'users_role',
+        key: 'team',
         icon: <FaUsers size={20} />,
         label: <Link href={'/settings/team'}>Team</Link>,
       },
