@@ -20,6 +20,8 @@
     "antd": "^5.27.4",
     "antd-img-crop": "^4.25.0",
     "cookies-next": "^6.1.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
     "jose": "^6.0.13",
     "jsonwebtoken": "^9.0.2",
     "next": "15.5.0",
@@ -44,7 +46,7 @@
     "@typescript-eslint/eslint-plugin": "^8.46.1",
     "@typescript-eslint/parser": "^8.46.1",
     "dotenv": "^17.2.1",
-    "eslint": "^9.37.0",
+    "eslint": "^9.39.1",
     "eslint-config-next": "^16.0.1",
     "tailwindcss": "^4",
     "typescript": "^5"
