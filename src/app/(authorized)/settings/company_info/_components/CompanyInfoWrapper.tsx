@@ -61,15 +61,12 @@ export default memo(function CompanyInfoWrapper() {
         }>
         <Row gutter={[16, 16]} align={'stretch'}>
           <Col span={4}>
-            {/* <UploadProfile /> */}
             <Image.PreviewGroup items={['https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg']}>
               <Image width={200} src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
             </Image.PreviewGroup>
           </Col>
           <Col span={20}>
-            {/* <ProfileForm /> */}
             <Descriptions
-              // title="User Info"
               layout="horizontal"
               items={[
                 {
@@ -97,7 +94,7 @@ export default memo(function CompanyInfoWrapper() {
                   key: 'address',
                   label: <strong>Address</strong>,
                   children: 'Ambe Colony, Sector - 20, Reliance Energy Delhi - 110045',
-                  span: 2,
+                  span: 3,
                 },
                 {
                   key: 'description',

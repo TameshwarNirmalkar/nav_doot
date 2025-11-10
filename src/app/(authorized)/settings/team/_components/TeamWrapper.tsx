@@ -66,7 +66,6 @@ export default memo(function TeamWrapper() {
 
   const onFormAction = useCallback(
     (val: any) => {
-      console.log('======');
       dispatch(addTeamAction({ ...val, id: uuidv4() }));
       teamForm.resetFields();
     },

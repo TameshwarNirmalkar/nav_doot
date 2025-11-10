@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { BsCreditCard2FrontFill, BsTools } from 'react-icons/bs';
 import { CgListTree } from 'react-icons/cg';
-import { FaHandsHelping } from 'react-icons/fa';
+import { FaHandsHelping, FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { FaLayerGroup, FaMapLocationDot, FaStreetView, FaTreeCity, FaUserGear, FaUserShield, FaUsers } from 'react-icons/fa6';
 import { GiMatterStates, GiTicket, GiTransportationRings } from 'react-icons/gi';
 
@@ -386,7 +386,7 @@ export default function AuthorizedLayout({ children }: { children: React.ReactNo
             </span>
           ) : null}
           <span className="cursor-pointer text-white text-right" onClick={() => setCollapsed(!collapsed)}>
-            {collapsed ? <TbLayoutSidebarRightCollapse size={32} /> : <TbLayoutSidebarLeftCollapse size={32} />}
+            {collapsed ? <FaRegArrowAltCircleRight size={28} /> : <FaRegArrowAltCircleLeft size={28} />}
           </span>
         </div>
         <Menu theme="light" mode="inline" items={items} selectedKeys={selectedKeys} openKeys={openKeys} onSelect={onMenuSelect} onOpenChange={onMenuChange} />
