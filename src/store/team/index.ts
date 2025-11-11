@@ -5,8 +5,10 @@ import { addTeamAction, getTeamListAction, updateTeamAction } from './action';
 
 export interface TeamEntity {
   id: EntityId;
-  email: string;
+  user_email: string;
+  user_name: string;
   verified: boolean;
+  created_date: string;
 }
 
 export interface TeamStateI {

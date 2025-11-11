@@ -6,13 +6,20 @@ import TableComponent from '@src/components/Tables/TableComponent';
 import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
 import { getAllTeams } from '@src/store/team';
 import { addTeamAction, getTeamListAction, updateTeamAction } from '@src/store/team/action';
-import { Button, Card, Col, Drawer, Flex, Form, Input, Row, Space, Switch, Tag } from 'antd';
+import { getUniqueFilters } from '@src/utility/common_function';
+import { Avatar, Button, Card, Col, DatePicker, Drawer, Dropdown, Flex, Form, Input, MenuProps, Row, Space, Switch, Tag } from 'antd';
 import { useForm } from 'antd/es/form/Form';
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import { BsFillSendCheckFill } from 'react-icons/bs';
+import TextArea from 'antd/es/input/TextArea';
+import type { Dayjs } from 'dayjs';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { BiDotsVerticalRounded, BiUser } from 'react-icons/bi';
+import { BsCalendarDate, BsFillSendCheckFill } from 'react-icons/bs';
 import { MdClose, MdOutlineCheck } from 'react-icons/md';
-import { RiCloseLine } from 'react-icons/ri';
+import { RiCloseLine, RiFilter3Fill } from 'react-icons/ri';
 import { v4 as uuidv4 } from 'uuid';
+
+const { Search } = Input;
+const { RangePicker } = DatePicker;
 
 export default memo(function TeamWrapper() {
   const dispatch = useAppDispatch();
@@ -24,6 +31,11 @@ export default memo(function TeamWrapper() {
     { field_name: 'User', field_id: 'USER' },
     { field_name: 'Admin', field_id: 'ADMIN' },
     { field_name: 'Branch Head', field_id: 'BRANCH_HEAD' },
+  ]);
+  const [branchList, setBranchList] = useState<{ field_name: string; field_id: string }[]>([
+    { field_name: 'Ranchi', field_id: '1' },
+    { field_name: 'Raipur', field_id: '5' },
+    { field_name: 'Delhi HO', field_id: '6' },
   ]);
   const [moduleList, setModuleList] = useState<{ field_name: string; field_id: string }[]>([
     { field_name: 'Dashboard', field_id: 'DASHBOARD' },
@@ -42,23 +54,50 @@ export default memo(function TeamWrapper() {
     dispatch(getTeamListAction());
   }, [dispatch]);
 
+  const rowItems: MenuProps['items'] = [
+    { key: '1', label: 'Detail' },
+    { key: '2', label: 'Edit' },
+  ];
+
+  const filterFields = useMemo(() => {
+    return {
+      userName: getUniqueFilters(teamList, 'user_name'),
+      // branchType: getUniqueFilters(teamList, 'branchtype_name'),
+      // parentBranch: getUniqueFilters(teamList, 'parent_branch_name'),
+      // cityName: getUniqueFilters(teamList, 'city_name'),
+      // stateName: getUniqueFilters(teamList, 'state_name'),
+    };
+  }, [teamList]);
+
   const teamCol: any = [
     {
-      title: '#Id',
-      dataIndex: 'id',
-      key: 'id',
-      // filters: filterFields.countryName,
-      // filterIcon: <RiFilter3Fill size={20} />,
-      // onFilter: (value: string, record: any) => {
-      //   return record.pincode.toLowerCase() === value;
-      // },
+      title: 'Name',
+      dataIndex: 'user_name',
+      key: 'user_name',
+      width: 350,
+      render: (text: string, row: any) => (
+        <Flex align="center" gap={10}>
+          <Avatar icon={<BiUser />} style={{ backgroundColor: 'teal', verticalAlign: 'middle' }} size="large" gap={10} /> {text}
+        </Flex>
+      ),
+      filters: filterFields.userName,
+      filterMode: 'tree',
+      filterSearch: true,
       filterMultiple: true,
-      width: 320,
+      filterIcon: <RiFilter3Fill size={20} />,
+      onFilter: (value: string, record: any): boolean => {
+        return record.user_name.toLowerCase() === value;
+      },
     },
     {
-      title: 'Module Name',
-      dataIndex: 'module_name',
-      key: 'module_name',
+      title: 'Email',
+      dataIndex: 'user_email',
+      key: 'user_email',
+    },
+    {
+      title: 'Branch',
+      dataIndex: 'user_branch',
+      key: 'user_branch',
     },
     {
       title: 'Role',
@@ -66,21 +105,30 @@ export default memo(function TeamWrapper() {
       key: 'role',
     },
     {
-      title: 'Active',
+      title: 'Created Date',
+      dataIndex: 'created_date',
+      key: 'created_date',
+      width: 120,
+    },
+    {
+      title: <Flex justify="center">Active</Flex>,
       dataIndex: 'verified',
       key: 'verified',
       width: 120,
       render: (bool: string, row: any) => <Flex justify="center">{row.active ? <MdOutlineCheck size={20} className="text-green-700" /> : <MdClose size={20} className="text-red-700" />}</Flex>,
     },
     {
-      title: 'Action',
+      title: <Flex justify="center">Action</Flex>,
       dataIndex: 'id',
       key: 'id',
-      width: 80,
+      width: 130,
       render: (text: string, row: any) => (
-        <Flex align="center" justify="center">
+        <Flex align="center" justify="center" gap={10}>
           {/* {!row.verified && <BsFillSendCheckFill size={20} className="text-red-700 cursor-pointer" />} */}
           <Switch size="small" checked={row.active} onChange={(checked: boolean) => dispatch(updateTeamAction({ ...row, active: checked }))} />
+          <Dropdown menu={{ items: rowItems }} placement="bottomRight" trigger={['hover']} overlayStyle={{ width: 200 }}>
+            <BiDotsVerticalRounded size={20} />
+          </Dropdown>
         </Flex>
       ),
     },
@@ -101,18 +149,31 @@ export default memo(function TeamWrapper() {
     setIsCollapsed(false);
   }, []);
 
+  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    console.log('Change:', e.target.value);
+  }, []);
+
   return (
     <>
       <Card
         title={
           <Space>
-            <div>Team List</div>
+            <div>User List</div>
+            <Search
+              enterButton
+              placeholder="Search User"
+              style={{ width: 340 }}
+              onSearch={(value, event) => {
+                console.log('===========');
+              }}
+            />
           </Space>
         }
         extra={
           <Space>
+            <RangePicker suffixIcon={<BsCalendarDate size={20} />} />
             <Button type="primary" onClick={onDrawerOpen}>
-              Add Team
+              Add User
             </Button>
             {/* <IconLoader showLoader={true} /> */}
           </Space>
@@ -124,7 +185,7 @@ export default memo(function TeamWrapper() {
         width={520}
         title={
           <Flex justify="space-between">
-            <span>Team Detail</span>
+            <span>Create User</span>
             <RiCloseLine size={20} onClick={onDrawerClose} className="cursor-pointer" />
           </Flex>
         }
@@ -151,7 +212,43 @@ export default memo(function TeamWrapper() {
             <Form.Item name="module_name" hidden>
               <Input hidden />
             </Form.Item>
+            <Form.Item name="user_name" label="User Name">
+              <Input />
+            </Form.Item>
+            <Form.Item name="user_email" label="User Email Id">
+              <Input />
+            </Form.Item>
+            {/* <Form.Item name="user_branch" label="User Branch">
+              <Input />
+            </Form.Item> */}
             <SelectWithAdd
+              loadingState={false}
+              dropDownList={branchList}
+              formItemLabel="User Branch"
+              field_id="user_branch"
+              buttonLabel="Add Branch"
+              onAddHandler={(val) => {
+                // setRoleList((prev) => prev.concat({ field_name: val, field_id: val.toUpperCase() }));
+              }}
+            />
+            {/* <Form.Item name="user_role" label="User Role">
+              <Input />
+            </Form.Item> */}
+            <SelectWithAdd
+              loadingState={false}
+              dropDownList={roleList}
+              formItemLabel="User Role"
+              field_id="user_role"
+              buttonLabel="Add Role"
+              onAddHandler={(val) => {
+                console.log('abd');
+                setRoleList((prev) => prev.concat({ field_name: val, field_id: val.toUpperCase() }));
+              }}
+            />
+            <Form.Item name="user_description" label="Description">
+              <TextArea rows={5} cols={4} showCount maxLength={500} onChange={onChange} />
+            </Form.Item>
+            {/* <SelectWithAdd
               loadingState={false}
               dropDownList={moduleList}
               formItemLabel="Module Name"
@@ -173,7 +270,7 @@ export default memo(function TeamWrapper() {
                 console.log('abd');
                 setRoleList((prev) => prev.concat({ field_name: val, field_id: val.toUpperCase() }));
               }}
-            />
+            /> */}
           </Form>
         </div>
       </Drawer>

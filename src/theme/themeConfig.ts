@@ -110,7 +110,7 @@ const customTheme: ThemeConfig = {
   //   },
   // },
   token: {
-    colorPrimary: '#7816f9',
+    colorPrimary: '#007bff',
     colorInfo: '#ff8316',
     colorError: '#cc0000',
     fontSize: 14,

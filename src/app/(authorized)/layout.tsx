@@ -1,141 +1,142 @@
-"use client";
+'use client';
 
-import MainHeader from "@src/components/MainHeader/MainHeader";
-import type { MenuProps } from "antd";
-import { Flex, Input, Layout, Menu, theme } from "antd";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { BsCreditCard2FrontFill, BsTools } from "react-icons/bs";
-import { CgListTree } from "react-icons/cg";
-import { FaHandsHelping, FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from "react-icons/fa";
-import { FaLayerGroup, FaMapLocationDot, FaStreetView, FaTreeCity, FaUserGear, FaUserShield, FaUsers } from "react-icons/fa6";
-import { GiMatterStates, GiTicket, GiTransportationRings } from "react-icons/gi";
+import MainHeader from '@src/components/MainHeader/MainHeader';
+import type { MenuProps } from 'antd';
+import { Flex, Image, Input, Layout, Menu, theme } from 'antd';
 
-import { GrDocumentPerformance, GrDocumentStore, GrNavigate, GrScan, GrSystem } from "react-icons/gr";
-import { HiDocumentReport } from "react-icons/hi";
-import { ImBooks, ImEarth, ImLocation, ImOffice } from "react-icons/im";
-import { IoIosBarcode, IoIosCreate, IoIosPricetags } from "react-icons/io";
-import { IoBookmarkSharp } from "react-icons/io5";
-import { LiaFileInvoiceDollarSolid, LiaShippingFastSolid, LiaStreetViewSolid } from "react-icons/lia";
-import { MdDashboardCustomize, MdDeliveryDining, MdGpsFixed, MdOutlineContactPhone, MdOutlineFestival, MdOutlineHistory } from "react-icons/md";
-import { PiApplePodcastsLogoFill, PiMapPinSimpleAreaFill, PiUsersFill } from "react-icons/pi";
-import { RiCustomerService2Fill, RiPagesLine, RiTimeZoneFill, RiUploadCloud2Fill, RiUserSettingsLine } from "react-icons/ri";
-import { SiGitbook, SiNaver, SiProducthunt, SiVictoriametrics } from "react-icons/si";
-import { TbBinaryTree2Filled, TbBrandGoogleAnalytics, TbGpsFilled, TbLayoutSidebarLeftCollapse, TbLayoutSidebarRightCollapse, TbShoppingBagSearch, TbTimelineEventPlus, TbTransactionRupee } from "react-icons/tb";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { BsCreditCard2FrontFill, BsTools } from 'react-icons/bs';
+import { CgListTree } from 'react-icons/cg';
+import { FaHandsHelping, FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
+import { FaLayerGroup, FaMapLocationDot, FaStreetView, FaTreeCity, FaUserGear, FaUserShield, FaUsers } from 'react-icons/fa6';
+import { GiMatterStates, GiTicket, GiTransportationRings } from 'react-icons/gi';
+
+import { GrDocumentPerformance, GrDocumentStore, GrNavigate, GrScan, GrSystem } from 'react-icons/gr';
+import { HiDocumentReport } from 'react-icons/hi';
+import { ImBooks, ImEarth, ImLocation, ImOffice } from 'react-icons/im';
+import { IoIosBarcode, IoIosCreate, IoIosPricetags } from 'react-icons/io';
+import { IoBookmarkSharp } from 'react-icons/io5';
+import { LiaFileInvoiceDollarSolid, LiaShippingFastSolid, LiaStreetViewSolid } from 'react-icons/lia';
+import { MdDashboardCustomize, MdDeliveryDining, MdGpsFixed, MdOutlineContactPhone, MdOutlineFestival, MdOutlineHistory } from 'react-icons/md';
+import { PiApplePodcastsLogoFill, PiMapPinSimpleAreaFill, PiUsersFill } from 'react-icons/pi';
+import { RiCustomerService2Fill, RiPagesLine, RiTimeZoneFill, RiUploadCloud2Fill, RiUserSettingsLine } from 'react-icons/ri';
+import { SiGitbook, SiNaver, SiProducthunt, SiVictoriametrics } from 'react-icons/si';
+import { TbBinaryTree2Filled, TbBrandGoogleAnalytics, TbGpsFilled, TbLayoutSidebarLeftCollapse, TbLayoutSidebarRightCollapse, TbShoppingBagSearch, TbTimelineEventPlus, TbTransactionRupee } from 'react-icons/tb';
 
 const siderStyle: React.CSSProperties = {
-  overflow: "auto",
-  height: "100vh",
-  position: "sticky",
+  overflow: 'auto',
+  height: '100vh',
+  position: 'sticky',
   insetInlineStart: 0,
   top: 0,
   bottom: 0,
-  scrollbarWidth: "thin",
-  scrollbarGutter: "auto",
-  backgroundColor: "#02001c",
-  border: "none",
+  scrollbarWidth: 'thin',
+  scrollbarGutter: 'auto',
+  backgroundColor: '#02001c',
+  border: 'none',
 };
 
 const { Header, Content, Footer, Sider } = Layout;
 
-type MenuItem = Required<MenuProps>["items"][number];
+type MenuItem = Required<MenuProps>['items'][number];
 
 const items: Array<MenuItem> = [
   {
-    key: "dashboard",
+    key: 'dashboard',
     icon: <MdDashboardCustomize size={20} />,
-    label: <Link href={"/dashboard/sales"}>Dashboard</Link>,
+    label: <Link href={'/dashboard/sales'}>Dashboard</Link>,
   },
   {
-    key: "booking",
+    key: 'booking',
     icon: <GiTicket size={20} />,
-    label: <Link href={"/booking"}>Booking</Link>,
+    label: <Link href={'/booking'}>Booking</Link>,
   },
   {
-    key: "outscan_inscan",
+    key: 'outscan_inscan',
     icon: <GrScan size={20} />,
-    label: <Link href={"/out_in_scan"}>Outscan/Inscan</Link>,
+    label: <Link href={'/out_in_scan'}>Outscan/Inscan</Link>,
   },
   {
-    key: "delivery",
+    key: 'delivery',
     icon: <MdDeliveryDining size={20} />,
-    label: <Link href={"/delivery"}>Delivery</Link>,
+    label: <Link href={'/delivery'}>Delivery</Link>,
   },
   {
-    key: "pod_management",
+    key: 'pod_management',
     icon: <PiApplePodcastsLogoFill size={20} />,
-    label: <Link href={"/pod_management"}>POD Management</Link>,
+    label: <Link href={'/pod_management'}>POD Management</Link>,
   },
   {
-    key: "tracking",
+    key: 'tracking',
     icon: <TbGpsFilled size={20} />,
-    label: "Tracking",
+    label: 'Tracking',
     children: [
       {
-        key: "live",
+        key: 'live',
         icon: <MdGpsFixed size={20} />,
-        label: <Link href={"/tracking/live"}>Live Tracking</Link>,
+        label: <Link href={'/tracking/live'}>Live Tracking</Link>,
       },
       {
-        key: "history",
+        key: 'history',
         icon: <MdOutlineHistory size={20} />,
-        label: <Link href={"/tracking/history"}>History</Link>,
+        label: <Link href={'/tracking/history'}>History</Link>,
       },
       {
-        key: "status_report",
+        key: 'status_report',
         icon: <RiPagesLine size={20} />,
-        label: <Link href={"/tracking/status_report"}>Status Report</Link>,
+        label: <Link href={'/tracking/status_report'}>Status Report</Link>,
       },
     ],
   },
   {
-    key: "analytics",
+    key: 'analytics',
     icon: <TbBrandGoogleAnalytics size={20} />,
-    label: "Analytics",
+    label: 'Analytics',
     children: [
       {
-        key: "booking_analytics",
+        key: 'booking_analytics',
         icon: <SiGitbook size={20} />,
-        label: <Link href={"/analytics/booking"}>Booking Analytics</Link>,
+        label: <Link href={'/analytics/booking'}>Booking Analytics</Link>,
       },
       {
-        key: "delivery_metrics",
+        key: 'delivery_metrics',
         icon: <SiVictoriametrics size={20} />,
-        label: <Link href={"/analytics/delivery_metrics"}>Delivery Metrics</Link>,
+        label: <Link href={'/analytics/delivery_metrics'}>Delivery Metrics</Link>,
       },
       {
-        key: "partner_performance",
+        key: 'partner_performance',
         icon: <GrDocumentPerformance size={20} />,
-        label: <Link href={"/analytics/partner_performance"}>Partner Performance</Link>,
+        label: <Link href={'/analytics/partner_performance'}>Partner Performance</Link>,
       },
     ],
   },
   {
-    key: "setup_manage",
+    key: 'setup_manage',
     // icon: <MdDashboardCustomize size={20} />,
     label: <div className="border-b">Setup & Manage</div>,
     disabled: true,
   },
   {
-    key: "location",
+    key: 'location',
     icon: <ImLocation size={20} />,
-    label: "Network",
+    label: 'Network',
     children: [
       {
-        key: "serviceable_area",
+        key: 'serviceable_area',
         icon: <PiMapPinSimpleAreaFill size={20} />,
-        label: <Link href={"/location/serviceable_area"}>Serviceable Area</Link>,
+        label: <Link href={'/location/serviceable_area'}>Serviceable Area</Link>,
       },
       {
-        key: "branches_hub",
+        key: 'branches_hub',
         icon: <ImEarth size={20} />,
-        label: <Link href={"/location/branches_hub"}>Branches/Hubs</Link>,
+        label: <Link href={'/location/branches_hub'}>Branches/Hubs</Link>,
       },
       {
-        key: "partners",
+        key: 'partners',
         icon: <FaHandsHelping size={20} />,
-        label: <Link href={"/location/partners"}>Partners</Link>,
+        label: <Link href={'/location/partners'}>Partners</Link>,
       },
       // {
       //   key: 'branches_type',
@@ -194,51 +195,51 @@ const items: Array<MenuItem> = [
   // ],
   // },
   {
-    key: "contracts",
+    key: 'contracts',
     icon: <MdOutlineContactPhone size={20} />,
-    label: "Contracts",
+    label: 'Contracts',
     children: [
       {
-        key: "rfqs",
+        key: 'rfqs',
         icon: <IoIosCreate size={20} />,
-        label: <Link href={"/contracts/rfqs"}>RFQs</Link>,
+        label: <Link href={'/contracts/rfqs'}>RFQs</Link>,
       },
       {
-        key: "proposals",
+        key: 'proposals',
         icon: <ImBooks size={20} />,
-        label: <Link href={"/contracts/proposals"}>Praposals</Link>,
+        label: <Link href={'/contracts/proposals'}>Praposals</Link>,
       },
       {
-        key: "agreements",
+        key: 'agreements',
         icon: <FaLayerGroup size={20} />,
-        label: <Link href={"/contracts/agreements"}>Agreements</Link>,
+        label: <Link href={'/contracts/agreements'}>Agreements</Link>,
       },
     ],
   },
   {
-    key: "settings",
+    key: 'settings',
     icon: <RiUserSettingsLine size={20} />,
-    label: "Settings",
+    label: 'Settings',
     children: [
       {
-        key: "team",
+        key: 'team',
         icon: <FaUsers size={20} />,
-        label: <Link href={"/settings/team"}>Team</Link>,
+        label: <Link href={'/settings/team'}>Users</Link>,
       },
       {
-        key: "permission",
+        key: 'permission',
         icon: <FaUserGear size={20} />,
-        label: <Link href={"/settings/permission"}>Permission</Link>,
+        label: <Link href={'/settings/permission'}>Role Permission</Link>,
       },
       {
-        key: "company_info",
+        key: 'company_info',
         icon: <FaUserShield size={20} />,
-        label: <Link href={"/settings/company_info"}>Company Info</Link>,
+        label: <Link href={'/settings/company_info'}>Company Info</Link>,
       },
       {
-        key: "system_logs",
+        key: 'system_logs',
         icon: <GrSystem size={20} />,
-        label: <Link href={"/settings/system_logs"}>System Logs</Link>,
+        label: <Link href={'/settings/system_logs'}>System Logs</Link>,
       },
     ],
   },
@@ -358,7 +359,7 @@ export default function AuthorizedLayout({ children }: { children: React.ReactNo
   const [openKeys, setOpenKeys] = useState<string[]>([]);
 
   const selectedMenu = useMemo(() => {
-    const keyArray = pathname.split("/").filter((i) => i);
+    const keyArray = pathname.split('/').filter((i) => i);
     return keyArray;
   }, [pathname]) as string[];
 
@@ -367,22 +368,21 @@ export default function AuthorizedLayout({ children }: { children: React.ReactNo
     setOpenKeys(selectedMenu.slice(0, selectedMenu.length - 1));
   }, [selectedMenu]);
 
-  const onMenuSelect: MenuProps["onSelect"] = useCallback(({ key, keyPath, selectedKeys, domEvent }: any) => {
+  const onMenuSelect: MenuProps['onSelect'] = useCallback(({ key, keyPath, selectedKeys, domEvent }: any) => {
     setSelectedKeys(selectedKeys);
   }, []);
 
-  const onMenuChange: MenuProps["onOpenChange"] = useCallback((openKeys: string[]) => {
+  const onMenuChange: MenuProps['onOpenChange'] = useCallback((openKeys: string[]) => {
     setOpenKeys(openKeys);
   }, []);
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: '100vh' }}>
       <Sider style={siderStyle} collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} width={270}>
-        <div className={`flex align-middle justify-${!collapsed ? "between" : "center"} py-4 px-1`}>
+        <div className={`flex align-middle justify-${!collapsed ? 'between' : 'center'} py-4 px-1`}>
           {!collapsed ? (
             <span className="flex">
-              <SiNaver size={20} color="white" />
-              <GrNavigate size={20} color="white" />
+              <Image src={'/public/assets/images/logo_nav_doot.png'} width={100} height={80} alt="company logo" />
             </span>
           ) : null}
           <span className="cursor-pointer text-white text-right" onClick={() => setCollapsed(!collapsed)}>
@@ -392,7 +392,7 @@ export default function AuthorizedLayout({ children }: { children: React.ReactNo
         <Menu theme="light" mode="inline" items={items} selectedKeys={selectedKeys} openKeys={openKeys} onSelect={onMenuSelect} onOpenChange={onMenuChange} />
       </Sider>
       <Layout>
-        <div className="shadow-gray-200 shadow-md p-10 flex w-full mb-3" style={{ padding: "9px 20px", backgroundColor: "white", position: "sticky", top: 0, zIndex: 1 }}>
+        <div className="shadow-gray-200 shadow-md p-10 flex w-full mb-3" style={{ padding: '9px 20px', backgroundColor: 'white', position: 'sticky', top: 0, zIndex: 1 }}>
           <div className="align-middle justify-between flex w-full">
             <div className="">
               <Input style={{ width: 500 }} placeholder="Search" />
@@ -402,12 +402,12 @@ export default function AuthorizedLayout({ children }: { children: React.ReactNo
             </div>
           </div>
         </div>
-        <Content style={{ margin: "0 16px" }}>
+        <Content style={{ margin: '0 16px' }}>
           <div>
             <section>{children}</section>
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>NavDoot ©Created by NavDoot Logistics Solutions Pvt Ltd</Footer>
+        <Footer style={{ textAlign: 'center' }}>NavDoot ©Created by NavDoot Logistics Solutions Pvt Ltd</Footer>
       </Layout>
     </Layout>
   );
