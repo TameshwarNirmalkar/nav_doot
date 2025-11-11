@@ -1,7 +1,7 @@
-import { createEntityAdapter, createSlice, type EntityId, EntityState, PayloadAction } from "@reduxjs/toolkit";
-import { toSnakeCaseKeysInArray } from "@src/utility/common_function";
-import type { AppState } from "../store_config";
-import { addTeamAction, getTeamListAction } from "./action";
+import { createEntityAdapter, createSlice, type EntityId, EntityState, PayloadAction } from '@reduxjs/toolkit';
+import { toSnakeCaseKeysInArray } from '@src/utility/common_function';
+import type { AppState } from '../store_config';
+import { addTeamAction, getTeamListAction, updateTeamAction } from './action';
 
 export interface TeamEntity {
   id: EntityId;
@@ -20,7 +20,7 @@ const TeamEntityAdapter = createEntityAdapter<TeamEntity, EntityId>({
 });
 
 const TeamEntitySlice = createSlice({
-  name: "TEAM_SLICE",
+  name: 'TEAM_SLICE',
   initialState: TeamEntityAdapter.getInitialState<TeamStateI>({
     isLoading: false,
     error: false,
@@ -45,6 +45,19 @@ const TeamEntitySlice = createSlice({
       .addCase(addTeamAction.fulfilled, (state: any, action: PayloadAction<TeamEntity>) => {
         state.isLoading = true;
         TeamEntityAdapter.addOne(state, action.payload);
+      })
+      .addCase(updateTeamAction.pending, (state: any) => {
+        state.isLoading = true;
+      })
+      .addCase(updateTeamAction.fulfilled, (state: any, action: PayloadAction<TeamEntity>) => {
+        state.isLoading = true;
+        const update = {
+          id: action.payload.id,
+          changes: {
+            ...action.payload,
+          },
+        };
+        TeamEntityAdapter.updateOne(state, update);
       });
   },
 });

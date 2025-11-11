@@ -11,7 +11,7 @@ export const getTeamListAction = createAsyncThunk<TeamEntity[]>('TEAM/GET_TEAMLI
         email: 'test@amazon.com',
         verified: false,
         module_name: 'Booking',
-        active: true,
+        active: false,
         role: 'Admin',
       },
       {
@@ -27,7 +27,7 @@ export const getTeamListAction = createAsyncThunk<TeamEntity[]>('TEAM/GET_TEAMLI
         email: 'test2@amazon.com',
         verified: true,
         module_name: 'Tracking',
-        active: true,
+        active: false,
         role: 'Branch Manager',
       },
       {
@@ -45,6 +45,15 @@ export const getTeamListAction = createAsyncThunk<TeamEntity[]>('TEAM/GET_TEAMLI
 });
 
 export const addTeamAction = createAsyncThunk<TeamEntity>('TEAM/ADD_TEAM', async (arg) => {
+  try {
+    // API Call here
+    return arg;
+  } catch (error: any) {
+    return error;
+  }
+});
+
+export const updateTeamAction = createAsyncThunk<TeamEntity>('TEAM/UDATE_TEAM', async (arg) => {
   try {
     // API Call here
     return arg;

@@ -5,7 +5,7 @@ import SelectWithAdd from '@src/components/SelectWithAdd/SelectWithAdd';
 import TableComponent from '@src/components/Tables/TableComponent';
 import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
 import { getAllTeams } from '@src/store/team';
-import { addTeamAction, getTeamListAction } from '@src/store/team/action';
+import { addTeamAction, getTeamListAction, updateTeamAction } from '@src/store/team/action';
 import { Button, Card, Col, Drawer, Flex, Form, Input, Row, Space, Switch, Tag } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import React, { memo, useCallback, useEffect, useState } from 'react';
@@ -70,7 +70,7 @@ export default memo(function TeamWrapper() {
       dataIndex: 'verified',
       key: 'verified',
       width: 120,
-      render: (bool: string, row: any) => <Flex justify="center">{row.verified ? <MdOutlineCheck size={20} className="text-green-700" /> : <MdClose size={20} className="text-red-700" />}</Flex>,
+      render: (bool: string, row: any) => <Flex justify="center">{row.active ? <MdOutlineCheck size={20} className="text-green-700" /> : <MdClose size={20} className="text-red-700" />}</Flex>,
     },
     {
       title: 'Action',
@@ -80,7 +80,7 @@ export default memo(function TeamWrapper() {
       render: (text: string, row: any) => (
         <Flex align="center" justify="center">
           {/* {!row.verified && <BsFillSendCheckFill size={20} className="text-red-700 cursor-pointer" />} */}
-          <Switch size="small" checked={row.verified} />
+          <Switch size="small" checked={row.active} onChange={(checked: boolean) => dispatch(updateTeamAction({ ...row, active: checked }))} />
         </Flex>
       ),
     },
