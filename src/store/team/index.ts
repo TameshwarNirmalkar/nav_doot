@@ -7,8 +7,10 @@ export interface TeamEntity {
   id: EntityId;
   user_email: string;
   user_name: string;
+  user_branch: string;
   verified: boolean;
   created_date: string;
+  role: string;
 }
 
 export interface TeamStateI {

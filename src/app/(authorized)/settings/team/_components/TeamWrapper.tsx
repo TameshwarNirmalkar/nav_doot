@@ -2,6 +2,7 @@
 
 import IconLoader from '@src/components/IconLoader/IconLoader';
 import SelectWithAdd from '@src/components/SelectWithAdd/SelectWithAdd';
+import { CreateStandardFilter } from '@src/components/Tables/FilterComponent';
 import TableComponent from '@src/components/Tables/TableComponent';
 import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
 import { getAllTeams } from '@src/store/team';
@@ -27,6 +28,7 @@ export default memo(function TeamWrapper() {
   const [teamForm] = useForm();
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const [roleList, setRoleList] = useState<{ field_name: string; field_id: string }[]>([
     { field_name: 'User', field_id: 'USER' },
     { field_name: 'Admin', field_id: 'ADMIN' },
@@ -37,22 +39,26 @@ export default memo(function TeamWrapper() {
     { field_name: 'Raipur', field_id: '5' },
     { field_name: 'Delhi HO', field_id: '6' },
   ]);
-  const [moduleList, setModuleList] = useState<{ field_name: string; field_id: string }[]>([
-    { field_name: 'Dashboard', field_id: 'DASHBOARD' },
-    { field_name: 'Booking', field_id: 'BOOKING' },
-    { field_name: 'Outscan/Inscan', field_id: 'OUT_IN_SCAN' },
-    { field_name: 'Delivery', field_id: 'DELIVERY' },
-    { field_name: 'POD Management', field_id: 'POD_MANAGEMENT' },
-    { field_name: 'Tracking', field_id: 'TRACKING' },
-    { field_name: 'Analytics', field_id: 'ANALYTICS' },
-    { field_name: 'Network', field_id: 'NETWORK' },
-    { field_name: 'Contracts', field_id: 'CONTRACTS' },
-    { field_name: 'Settings', field_id: 'SETTINGS' },
-  ]);
+  // const [moduleList, setModuleList] = useState<{ field_name: string; field_id: string }[]>([
+  //   { field_name: 'Dashboard', field_id: 'DASHBOARD' },
+  //   { field_name: 'Booking', field_id: 'BOOKING' },
+  //   { field_name: 'Outscan/Inscan', field_id: 'OUT_IN_SCAN' },
+  //   { field_name: 'Delivery', field_id: 'DELIVERY' },
+  //   { field_name: 'POD Management', field_id: 'POD_MANAGEMENT' },
+  //   { field_name: 'Tracking', field_id: 'TRACKING' },
+  //   { field_name: 'Analytics', field_id: 'ANALYTICS' },
+  //   { field_name: 'Network', field_id: 'NETWORK' },
+  //   { field_name: 'Contracts', field_id: 'CONTRACTS' },
+  //   { field_name: 'Settings', field_id: 'SETTINGS' },
+  // ]);
 
   useEffect(() => {
     dispatch(getTeamListAction());
   }, [dispatch]);
+
+  const onDrawerOpen = useCallback(() => {
+    setIsCollapsed(true);
+  }, []);
 
   const rowItems: MenuProps['items'] = [
     { key: '1', label: 'Detail' },
@@ -62,12 +68,16 @@ export default memo(function TeamWrapper() {
   const filterFields = useMemo(() => {
     return {
       userName: getUniqueFilters(teamList, 'user_name'),
-      // branchType: getUniqueFilters(teamList, 'branchtype_name'),
-      // parentBranch: getUniqueFilters(teamList, 'parent_branch_name'),
-      // cityName: getUniqueFilters(teamList, 'city_name'),
+      userEmail: getUniqueFilters(teamList, 'user_email'),
+      userBranch: getUniqueFilters(teamList, 'user_branch'),
+      userRole: getUniqueFilters(teamList, 'role'),
       // stateName: getUniqueFilters(teamList, 'state_name'),
     };
   }, [teamList]);
+
+  const onItemClickHandler = useCallback(() => {
+    onDrawerOpen();
+  }, [onDrawerOpen]);
 
   const teamCol: any = [
     {
@@ -80,29 +90,25 @@ export default memo(function TeamWrapper() {
           <Avatar icon={<BiUser />} style={{ backgroundColor: 'teal', verticalAlign: 'middle' }} size="large" gap={10} /> {text}
         </Flex>
       ),
-      filters: filterFields.userName,
-      filterMode: 'tree',
-      filterSearch: true,
-      filterMultiple: true,
-      filterIcon: <RiFilter3Fill size={20} />,
-      onFilter: (value: string, record: any): boolean => {
-        return record.user_name.toLowerCase() === value;
-      },
+      ...CreateStandardFilter(filterFields.userName, 'user_name'),
     },
     {
       title: 'Email',
       dataIndex: 'user_email',
       key: 'user_email',
+      ...CreateStandardFilter(filterFields.userEmail, 'user_email'),
     },
     {
       title: 'Branch',
       dataIndex: 'user_branch',
       key: 'user_branch',
+      ...CreateStandardFilter(filterFields.userEmail, 'user_branch'),
     },
     {
       title: 'Role',
       dataIndex: 'role',
       key: 'role',
+      ...CreateStandardFilter(filterFields.userRole, 'role'),
     },
     {
       title: 'Created Date',
@@ -124,9 +130,8 @@ export default memo(function TeamWrapper() {
       width: 130,
       render: (text: string, row: any) => (
         <Flex align="center" justify="center" gap={10}>
-          {/* {!row.verified && <BsFillSendCheckFill size={20} className="text-red-700 cursor-pointer" />} */}
           <Switch size="small" checked={row.active} onChange={(checked: boolean) => dispatch(updateTeamAction({ ...row, active: checked }))} />
-          <Dropdown menu={{ items: rowItems }} placement="bottomRight" trigger={['hover']} overlayStyle={{ width: 200 }}>
+          <Dropdown menu={{ items: rowItems, onClick: onItemClickHandler }} placement="bottomRight" trigger={['hover']} overlayStyle={{ width: 200 }}>
             <BiDotsVerticalRounded size={20} />
           </Dropdown>
         </Flex>
@@ -140,10 +145,6 @@ export default memo(function TeamWrapper() {
     teamForm.resetFields();
     setIsCollapsed(false);
   }, [dispatch, teamForm]);
-
-  const onDrawerOpen = useCallback(() => {
-    setIsCollapsed(true);
-  }, []);
 
   const onDrawerClose = useCallback(() => {
     setIsCollapsed(false);
