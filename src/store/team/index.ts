@@ -40,21 +40,21 @@ const TeamEntitySlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getTeamListAction.fulfilled, (state: any, action: PayloadAction<TeamEntity[]>) => {
-        state.isLoading = true;
+        state.isLoading = false;
         TeamEntityAdapter.upsertMany(state, action.payload);
       })
       .addCase(addTeamAction.pending, (state: any) => {
         state.isLoading = true;
       })
       .addCase(addTeamAction.fulfilled, (state: any, action: PayloadAction<TeamEntity>) => {
-        state.isLoading = true;
+        state.isLoading = false;
         TeamEntityAdapter.addOne(state, action.payload);
       })
       .addCase(updateTeamAction.pending, (state: any) => {
         state.isLoading = true;
       })
       .addCase(updateTeamAction.fulfilled, (state: any, action: PayloadAction<TeamEntity>) => {
-        state.isLoading = true;
+        state.isLoading = false;
         const update = {
           id: action.payload.id,
           changes: {

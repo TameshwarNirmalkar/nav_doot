@@ -15,8 +15,10 @@ import type { Dayjs } from 'dayjs';
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { BiDotsVerticalRounded, BiUser } from 'react-icons/bi';
 import { BsCalendarDate, BsFillSendCheckFill } from 'react-icons/bs';
+import { GrDocumentText } from 'react-icons/gr';
 import { MdClose, MdOutlineCheck } from 'react-icons/md';
 import { RiCloseLine, RiFilter3Fill } from 'react-icons/ri';
+import { TbEdit, TbEyeCheck } from 'react-icons/tb';
 import { v4 as uuidv4 } from 'uuid';
 
 const { Search } = Input;
@@ -61,8 +63,24 @@ export default memo(function TeamWrapper() {
   }, []);
 
   const rowItems: MenuProps['items'] = [
-    { key: '1', label: 'Detail' },
-    { key: '2', label: 'Edit' },
+    {
+      key: '1',
+      label: (
+        <div className="flex items-center gap-1">
+          <TbEyeCheck size={20} />
+          <span>Detail</span>
+        </div>
+      ),
+    },
+    {
+      key: '2',
+      label: (
+        <div className="flex items-center gap-1">
+          <TbEdit size={20} />
+          <span>Edit</span>
+        </div>
+      ),
+    },
   ];
 
   const filterFields = useMemo(() => {
@@ -141,7 +159,7 @@ export default memo(function TeamWrapper() {
 
   const onSave = useCallback(async () => {
     const val = await teamForm.getFieldsValue();
-    dispatch(addTeamAction({ ...val, id: uuidv4(), verified: true, active: true }));
+    dispatch(addTeamAction({ ...val, id: uuidv4(), verified: true, active: true, created_date: new Date().toLocaleDateString('en-GB') }));
     teamForm.resetFields();
     setIsCollapsed(false);
   }, [dispatch, teamForm]);
@@ -210,9 +228,16 @@ export default memo(function TeamWrapper() {
             <Form.Item name="country_name" hidden>
               <Input hidden />
             </Form.Item>
-            <Form.Item name="module_name" hidden>
+            <Form.Item name="country_name" hidden>
               <Input hidden />
             </Form.Item>
+            <Form.Item name="role" hidden>
+              <Input hidden />
+            </Form.Item>
+            <Form.Item name="user_branch" hidden>
+              <Input hidden />
+            </Form.Item>
+
             <Form.Item name="user_name" label="User Name">
               <Input />
             </Form.Item>
@@ -226,7 +251,7 @@ export default memo(function TeamWrapper() {
               loadingState={false}
               dropDownList={branchList}
               formItemLabel="User Branch"
-              field_id="user_branch"
+              field_id="user_branch_code"
               buttonLabel="Add Branch"
               onAddHandler={(val) => {
                 // setRoleList((prev) => prev.concat({ field_name: val, field_id: val.toUpperCase() }));
@@ -242,7 +267,6 @@ export default memo(function TeamWrapper() {
               field_id="user_role"
               buttonLabel="Add Role"
               onAddHandler={(val) => {
-                console.log('abd');
                 setRoleList((prev) => prev.concat({ field_name: val, field_id: val.toUpperCase() }));
               }}
             />

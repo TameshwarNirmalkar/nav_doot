@@ -7,7 +7,7 @@ export const getTeamListAction = createAsyncThunk<TeamEntity[]>('TEAM/GET_TEAMLI
     // API Call here
     return [
       {
-        id: uuidv4(),
+        id: 1,
         user_email: 'test@amazon.com',
         user_branch: 'Raipur',
         user_name: 'Jeevan Nishad',
@@ -16,7 +16,7 @@ export const getTeamListAction = createAsyncThunk<TeamEntity[]>('TEAM/GET_TEAMLI
         created_date: new Date().toLocaleDateString('en-GB'),
       },
       {
-        id: uuidv4(),
+        id: 2,
         user_email: 'test@amazon.com',
         user_branch: 'Delhi HO',
         user_name: 'Dhiraj Sinha',
@@ -25,7 +25,7 @@ export const getTeamListAction = createAsyncThunk<TeamEntity[]>('TEAM/GET_TEAMLI
         created_date: new Date().toLocaleDateString('en-GB'),
       },
       {
-        id: uuidv4(),
+        id: 3,
         user_email: 'test@amazon.com',
         user_branch: 'Bhilai HO',
         user_name: 'Tameshwar Nirmalkar',
@@ -34,7 +34,7 @@ export const getTeamListAction = createAsyncThunk<TeamEntity[]>('TEAM/GET_TEAMLI
         created_date: new Date().toLocaleDateString('en-GB'),
       },
       {
-        id: uuidv4(),
+        id: 4,
         user_email: 'test@amazon.com',
         user_branch: 'Bhilai HO',
         user_name: 'Abhilash Methew',

@@ -135,8 +135,7 @@ const customTheme: ThemeConfig = {
     },
     Dropdown: {
       // colorBgElevated: grayBgcolor,
-      // colorText: '#FFF',
-      controlItemBgHover: grayColor,
+      controlItemBgHover: '#007bff',
       padding: 0,
     },
     Layout: {
