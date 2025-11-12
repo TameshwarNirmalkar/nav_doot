@@ -12,9 +12,9 @@ import { v4 as uuidv4 } from 'uuid';
 export default memo(function PermissionTable() {
   const permissionCol: any = [
     {
-      title: '#Id',
-      dataIndex: 'id',
-      key: 'id',
+      title: 'Module Name',
+      dataIndex: 'module_name',
+      key: 'module_name',
       // filters: filterFields.countryName,
       // filterIcon: <RiFilter3Fill size={20} />,
       // onFilter: (value: string, record: any) => {

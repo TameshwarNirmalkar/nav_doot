@@ -76,7 +76,7 @@ const MainHeader = () => {
           <Dropdown menu={{ items }} placement="bottomRight" trigger={['hover']} overlayStyle={{ width: 200 }}>
             <Flex align="center" className="cursor-pointer">
               <span className="text-white px-1">John Doe</span>
-              <PiUserCircleDashedFill size={40} color="white" />
+              <PiUserCircleDashedFill size={32} color="white" />
             </Flex>
           </Dropdown>
         </div>

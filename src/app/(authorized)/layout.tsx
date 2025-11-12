@@ -380,7 +380,7 @@ export default function AuthorizedLayout({ children }: { children: React.ReactNo
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider style={siderStyle} collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} width={270}>
-        <div className={`flex items-center px-2 justify-${!collapsed ? 'between' : 'center py-3'}`}>
+        <div className={`border-b border-blue-800 flex items-center px-2 justify-${!collapsed ? 'between' : 'center py-3'}`}>
           {!collapsed ? (
             <div className="flex justify-center">
               <Image src={'/assets/images/logo_nav_doot.png'} width={170} height={80} alt="company logo" />
