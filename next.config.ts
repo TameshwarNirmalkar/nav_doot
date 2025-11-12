@@ -45,6 +45,9 @@ const nextConfig: NextConfig = {
         pathname: '/assets/images/**',
         search: '',
       },
+      {
+        pathname: '^/assets/images/.*',
+      },
     ],
     // domains: ["placehold.co", "pexels.com", "images.pexels.com", "i.ibb.co"],
     remotePatterns: [

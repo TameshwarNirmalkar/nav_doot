@@ -2,7 +2,8 @@
 
 import MainHeader from '@src/components/MainHeader/MainHeader';
 import type { MenuProps } from 'antd';
-import { Flex, Image, Input, Layout, Menu, theme } from 'antd';
+import { Flex, Input, Layout, Menu, theme } from 'antd';
+import Image from 'next/image';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -379,15 +380,15 @@ export default function AuthorizedLayout({ children }: { children: React.ReactNo
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider style={siderStyle} collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} width={270}>
-        <div className={`flex align-middle justify-${!collapsed ? 'between' : 'center'} py-4 px-1`}>
+        <div className={`flex items-center px-2 justify-${!collapsed ? 'between' : 'center py-3'}`}>
           {!collapsed ? (
-            <span className="flex">
-              <Image src={'/public/assets/images/logo_nav_doot.png'} width={100} height={80} alt="company logo" />
-            </span>
+            <div className="flex justify-center">
+              <Image src={'/assets/images/logo_nav_doot.png'} width={170} height={80} alt="company logo" />
+            </div>
           ) : null}
-          <span className="cursor-pointer text-white text-right" onClick={() => setCollapsed(!collapsed)}>
+          <div className="cursor-pointer text-white text-right" onClick={() => setCollapsed(!collapsed)}>
             {collapsed ? <FaRegArrowAltCircleRight size={28} /> : <FaRegArrowAltCircleLeft size={28} />}
-          </span>
+          </div>
         </div>
         <Menu theme="light" mode="inline" items={items} selectedKeys={selectedKeys} openKeys={openKeys} onSelect={onMenuSelect} onOpenChange={onMenuChange} />
       </Sider>
