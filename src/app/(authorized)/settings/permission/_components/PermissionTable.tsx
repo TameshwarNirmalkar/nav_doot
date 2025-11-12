@@ -15,22 +15,11 @@ export default memo(function PermissionTable() {
       title: 'Module Name',
       dataIndex: 'module_name',
       key: 'module_name',
-      // filters: filterFields.countryName,
-      // filterIcon: <RiFilter3Fill size={20} />,
-      // onFilter: (value: string, record: any) => {
-      //   return record.pincode.toLowerCase() === value;
-      // },
-      filterMultiple: true,
     },
     {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
-      // filters: filterFields.cityName,
-      // filterIcon: <RiFilter3Fill size={20} />,
-      // onFilter: (value: string | number | boolean, record: any) => {
-      //   return record.name.toLowerCase() === value;
-      // },
       filterMultiple: true,
     },
     {
@@ -92,7 +81,8 @@ export default memo(function PermissionTable() {
 
   const permissionList = [
     {
-      id: uuidv4(),
+      id: 1,
+      module_name: 'Dashboard',
       email: 'test@test.com',
       read: false,
       write: false,
@@ -100,7 +90,8 @@ export default memo(function PermissionTable() {
       read_only: true,
     },
     {
-      id: uuidv4(),
+      id: 2,
+      module_name: 'Booking',
       email: 'dhiraj@gmail.com',
       read: true,
       write: true,
@@ -108,7 +99,8 @@ export default memo(function PermissionTable() {
       read_only: true,
     },
     {
-      id: uuidv4(),
+      id: 3,
+      module_name: 'Delivery',
       email: 'jiwan.nishad@gmail.com',
       read: false,
       write: true,
@@ -116,7 +108,8 @@ export default memo(function PermissionTable() {
       read_only: false,
     },
     {
-      id: uuidv4(),
+      id: 4,
+      module_name: 'Tracking',
       email: 'harish.verma@gmail.com',
       read: false,
       write: false,
