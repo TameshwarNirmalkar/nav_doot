@@ -2,7 +2,7 @@
 
 import IconLoader from '@src/components/IconLoader/IconLoader';
 import SearchComponent from '@src/components/SearchComponent/SearchComponent';
-import { Button, Card, DatePicker, Drawer, Flex, Form, Input, Space } from 'antd';
+import { Button, Card, DatePicker, Drawer, Flex, Form, Input, Select, Space } from 'antd';
 import React, { memo, useCallback, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { BsCalendarDate } from 'react-icons/bs';
@@ -15,6 +15,7 @@ const { RangePicker } = DatePicker;
 export default memo(function PermissionWrapper() {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showTable, setShowTable] = useState<boolean>(false);
 
   const [permissonFormInstance] = Form.useForm();
 
@@ -36,20 +37,39 @@ export default memo(function PermissionWrapper() {
     }
   }, [permissonFormInstance]);
 
+  const onRoleSelect = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('======== ', e);
+    setShowTable(true);
+  }, []);
+
   return (
     <>
       <Card
-        title={<SearchComponent onSearch={(val: string) => console.log('==== ', val)} />}
+        title={
+          <div className="flex items-center">
+            <Select
+              style={{ width: 200 }}
+              options={[
+                { value: 1, label: 'Admin' },
+                { value: 2, label: 'User' },
+                { value: 3, label: 'Manager' },
+                { value: 4, label: 'Head' },
+              ]}
+              onChange={onRoleSelect}
+            />
+            <SearchComponent searchLabel=" " onSearch={(val: string) => console.log('==== ', val)} />
+          </div>
+        }
         extra={
           <Space>
             <RangePicker suffixIcon={<BsCalendarDate size={20} />} />
-            <Button type="primary" onClick={onDrawerOpen}>
+            {/* <Button type="primary" onClick={onDrawerOpen}>
               Add Permission
-            </Button>
+            </Button> */}
             {/* <IconLoader showLoader={true} /> */}
           </Space>
         }>
-        <PermissionTable />
+        {showTable && <PermissionTable />}
       </Card>
 
       <Drawer

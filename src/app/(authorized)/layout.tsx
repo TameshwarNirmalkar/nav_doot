@@ -1,6 +1,7 @@
 'use client';
 
 import MainHeader from '@src/components/MainHeader/MainHeader';
+import SearchComponent from '@src/components/SearchComponent/SearchComponent';
 import type { MenuProps } from 'antd';
 import { Flex, Input, Layout, Menu, theme } from 'antd';
 import Image from 'next/image';
@@ -25,19 +26,6 @@ import { PiApplePodcastsLogoFill, PiMapPinSimpleAreaFill, PiUsersFill } from 're
 import { RiCustomerService2Fill, RiPagesLine, RiTimeZoneFill, RiUploadCloud2Fill, RiUserSettingsLine } from 'react-icons/ri';
 import { SiGitbook, SiNaver, SiProducthunt, SiVictoriametrics } from 'react-icons/si';
 import { TbBinaryTree2Filled, TbBrandGoogleAnalytics, TbGpsFilled, TbLayoutSidebarLeftCollapse, TbLayoutSidebarRightCollapse, TbShoppingBagSearch, TbTimelineEventPlus, TbTransactionRupee } from 'react-icons/tb';
-
-const siderStyle: React.CSSProperties = {
-  overflow: 'auto',
-  height: '100vh',
-  position: 'sticky',
-  insetInlineStart: 0,
-  top: 0,
-  bottom: 0,
-  scrollbarWidth: 'thin',
-  scrollbarGutter: 'auto',
-  backgroundColor: '#02001c',
-  border: 'none',
-};
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -350,9 +338,22 @@ const items: Array<MenuItem> = [
   // },
 ];
 export default function AuthorizedLayout({ children }: { children: React.ReactNode }) {
-  // const {
-  //   token: { colorBgContainer },
-  // } = theme.useToken();
+  const {
+    token: { colorBgContainer, colorText },
+  } = theme.useToken();
+
+  const siderStyle: React.CSSProperties = {
+    overflow: 'auto',
+    height: '100vh',
+    position: 'sticky',
+    insetInlineStart: 0,
+    top: 0,
+    bottom: 0,
+    scrollbarWidth: 'thin',
+    scrollbarGutter: 'auto',
+    backgroundColor: colorBgContainer,
+    border: 'none',
+  };
 
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
@@ -380,23 +381,23 @@ export default function AuthorizedLayout({ children }: { children: React.ReactNo
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider style={siderStyle} collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} width={270}>
-        <div className={`border-b bg-blue-500 border-blue-800 flex items-center px-2 justify-${!collapsed ? 'between' : 'center py-3'}`}>
+        <div className={`border-b border-gray-300 flex items-center px-2 justify-${!collapsed ? 'between' : 'center'}`} style={{ backgroundColor: colorBgContainer, padding: `${collapsed ? '18px 0px' : ''}` }}>
           {!collapsed ? (
             <div className="flex justify-center">
-              <Image src={'/assets/images/logo_nav_doot.png'} width={170} height={80} alt="company logo" />
+              <Image src={'/assets/images/logo_nav_doot.png'} width={170} height={40} alt="company logo" />
             </div>
           ) : null}
           <div className="cursor-pointer text-white text-right" onClick={() => setCollapsed(!collapsed)}>
-            {collapsed ? <FaRegArrowAltCircleRight size={28} /> : <FaRegArrowAltCircleLeft size={28} />}
+            {collapsed ? <FaRegArrowAltCircleRight size={18} color={colorText} /> : <FaRegArrowAltCircleLeft size={18} color={colorText} />}
           </div>
         </div>
-        <Menu theme="light" mode="inline" items={items} selectedKeys={selectedKeys} openKeys={openKeys} onSelect={onMenuSelect} onOpenChange={onMenuChange} />
+        <Menu mode="inline" items={items} selectedKeys={selectedKeys} openKeys={openKeys} onSelect={onMenuSelect} onOpenChange={onMenuChange} />
       </Sider>
       <Layout>
-        <div className="shadow-gray-200 shadow-md p-10 flex w-full mb-3" style={{ padding: '9px 20px', backgroundColor: 'white', position: 'sticky', top: 0, zIndex: 1 }}>
-          <div className="align-middle justify-between flex w-full">
+        <div className="border-b border-gray-300 flex w-full mb-3" style={{ padding: '11px 20px', backgroundColor: 'white', position: 'sticky', top: 0, zIndex: 1 }}>
+          <div className="items-center justify-between flex w-full">
             <div className="">
-              <Input style={{ width: 500 }} placeholder="Search" />
+              <SearchComponent onSearch={() => console.log('----')} searchLabel=" " />
             </div>
             <div>
               <MainHeader />

@@ -20,6 +20,21 @@ export default memo(function PermissionForm() {
       <SelectWithAdd
         loadingState={false}
         dropDownList={[
+          { field_id: 1, field_name: 'Admin' },
+          { field_id: 2, field_name: 'User' },
+          { field_id: 3, field_name: 'Manager' },
+        ]}
+        formItemLabel="User Role"
+        field_id="user_role"
+        buttonLabel="Add Role"
+        onAddHandler={(val) => {
+          // setRoleList((prev) => prev.concat({ field_name: val, field_id: val.toUpperCase() }));
+        }}
+      />
+
+      <SelectWithAdd
+        loadingState={false}
+        dropDownList={[
           { field_id: 1, field_name: 'Dashboard' },
           { field_id: 2, field_name: 'Booking' },
           { field_id: 3, field_name: 'Delivery' },
@@ -36,26 +51,11 @@ export default memo(function PermissionForm() {
         }}
       />
 
-      <SelectWithAdd
-        loadingState={false}
-        dropDownList={[
-          { field_id: 1, field_name: 'Admin' },
-          { field_id: 2, field_name: 'User' },
-          { field_id: 3, field_name: 'Manager' },
-        ]}
-        formItemLabel="User Role"
-        field_id="user_role"
-        buttonLabel="Add Role"
-        onAddHandler={(val) => {
-          // setRoleList((prev) => prev.concat({ field_name: val, field_id: val.toUpperCase() }));
-        }}
-      />
-
-      <Form.Item name="user_email" label="User Email" rules={[{ required: true, message: 'Required' }]}>
+      {/* <Form.Item name="user_email" label="User Email" rules={[{ required: true, message: 'Required' }]}>
         <Input />
-      </Form.Item>
+      </Form.Item> */}
 
-      <SelectWithAdd
+      {/* <SelectWithAdd
         loadingState={false}
         dropDownList={[
           { field_id: 1, field_name: 'Read' },
@@ -69,7 +69,7 @@ export default memo(function PermissionForm() {
         onAddHandler={(val) => {
           // setRoleList((prev) => prev.concat({ field_name: val, field_id: val.toUpperCase() }));
         }}
-      />
+      /> */}
     </div>
   );
 });

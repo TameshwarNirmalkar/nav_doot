@@ -1,6 +1,6 @@
 'use client';
 
-import { Badge, ConfigProvider, Dropdown, Flex, Input, MenuProps, Popover, Space, Tag } from 'antd';
+import { Badge, ConfigProvider, Dropdown, Flex, Input, MenuProps, Popover, Space, Tag, theme } from 'antd';
 import Link from 'next/link';
 import React, { memo } from 'react';
 import { BiBell, BiHelpCircle } from 'react-icons/bi';
@@ -12,6 +12,10 @@ import { RiProfileFill } from 'react-icons/ri';
 import { SlSettings } from 'react-icons/sl';
 
 const MainHeader = () => {
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+
   const items: MenuProps['items'] = [
     {
       key: 'my_profile',

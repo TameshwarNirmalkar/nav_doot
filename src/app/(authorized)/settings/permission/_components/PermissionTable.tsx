@@ -19,20 +19,20 @@ export default memo(function PermissionTable() {
         'module_name',
       ),
     },
-    {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
-      ...CreateStandardFilter(
-        [
-          { text: 'test@test.com', value: 'test@test.com' },
-          { text: 'dhiraj@gmail.com', value: 'dhiraj@gmail.com' },
-          { text: 'jiwan.nishad@gmail.com', value: 'jiwan.nishad@gmail.com' },
-          { text: 'harish.verma@gmail.com', value: 'harish.verma@gmail.com' },
-        ],
-        'module_name',
-      ),
-    },
+    // {
+    //   title: 'Email',
+    //   dataIndex: 'email',
+    //   key: 'email',
+    //   ...CreateStandardFilter(
+    //     [
+    //       { text: 'test@test.com', value: 'test@test.com' },
+    //       { text: 'dhiraj@gmail.com', value: 'dhiraj@gmail.com' },
+    //       { text: 'jiwan.nishad@gmail.com', value: 'jiwan.nishad@gmail.com' },
+    //       { text: 'harish.verma@gmail.com', value: 'harish.verma@gmail.com' },
+    //     ],
+    //     'module_name',
+    //   ),
+    // },
     {
       title: <Flex justify="center">Read</Flex>,
       dataIndex: 'read',
@@ -77,17 +77,17 @@ export default memo(function PermissionTable() {
         </Flex>
       ),
     },
-    {
-      title: <Flex justify="center">Action</Flex>,
-      dataIndex: 'id',
-      key: 'id',
-      width: 120,
-      render: (text: string, row: any) => (
-        <Flex align="center" justify="center" gap={8}>
-          <Switch size="small" checked={row.active} onChange={(checked: boolean) => console.log('fsdffdfdsfsafd', checked)} />
-        </Flex>
-      ),
-    },
+    // {
+    //   title: <Flex justify="center">Action</Flex>,
+    //   dataIndex: 'id',
+    //   key: 'id',
+    //   width: 120,
+    //   render: (text: string, row: any) => (
+    //     <Flex align="center" justify="center" gap={8}>
+    //       <Switch size="small" checked={row.active} onChange={(checked: boolean) => console.log('fsdffdfdsfsafd', checked)} />
+    //     </Flex>
+    //   ),
+    // },
   ];
 
   const permissionList = [
