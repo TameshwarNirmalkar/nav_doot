@@ -1,6 +1,7 @@
 'use client';
 
 import IconLoader from '@src/components/IconLoader/IconLoader';
+import SearchComponent from '@src/components/SearchComponent/SearchComponent';
 import SelectWithAdd from '@src/components/SelectWithAdd/SelectWithAdd';
 import { CreateStandardFilter } from '@src/components/Tables/FilterComponent';
 import TableComponent from '@src/components/Tables/TableComponent';
@@ -176,17 +177,12 @@ export default memo(function TeamWrapper() {
     <>
       <Card
         title={
-          <Space>
-            <div>User List</div>
-            <Search
-              enterButton
-              placeholder="Search User"
-              style={{ width: 340 }}
-              onSearch={(value, event) => {
-                console.log('===========');
-              }}
-            />
-          </Space>
+          <SearchComponent
+            searchLabel="User List"
+            onSearch={(value: string) => {
+              console.log('===========', value);
+            }}
+          />
         }
         extra={
           <Space>

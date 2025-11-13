@@ -1,6 +1,5 @@
 {
   "editor.fontFamily": "MesloLGS NF",
-  "editor.formatOnSaveMode": "file",
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
   "prettier.printWidth": 320,

@@ -1,8 +1,10 @@
 'use client';
 
 import IconLoader from '@src/components/IconLoader/IconLoader';
+import SearchComponent from '@src/components/SearchComponent/SearchComponent';
 import { Button, Card, DatePicker, Drawer, Flex, Form, Input, Space } from 'antd';
 import React, { memo, useCallback, useState } from 'react';
+import { BiSearch } from 'react-icons/bi';
 import { BsCalendarDate } from 'react-icons/bs';
 import { RiCloseLine } from 'react-icons/ri';
 import PermissionForm from './PermissionForm';
@@ -27,27 +29,19 @@ export default memo(function PermissionWrapper() {
   }, []);
 
   const onCreatePermission = useCallback(async () => {
-    setIsCollapsed(true);
-    const values = await permissonFormInstance.getFieldsValue();
-    console.log('======== ', values);
+    try {
+      setIsCollapsed(false);
+      const values = await permissonFormInstance.getFieldsValue();
+      console.log('======== ', values);
+    } catch (error) {
+      console.log('eee ', error);
+    }
   }, [permissonFormInstance]);
 
   return (
     <>
       <Card
-        title={
-          <Space>
-            <div>Permission</div>
-            <Search
-              enterButton
-              placeholder="Search User"
-              style={{ width: 340 }}
-              onSearch={(value, event) => {
-                console.log('===========');
-              }}
-            />
-          </Space>
-        }
+        title={<SearchComponent onSearch={(val: string) => console.log('==== ', val)} />}
         extra={
           <Space>
             <RangePicker suffixIcon={<BsCalendarDate size={20} />} />

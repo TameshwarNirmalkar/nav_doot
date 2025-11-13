@@ -3,8 +3,8 @@
 import FilterColumnComponent from '@src/components/FilterColumnComponent/FilterColumnComponent';
 import DropdownWithCheckboxes from '@src/components/FilterColumnComponent/FilterComponents';
 import IconLoader from '@src/components/IconLoader/IconLoader';
+import SearchComponent from '@src/components/SearchComponent/SearchComponent';
 import TableComponent from '@src/components/Tables/TableComponent';
-
 import { getAllCitiesBasedOnCountryAndStateAction, getAllCountriesWithFlagAction, getAllStatesBasedOnCountryAction } from '@src/store/country_cities/action';
 import { countryCityIsLoading } from '@src/store/country_cities/memonised_country_city_selector';
 import { addDrawer, drawerUpdate } from '@src/store/drawer';
@@ -221,20 +221,7 @@ const LocationTableList = () => {
   return (
     <>
       <Card
-        title={
-          <Space>
-            <div>Serviceable Area</div>
-            <Search
-              enterButton
-              placeholder="Enter pincode: 110001"
-              style={{ width: 340 }}
-              onSearch={(value, event) => {
-                // delayWaitFor(800);
-                dispatch(getListByPincodeAction({ pin_code: value }));
-              }}
-            />
-          </Space>
-        }
+        title={<SearchComponent searchLabel="Serviceable Area" onSearch={(val: string) => dispatch(getListByPincodeAction({ pin_code: val }))} />}
         extra={
           <Space>
             <IconLoader showLoader={isLoading} />

@@ -1,5 +1,6 @@
 'use client';
 import DropdownWithCheckboxes from '@src/components/FilterColumnComponent/FilterComponents';
+import SearchComponent from '@src/components/SearchComponent/SearchComponent';
 import TableComponent from '@src/components/Tables/TableComponent';
 import { getbranchTypeListAction } from '@src/store/branch_type/action';
 import { addBranch, removeBranch, selectBranchesList, updadateBranch } from '@src/store/branches';
@@ -195,7 +196,7 @@ const BranchesWrapper = () => {
   return (
     <>
       <Card
-        title="Branch Gateway"
+        title={<SearchComponent searchLabel="Branch Gateway" onSearch={(val: string) => console.log('=======', val)} />}
         extra={
           <Space>
             <DropdownWithCheckboxes

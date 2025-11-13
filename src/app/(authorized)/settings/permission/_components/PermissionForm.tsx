@@ -63,8 +63,8 @@ export default memo(function PermissionForm() {
           { field_id: 3, field_name: 'Delete' },
           { field_id: 4, field_name: 'ReadOnly' },
         ]}
-        formItemLabel="Method"
-        field_id="user_role"
+        formItemLabel="Permission"
+        field_id="user_permission"
         buttonLabel="Add Role"
         onAddHandler={(val) => {
           // setRoleList((prev) => prev.concat({ field_name: val, field_id: val.toUpperCase() }));
