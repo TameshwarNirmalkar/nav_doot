@@ -1,6 +1,7 @@
 'use client';
 import DropdownWithCheckboxes from '@src/components/FilterColumnComponent/FilterComponents';
 import SearchComponent from '@src/components/SearchComponent/SearchComponent';
+import { CreateStandardFilter } from '@src/components/Tables/FilterComponent';
 import TableComponent from '@src/components/Tables/TableComponent';
 import { getbranchTypeListAction } from '@src/store/branch_type/action';
 import { addBranch, removeBranch, selectBranchesList, updadateBranch } from '@src/store/branches';
@@ -51,35 +52,19 @@ const BranchesWrapper = () => {
         title: 'Branch Name',
         dataIndex: 'branch_name',
         key: 'branch_name',
-        filtered: true,
-        filters: filterFields.branchName,
-        filterIcon: <RiFilter3Fill size={20} />,
-        onFilter: (value: string, record: any): boolean => {
-          return record.branch_name.toLowerCase() === value;
-        },
-        filterMultiple: true,
+        ...CreateStandardFilter(filterFields.branchName, 'branch_name'),
       },
       {
         title: 'Branch Type',
         dataIndex: 'branchtype_name',
         key: 'branchtype_name',
-        filters: filterFields.branchType,
-        filterIcon: <RiFilter3Fill size={20} />,
-        onFilter: (value: string, record: any): boolean => {
-          return record.branchtype_name.toLowerCase() === value;
-        },
-        filterMultiple: true,
+        ...CreateStandardFilter(filterFields.branchType, 'branchtype_name'),
       },
       {
         title: 'Parent Branch',
         dataIndex: 'parent_branch_name',
         key: 'parent_branch_name',
-        filters: filterFields.parentBranch,
-        filterIcon: <RiFilter3Fill size={20} />,
-        onFilter: (value: string, record: any): boolean => {
-          return record.parent_branch_name.toLowerCase() === value;
-        },
-        filterMultiple: true,
+        ...CreateStandardFilter(filterFields.parentBranch, 'parent_branch_name'),
       },
       {
         title: 'Address',
@@ -90,23 +75,13 @@ const BranchesWrapper = () => {
         title: 'City',
         dataIndex: 'city_name',
         key: 'city_name',
-        filters: filterFields.cityName,
-        filterIcon: <RiFilter3Fill size={20} />,
-        onFilter: (value: string, record: any): boolean => {
-          return record.city_name.toLowerCase() === value;
-        },
-        filterMultiple: true,
+        ...CreateStandardFilter(filterFields.cityName, 'city_name'),
       },
       {
         title: 'State',
         dataIndex: 'state_name',
         key: 'state_name',
-        filters: filterFields.stateName,
-        filterIcon: <RiFilter3Fill size={20} />,
-        onFilter: (value: string, record: any): boolean => {
-          return record.state_name.toLowerCase() === value;
-        },
-        filterMultiple: true,
+        ...CreateStandardFilter(filterFields.stateName, 'state_name'),
       },
       {
         title: 'Created Date',

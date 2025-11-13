@@ -1,13 +1,7 @@
+import { CreateStandardFilter } from '@src/components/Tables/FilterComponent';
 import TableComponent from '@src/components/Tables/TableComponent';
 import { Checkbox, Flex, Switch } from 'antd';
 import React, { memo } from 'react';
-import { AiTwotoneDelete } from 'react-icons/ai';
-import { BsFillSendCheckFill } from 'react-icons/bs';
-import { FcDeleteColumn } from 'react-icons/fc';
-import { MdClose, MdDelete, MdOutlineCheck } from 'react-icons/md';
-import { RiSave3Fill } from 'react-icons/ri';
-import { TiUserDelete } from 'react-icons/ti';
-import { v4 as uuidv4 } from 'uuid';
 
 export default memo(function PermissionTable() {
   const permissionCol: any = [
@@ -15,12 +9,29 @@ export default memo(function PermissionTable() {
       title: 'Module Name',
       dataIndex: 'module_name',
       key: 'module_name',
+      ...CreateStandardFilter(
+        [
+          { text: 'Dashboard', value: 'dashboard' },
+          { text: 'Booking', value: 'booking' },
+          { text: 'Delivery', value: 'delivery' },
+          { text: 'Tracking', value: 'tracking' },
+        ],
+        'module_name',
+      ),
     },
     {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
-      filterMultiple: true,
+      ...CreateStandardFilter(
+        [
+          { text: 'test@test.com', value: 'test@test.com' },
+          { text: 'dhiraj@gmail.com', value: 'dhiraj@gmail.com' },
+          { text: 'jiwan.nishad@gmail.com', value: 'jiwan.nishad@gmail.com' },
+          { text: 'harish.verma@gmail.com', value: 'harish.verma@gmail.com' },
+        ],
+        'module_name',
+      ),
     },
     {
       title: <Flex justify="center">Read</Flex>,

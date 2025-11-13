@@ -12,8 +12,6 @@ import PermissionTable from './PermissionTable';
 
 const { RangePicker } = DatePicker;
 
-const { Search } = Input;
-
 export default memo(function PermissionWrapper() {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
