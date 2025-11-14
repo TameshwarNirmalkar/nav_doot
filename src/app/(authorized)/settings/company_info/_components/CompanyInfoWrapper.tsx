@@ -1,11 +1,12 @@
 'use client';
 
+import CollapsibleComponent from '@src/components/Collapsible/CollapsibleComponent';
 import { addDrawer, drawerUpdate } from '@src/store/drawer';
 import { selectIsCollapsedById } from '@src/store/drawer/memoised_drawer_selector';
 import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
 import { AppState } from '@src/store/store_config';
-import { Button, Card, Col, Descriptions, Drawer, Flex, Form, Image, Row, Space } from 'antd';
-import React, { memo, useCallback, useEffect } from 'react';
+import { Button, Card, Col, Collapse, CollapseProps, Descriptions, DescriptionsProps, Drawer, Flex, Form, Image, Row, Space } from 'antd';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { RiCloseLine } from 'react-icons/ri';
 import CompanyForm from './CompanyForm';
 import UploadLogo from './UploadLogo';
@@ -15,6 +16,7 @@ export default memo(function CompanyInfoWrapper() {
   const [profileFormParent] = Form.useForm();
   const _id = Form.useWatch('id', profileFormParent);
   const isCollapsed = useAppSelector((state: AppState) => selectIsCollapsedById(state, 'add_profile_drawer'));
+  const [activeKeys, setActiveKeys] = useState<string[]>(['1']);
 
   useEffect(() => {
     dispatch(addDrawer({ drawerId: 'add_profile_drawer', isCollapsed: false }));
@@ -50,63 +52,174 @@ export default memo(function CompanyInfoWrapper() {
     }
   }, [profileFormParent, onDrawerClose]);
 
+  const narrowLabelStyle = { width: '250px' };
+
+  const companyInformation: DescriptionsProps['items'] = [
+    {
+      key: '1',
+      label: 'Reg. Company Name',
+      children: 'AirFlight',
+      span: 'filled',
+      labelStyle: narrowLabelStyle,
+    },
+    {
+      key: '2',
+      label: 'Company ID',
+      children: '1242533FDS252',
+      span: 'filled',
+    },
+    {
+      key: '3',
+      label: 'Company Logo',
+      children: <Image src="https://dummyimage.com/100x100/C00/fff.png&text=AirLift" className="rounded border border-amber-700" />,
+      span: 'filled',
+    },
+  ];
+
+  const kycInfo: DescriptionsProps['items'] = [
+    {
+      key: '1',
+      label: 'Email',
+      children: 'mycompany@company.com',
+      span: 'filled',
+      labelStyle: narrowLabelStyle,
+    },
+    {
+      key: '2',
+      label: 'Phone',
+      children: '2513625425',
+      span: 'filled',
+    },
+    {
+      key: '3',
+      label: 'Website',
+      children: 'https://www.mycompany.com',
+      span: 'filled',
+    },
+    {
+      key: '4',
+      label: 'GST No.',
+      children: '251DFF2515135DD',
+      span: 'filled',
+    },
+    {
+      key: '5',
+      label: 'PAN No.',
+      children: '251DFF2515135DD',
+      span: 'filled',
+    },
+    {
+      key: '5',
+      label: 'Address',
+      children: 'Shop no. 25, Dwarkapur Section-40, 110005',
+      span: 'filled',
+    },
+    {
+      key: '6',
+      label: 'About Company',
+      children: 'Some description about the company',
+      span: 'filled',
+    },
+  ];
+
+  const paymentInfo: DescriptionsProps['items'] = [
+    {
+      key: '1',
+      label: 'Bank Account',
+      children: '2514**********23',
+      span: 'filled',
+      labelStyle: narrowLabelStyle,
+    },
+    {
+      key: '2',
+      label: 'Credit Details',
+      children: '25 credit points available',
+      span: 'filled',
+    },
+  ];
+
+  const invoicingInfo: DescriptionsProps['items'] = [
+    {
+      key: '1',
+      label: 'Invoice Prefix',
+      children: '2514**********23',
+      span: 'filled',
+      labelStyle: narrowLabelStyle,
+    },
+    {
+      key: '2',
+      label: 'Invoice series starts from',
+      children: '1001',
+      span: 'filled',
+    },
+    {
+      key: '3',
+      label: 'CIN Number',
+      children: '1001DFS2523SA8',
+      span: 'filled',
+    },
+    {
+      key: '4',
+      label: 'Upload Signature',
+      children: <Image src="https://dummyimage.com/100x100/d1edff/0014cc.png&text=Signature" className="rounded border border-blue-500" />,
+      span: 'filled',
+    },
+  ];
+
+  const items: CollapseProps['items'] = [
+    {
+      key: '1',
+      label: 'Company Information',
+      children: (
+        <>
+          <Descriptions bordered={true} size={'small'} items={companyInformation} />
+        </>
+      ),
+    },
+    {
+      key: '2',
+      label: 'KYC Information',
+      children: (
+        <>
+          <Descriptions bordered={true} size={'small'} items={kycInfo} />
+        </>
+      ),
+    },
+    {
+      key: '3',
+      label: 'Payment Information',
+      children: (
+        <>
+          <Descriptions bordered={true} size={'small'} items={paymentInfo} />
+        </>
+      ),
+    },
+    {
+      key: '4',
+      label: 'Invoicing Information',
+      children: (
+        <>
+          <Descriptions bordered={true} size={'small'} items={invoicingInfo} />
+        </>
+      ),
+    },
+  ];
+
+  const onCollapseChange = useCallback((keys: string[]) => {
+    setActiveKeys(keys);
+  }, []);
+
   return (
     <>
       <Card
-        title="Company Information"
+        title="Company Details"
         // extra={
         //   <Button type="primary" onClick={onOpenDrawer}>
         //     Add/Edit
         //   </Button>
         // }
       >
-        <Row gutter={[16, 16]} align={'stretch'}>
-          <Col span={4}>
-            {/* <Image.PreviewGroup items={['https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg']}>
-              <Image width={200} src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
-            </Image.PreviewGroup> */}
-          </Col>
-          <Col span={20}>
-            {/* <Descriptions
-              layout="horizontal"
-              items={[
-                {
-                  key: 'company_name',
-                  label: <strong>Company Name</strong>,
-                  children: 'Agrawal Movers and Packers',
-                },
-                {
-                  key: 'owner_name',
-                  label: <strong>Owner Name</strong>,
-                  children: 'Ratan Agrawal (Bade Bhaiya)',
-                },
-                {
-                  key: 'email',
-                  label: <strong>Email</strong>,
-                  children: 'badebhaiya.agrawal@gmail.com',
-                  span: 2,
-                },
-                {
-                  key: 'gst_number',
-                  label: <strong>Owner Name</strong>,
-                  children: 'GSTIN9568A2365S',
-                },
-                {
-                  key: 'address',
-                  label: <strong>Address</strong>,
-                  children: 'Ambe Colony, Sector - 20, Reliance Energy Delhi - 110045',
-                  span: 3,
-                },
-                {
-                  key: 'description',
-                  label: <strong>Description</strong>,
-                  children:
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-                },
-              ]}
-            /> */}
-          </Col>
-        </Row>
+        <CollapsibleComponent items={items} activeKey={activeKeys} onChange={onCollapseChange} />
       </Card>
 
       <Drawer
