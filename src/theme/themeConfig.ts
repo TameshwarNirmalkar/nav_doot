@@ -8,6 +8,8 @@ const selectedItemTextColor = '#fff';
 const selectedItemBgColor = textColor;
 const itemDisabledColor = '#939393';
 
+const descLabelBg = '#cee3ff';
+
 const customTheme: ThemeConfig = {
   algorithm: theme.compactAlgorithm,
   token: {
@@ -66,6 +68,7 @@ const customTheme: ThemeConfig = {
       itemPaddingBottom: 10,
       itemPaddingEnd: 0,
       labelColor: grayBgcolor,
+      labelBg: descLabelBg,
     },
   },
 };
