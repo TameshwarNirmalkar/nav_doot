@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
 import { getAllTeams } from '@src/store/team';
 import { addTeamAction, getTeamListAction, updateTeamAction } from '@src/store/team/action';
 import { getUniqueFilters } from '@src/utility/common_function';
-import { Avatar, Button, Card, Col, DatePicker, Drawer, Dropdown, Flex, Form, Input, MenuProps, Row, Space, Switch, Tag } from 'antd';
+import { Avatar, Button, Card, Col, DatePicker, Descriptions, DescriptionsProps, Drawer, Dropdown, Flex, Form, Input, MenuProps, Row, Space, Switch, Tag } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import TextArea from 'antd/es/input/TextArea';
 import type { Dayjs } from 'dayjs';
@@ -30,6 +30,7 @@ export default memo(function TeamWrapper() {
   const teamList = useAppSelector(getAllTeams);
   const [teamForm] = useForm();
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+  const [isDetailsView, setIsDetailsView] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [roleList, setRoleList] = useState<{ field_name: string; field_id: string }[]>([
@@ -94,9 +95,17 @@ export default memo(function TeamWrapper() {
     };
   }, [teamList]);
 
-  const onItemClickHandler = useCallback(() => {
-    onDrawerOpen();
-  }, [onDrawerOpen]);
+  const onItemClickHandler = useCallback(
+    (val: { key: string | number }) => {
+      console.log('====', val);
+      if (val.key === '1') {
+        setIsDetailsView(true);
+      } else {
+        onDrawerOpen();
+      }
+    },
+    [onDrawerOpen],
+  );
 
   const teamCol: any = [
     {
@@ -155,6 +164,20 @@ export default memo(function TeamWrapper() {
           </Dropdown>
         </Flex>
       ),
+    },
+  ];
+
+  const descItems: DescriptionsProps['items'] = [
+    {
+      label: 'Created At:',
+      children: '12/05/2025',
+      span: 'filled',
+      labelStyle: { width: 150 },
+    },
+    {
+      label: 'Updated At:',
+      children: '10/10/2025',
+      span: 'filled', // span = 2
     },
   ];
 
@@ -294,6 +317,39 @@ export default memo(function TeamWrapper() {
             /> */}
           </Form>
         </div>
+      </Drawer>
+
+      {/* Description View  */}
+      <Drawer
+        width={520}
+        title={
+          <Flex justify="space-between">
+            <span>User Details</span>
+            <RiCloseLine
+              size={20}
+              onClick={() => {
+                setIsDetailsView(false);
+              }}
+              className="cursor-pointer"
+            />
+          </Flex>
+        }
+        open={isDetailsView}
+        closable={false}
+        maskClosable={false}
+        footer={
+          <Flex justify="end">
+            <Space>
+              <Button
+                onClick={() => {
+                  setIsDetailsView(false);
+                }}>
+                Cancel
+              </Button>
+            </Space>
+          </Flex>
+        }>
+        <Descriptions bordered items={descItems} />
       </Drawer>
     </>
   );
