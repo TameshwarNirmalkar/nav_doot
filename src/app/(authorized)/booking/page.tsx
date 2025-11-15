@@ -1,3 +1,10 @@
+import BookingForm from './_components/BookingForm';
+import BookingWrapper from './_components/BookingWrapper';
+
 export default function BookingPage() {
-  return <div>Booking Page</div>;
+  return (
+    <div>
+      <BookingWrapper />
+    </div>
+  );
 }
