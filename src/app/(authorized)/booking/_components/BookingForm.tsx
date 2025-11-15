@@ -12,10 +12,10 @@ const packageTypes = ['Document', 'Non-Document'];
 const BookingForm = () => {
   const form = Form.useFormInstance();
 
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
-    // Handle form submission logic here (e.g., API call)
-  };
+  // const onFinish = (values: any) => {
+  //   console.log('Received values of form: ', values);
+  //   // Handle form submission logic here (e.g., API call)
+  // };
 
   // Function to calculate Chargeable Weight
   const calculateVolumetricWeight = () => {
@@ -34,7 +34,7 @@ const BookingForm = () => {
       form={form}
       name="booking_form"
       layout="vertical"
-      onFinish={onFinish}
+      // onFinish={onFinish}
       initialValues={{
         useProfileAsPickup: true,
         calculate_chargeable_weight: false,
@@ -48,7 +48,7 @@ const BookingForm = () => {
           Booking Details <Text type="danger">*</Text>
         </Title>
       </Divider>
-      <Row gutter={24}>
+      <Row gutter={10}>
         <Col span={12}>
           <Form.Item label="AWB (Waybill Number)" name="awbNumber">
             <Input />
@@ -60,9 +60,9 @@ const BookingForm = () => {
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="Booking Date" name="bookingDate" style={{ width: '100%' }}>
+          <Form.Item label="Booking Date" name="bookingDate">
             {/* <Input type="date" /> */}
-            <DatePicker width={'100%'} />
+            <DatePicker style={{ width: '100%' }} />
           </Form.Item>
         </Col>
         <Col span={12}>
@@ -72,7 +72,6 @@ const BookingForm = () => {
         </Col>
       </Row>
 
-      <br />
       {/* --- Delivery Address Details --- */}
       <Divider orientation="right">
         <Title level={5}>
@@ -80,7 +79,7 @@ const BookingForm = () => {
         </Title>
       </Divider>
       <Text strong>Delivery Address</Text>
-      <Row gutter={24}>
+      <Row gutter={10}>
         <Col span={12}>
           <Form.Item label="Full Name" name={['deliveryAddress', 'fullName']} rules={[{ required: true, message: 'Required' }]}>
             <Input />
@@ -92,7 +91,7 @@ const BookingForm = () => {
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={24}>
+      <Row gutter={10}>
         <Col span={12}>
           <Form.Item label="Postal Code" name={['deliveryAddress', 'postalCode']} rules={[{ required: true, message: 'Required' }]}>
             <Input />
@@ -104,7 +103,7 @@ const BookingForm = () => {
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={24}>
+      <Row gutter={10}>
         <Col span={12}>
           <Form.Item label="City" name={['deliveryAddress', 'city']} rules={[{ required: true, message: 'Required' }]}>
             <Input />
@@ -116,7 +115,7 @@ const BookingForm = () => {
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={24}>
+      <Row gutter={10}>
         <Col span={12}>
           <Form.Item label="State" name={['deliveryAddress', 'state']} rules={[{ required: true, message: 'Required' }]}>
             <Input />
@@ -124,7 +123,7 @@ const BookingForm = () => {
         </Col>
         <Col span={12}>{/* Empty Col for alignment */}</Col>
       </Row>
-      <Row gutter={24}>
+      <Row gutter={10}>
         <Col span={12}>
           <Form.Item label="Country" name={['deliveryAddress', 'country']} rules={[{ required: true, message: 'Required' }]}>
             <Input />
@@ -141,7 +140,7 @@ const BookingForm = () => {
       <Form.Item noStyle shouldUpdate>
         {({ getFieldValue }) =>
           !getFieldValue('useProfileAsPickup') ? (
-            <Row gutter={24}>
+            <Row gutter={10}>
               <Col span={12}>
                 <Form.Item label="Full Name" name={['pickupAddress', 'fullName']} rules={[{ required: true, message: 'Required' }]}>
                   <Input />
@@ -177,7 +176,6 @@ const BookingForm = () => {
                   <Input />
                 </Form.Item>
               </Col>
-              <Col span={12}>{/* Empty Col for alignment */}</Col>
               <Col span={12}>
                 <Form.Item label="Country" name={['pickupAddress', 'country']} rules={[{ required: true, message: 'Required' }]}>
                   <Input />
@@ -194,7 +192,7 @@ const BookingForm = () => {
           Package Details <Text type="danger">*</Text>
         </Title>
       </Divider>
-      <Row gutter={24}>
+      <Row gutter={10}>
         <Col span={12}>
           <Form.Item label="Select the Packet type" name="packetType" rules={[{ required: true, message: 'Required' }]}>
             <Select placeholder="Select a type">
@@ -218,7 +216,7 @@ const BookingForm = () => {
         </Col>
         <Col span={12}>
           <Form.Item label="Actual Weight" name="actualWeight" rules={[{ required: true, message: 'Required' }]}>
-            <Input addonAfter="kg" type="number" min={0} step={0.01} />
+            <Input suffix="kg" />
           </Form.Item>
         </Col>
         <Col span={24}>
@@ -232,23 +230,23 @@ const BookingForm = () => {
                   <Text strong>Package Dimensions L x B x H of the complete package</Text>
                   <Row gutter={8} align="bottom">
                     <Col span={6}>
-                      <Form.Item label="Length" name={['packageDimensions', 'length']} rules={[{ required: true, message: 'L required' }]} style={{ marginBottom: 0 }}>
-                        <Input addonAfter="cm" type="number" min={0} onChange={calculateVolumetricWeight} />
+                      <Form.Item label="Length" name={['packageDimensions', 'length']} rules={[{ required: true, message: 'L required' }]}>
+                        <Input suffix="cm" onChange={calculateVolumetricWeight} />
                       </Form.Item>
                     </Col>
                     <Col span={6}>
-                      <Form.Item label="Breadth" name={['packageDimensions', 'breadth']} rules={[{ required: true, message: 'B required' }]} style={{ marginBottom: 0 }}>
-                        <Input addonAfter="cm" type="number" min={0} onChange={calculateVolumetricWeight} />
+                      <Form.Item label="Breadth" name={['packageDimensions', 'breadth']} rules={[{ required: true, message: 'B required' }]}>
+                        <Input suffix="cm" onChange={calculateVolumetricWeight} />
                       </Form.Item>
                     </Col>
                     <Col span={6}>
-                      <Form.Item label="Height" name={['packageDimensions', 'height']} rules={[{ required: true, message: 'H required' }]} style={{ marginBottom: 0 }}>
-                        <Input addonAfter="cm" type="number" min={0} onChange={calculateVolumetricWeight} />
+                      <Form.Item label="Height" name={['packageDimensions', 'height']} rules={[{ required: true, message: 'H required' }]}>
+                        <Input suffix="cm" onChange={calculateVolumetricWeight} />
                       </Form.Item>
                     </Col>
                     <Col span={6}>
-                      <Form.Item label="Volumetric Weight" name="volumetricWeight" style={{ marginBottom: 0 }}>
-                        <Input addonAfter="kg" disabled />
+                      <Form.Item label="Volumetric Weight" name="volumetricWeight">
+                        <Input suffix="kg" disabled />
                       </Form.Item>
                     </Col>
                   </Row>

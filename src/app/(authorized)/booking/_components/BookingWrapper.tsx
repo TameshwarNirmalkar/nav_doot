@@ -9,6 +9,7 @@ import React, { memo, useCallback, useState } from 'react';
 import { BsCalendarDate } from 'react-icons/bs';
 import { RiCloseLine } from 'react-icons/ri';
 import BookingForm from './BookingForm';
+import BookingSummaryDescription from './BookingSummaryDescription';
 
 const { RangePicker } = DatePicker;
 
@@ -107,7 +108,7 @@ export default memo(function BookingWrapper() {
       </Card>
 
       <Drawer
-        width={'40%'}
+        width={'70%'}
         title={
           <Flex justify="space-between">
             <span>Add Booking</span>
@@ -129,10 +130,15 @@ export default memo(function BookingWrapper() {
             </Space>
           </Flex>
         }>
-        <div className="flex flex-col gap-3">
-          <Form name="bookingForm" form={bookingForm}>
-            <BookingForm />
-          </Form>
+        <div className="flex flex-row gap-5">
+          <div className="flex-1">
+            <Form name="bookingForm" form={bookingForm}>
+              <BookingForm />
+            </Form>
+          </div>
+          <div className="flex-1">
+            <BookingSummaryDescription />
+          </div>
         </div>
       </Drawer>
     </div>
