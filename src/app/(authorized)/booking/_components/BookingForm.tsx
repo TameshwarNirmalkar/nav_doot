@@ -30,17 +30,7 @@ const BookingForm = () => {
   };
 
   return (
-    <Form
-      form={form}
-      name="booking_form"
-      layout="vertical"
-      // onFinish={onFinish}
-      initialValues={{
-        useProfileAsPickup: true,
-        calculate_chargeable_weight: false,
-        packageDimensions: { length: 0, breadth: 0, height: 0 },
-        volumetricWeight: 0,
-      }}>
+    <>
       {/* --- Booking Details --- */}
 
       <Divider orientation="right">
@@ -259,7 +249,7 @@ const BookingForm = () => {
           </Form.Item>
         </Col>
       </Row>
-    </Form>
+    </>
   );
 };
 

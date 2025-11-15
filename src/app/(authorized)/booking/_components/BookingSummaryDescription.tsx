@@ -1,3 +1,5 @@
+'use client';
+
 import { Card, Col, Descriptions, Divider, Row, Typography } from 'antd';
 import React, { memo } from 'react';
 

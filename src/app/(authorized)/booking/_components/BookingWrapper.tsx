@@ -93,6 +93,7 @@ export default memo(function BookingWrapper() {
             onSearch={(value: string) => {
               console.log('===========', value);
             }}
+            placeholder="Search Booking"
           />
         }
         extra={
@@ -132,7 +133,7 @@ export default memo(function BookingWrapper() {
         }>
         <div className="flex flex-row gap-5">
           <div className="flex-1">
-            <Form name="bookingForm" form={bookingForm}>
+            <Form name="bookingForm" form={bookingForm} layout="vertical">
               <BookingForm />
             </Form>
           </div>
