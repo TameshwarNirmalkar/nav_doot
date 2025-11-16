@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Col, Descriptions, Divider, Row, Typography } from 'antd';
+import { Card, Col, ConfigProvider, Descriptions, Divider, Row, Typography } from 'antd';
 import React, { memo } from 'react';
 
 const { Title } = Typography;
@@ -49,7 +49,15 @@ const BookingSummaryDescription: React.FC = () => {
   return (
     <Card title={<Title level={5}>📦 Booking Summary</Title>} style={{}}>
       {/* --- Shipment Details Section --- */}
-      <Descriptions bordered column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }} size="middle" labelStyle={{ width: 200 }}>
+      <Descriptions
+        bordered
+        column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
+        size="middle"
+        styles={{
+          label: {
+            width: '200px',
+          },
+        }}>
         <Descriptions.Item label="AWB (Waybill Number)">{awbNumber}</Descriptions.Item>
         <Descriptions.Item label="Pickup Address">{pickupAddress}</Descriptions.Item>
         <Descriptions.Item label="Delivery Address">{deliveryAddress}</Descriptions.Item>
@@ -76,13 +84,32 @@ const BookingSummaryDescription: React.FC = () => {
       </Card>
 
       {/* --- GST/Eway Bill Required Checkbox (Simulated) --- */}
-      <Descriptions title="GST/Eway Bill Required" bordered column={1} size="small" style={{ marginBottom: 16 }} labelStyle={{ width: 200 }}>
+      <Descriptions
+        title="GST/Eway Bill Required"
+        bordered
+        column={1}
+        size="small"
+        style={{ marginBottom: 16 }}
+        styles={{
+          label: {
+            width: '200px',
+          },
+        }}>
         <Descriptions.Item label="Required">{gstRequired ? '☑️ YES' : '⬜ NO'}</Descriptions.Item>
       </Descriptions>
 
       {/* --- GST/Eway Details (Conditional Display) --- */}
       {gstRequired && (
-        <Descriptions title="GST & Eway Bill Details" bordered column={1} size="small" labelStyle={{ width: 200 }}>
+        <Descriptions
+          title="GST & Eway Bill Details"
+          bordered
+          column={1}
+          size="small"
+          styles={{
+            label: {
+              width: '200px',
+            },
+          }}>
           <Descriptions.Item label="GST Number">{gstNumber}</Descriptions.Item>
           <Descriptions.Item label="Eway Bill Number">{ewayBillNumber}</Descriptions.Item>
           <Descriptions.Item label="Eway Expiry Date">{ewayExpiryDate}</Descriptions.Item>
