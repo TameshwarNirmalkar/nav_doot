@@ -14,7 +14,7 @@ import BookingSummaryDescription from './BookingSummaryDescription';
 const { RangePicker } = DatePicker;
 
 export default memo(function BookingWrapper() {
-  const [bookingForm] = useForm();
+  const [bookingForm] = Form.useForm();
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -78,10 +78,14 @@ export default memo(function BookingWrapper() {
   }, []);
 
   const onSave = useCallback(async () => {
-    const val = await bookingForm.getFieldsValue();
-    console.log('========', val);
-    bookingForm.resetFields();
-    setIsCollapsed(false);
+    try {
+      const val = await bookingForm.getFieldsValue();
+      console.log('========', val);
+      // bookingForm.resetFields();
+      // setIsCollapsed(false);
+    } catch (error) {
+      console.log('error ======', error);
+    }
   }, [bookingForm]);
 
   return (

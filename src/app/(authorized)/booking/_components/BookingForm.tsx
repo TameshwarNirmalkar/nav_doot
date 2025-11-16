@@ -40,23 +40,23 @@ const BookingForm = () => {
       </Divider>
       <Row gutter={10}>
         <Col span={12}>
-          <Form.Item label="AWB (Waybill Number)" name="awbNumber">
+          <Form.Item label="AWB (Waybill Number)" name="awbNumber" rules={[{ required: true, message: 'Required' }]}>
             <Input />
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="Booking Branch" name="branch">
+          <Form.Item label="Booking Branch" name="branch" rules={[{ required: true, message: 'Required' }]}>
             <Input />
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="Booking Date" name="bookingDate">
+          <Form.Item label="Booking Date" name="bookingDate" rules={[{ required: true, message: 'Required' }]}>
             {/* <Input type="date" /> */}
             <DatePicker style={{ width: '100%' }} />
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="Product" name="product">
+          <Form.Item label="Product" name="product" rules={[{ required: true, message: 'Required' }]}>
             <Input />
           </Form.Item>
         </Col>
