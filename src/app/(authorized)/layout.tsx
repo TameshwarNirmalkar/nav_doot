@@ -3,31 +3,24 @@
 import MainHeader from '@src/components/MainHeader/MainHeader';
 import SearchComponent from '@src/components/SearchComponent/SearchComponent';
 import type { MenuProps } from 'antd';
-import { Flex, Input, Layout, Menu, theme } from 'antd';
+import { Layout, Menu, theme } from 'antd';
 import Image from 'next/image';
-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { BsCreditCard2FrontFill, BsTools } from 'react-icons/bs';
-import { CgListTree } from 'react-icons/cg';
 import { FaHandsHelping, FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
-import { FaLayerGroup, FaMapLocationDot, FaStreetView, FaTreeCity, FaUserGear, FaUserShield, FaUsers } from 'react-icons/fa6';
-import { GiMatterStates, GiTicket, GiTransportationRings } from 'react-icons/gi';
+import { FaLayerGroup, FaUserGear, FaUserShield, FaUsers } from 'react-icons/fa6';
+import { GiTicket } from 'react-icons/gi';
+import { GrDocumentPerformance, GrScan, GrSystem } from 'react-icons/gr';
+import { ImBooks, ImEarth, ImLocation } from 'react-icons/im';
+import { IoIosCreate } from 'react-icons/io';
+import { MdDashboardCustomize, MdDeliveryDining, MdGpsFixed, MdOutlineContactPhone, MdOutlineHistory } from 'react-icons/md';
+import { PiApplePodcastsLogoFill, PiMapPinSimpleAreaFill } from 'react-icons/pi';
+import { RiPagesLine, RiUserSettingsLine } from 'react-icons/ri';
+import { SiGitbook, SiVictoriametrics } from 'react-icons/si';
+import { TbBrandGoogleAnalytics, TbGpsFilled } from 'react-icons/tb';
 
-import { GrDocumentPerformance, GrDocumentStore, GrNavigate, GrScan, GrSystem } from 'react-icons/gr';
-import { HiDocumentReport } from 'react-icons/hi';
-import { ImBooks, ImEarth, ImLocation, ImOffice } from 'react-icons/im';
-import { IoIosBarcode, IoIosCreate, IoIosPricetags } from 'react-icons/io';
-import { IoBookmarkSharp } from 'react-icons/io5';
-import { LiaFileInvoiceDollarSolid, LiaShippingFastSolid, LiaStreetViewSolid } from 'react-icons/lia';
-import { MdDashboardCustomize, MdDeliveryDining, MdGpsFixed, MdOutlineContactPhone, MdOutlineFestival, MdOutlineHistory } from 'react-icons/md';
-import { PiApplePodcastsLogoFill, PiMapPinSimpleAreaFill, PiUsersFill } from 'react-icons/pi';
-import { RiCustomerService2Fill, RiPagesLine, RiTimeZoneFill, RiUploadCloud2Fill, RiUserSettingsLine } from 'react-icons/ri';
-import { SiGitbook, SiNaver, SiProducthunt, SiVictoriametrics } from 'react-icons/si';
-import { TbBinaryTree2Filled, TbBrandGoogleAnalytics, TbGpsFilled, TbLayoutSidebarLeftCollapse, TbLayoutSidebarRightCollapse, TbShoppingBagSearch, TbTimelineEventPlus, TbTransactionRupee } from 'react-icons/tb';
-
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -43,7 +36,7 @@ const items: Array<MenuItem> = [
     label: <Link href={'/booking'}>Booking</Link>,
   },
   {
-    key: 'outscan_inscan',
+    key: 'out_in_scan',
     icon: <GrScan size={20} />,
     label: <Link href={'/out_in_scan'}>Outscan/Inscan</Link>,
   },
@@ -380,8 +373,18 @@ export default function AuthorizedLayout({ children }: { children: React.ReactNo
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider style={siderStyle} collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} width={270}>
-        <div className={`border-b border-gray-300 flex items-center px-2 justify-${!collapsed ? 'between' : 'center'}`} style={{ backgroundColor: colorBgContainer, padding: `${collapsed ? '18px 0px' : ''}` }}>
+      <Sider
+        style={siderStyle}
+        collapsible
+        collapsed={collapsed}
+        onCollapse={(value) => setCollapsed(value)}
+        width={270}
+        breakpoint="sm"
+        collapsedWidth="60"
+        onBreakpoint={(broken) => {
+          console.log(broken);
+        }}>
+        <div className={`border-b border-gray-300 flex items-center px-2 justify-${!collapsed ? 'between' : 'center'}`} style={{ height: 55, backgroundColor: colorBgContainer, padding: `${collapsed ? '18px 0px' : ''}` }}>
           {!collapsed ? (
             <div className="flex justify-center">
               <Image src={'/assets/images/logo_nav_doot.png'} width={170} height={40} alt="company logo" />
@@ -394,7 +397,7 @@ export default function AuthorizedLayout({ children }: { children: React.ReactNo
         <Menu mode="inline" items={items} selectedKeys={selectedKeys} openKeys={openKeys} onSelect={onMenuSelect} onOpenChange={onMenuChange} />
       </Sider>
       <Layout>
-        <div className="border-b border-gray-300 flex w-full mb-3" style={{ padding: '11px 20px', backgroundColor: 'white', position: 'sticky', top: 0, zIndex: 1 }}>
+        <div className="border-b border-gray-300 flex w-full mb-3" style={{ height: 55, padding: '11px 20px', backgroundColor: 'white', position: 'sticky', top: 0, zIndex: 1 }}>
           <div className="items-center justify-between flex w-full">
             <div className="">
               <SearchComponent onSearch={() => console.log('----')} searchLabel=" " />
@@ -405,9 +408,7 @@ export default function AuthorizedLayout({ children }: { children: React.ReactNo
           </div>
         </div>
         <Content style={{ margin: '0 16px' }}>
-          <div>
-            <section>{children}</section>
-          </div>
+          <section>{children}</section>
         </Content>
         <Footer style={{ textAlign: 'center' }}>NavDoot ©Created by NavDoot Logistics Solutions Pvt Ltd</Footer>
       </Layout>
