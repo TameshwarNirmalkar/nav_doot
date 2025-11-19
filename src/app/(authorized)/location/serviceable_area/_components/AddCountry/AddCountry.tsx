@@ -26,15 +26,15 @@ const AddCountry = ({ formInst, onCancelHandler, onSaveHandler }: { formInst?: F
   const allCities = useAppSelector(selectAllCities);
   const allZones = useAppSelector(selectZoneList);
 
-  // const { message } = App.useApp();
+  const { message } = App.useApp();
 
-  // const [zone_name, setZoneName] = useState<string>('');
-  // const [popupOpen, setPopupOpen] = useState<boolean>(false);
+  const [zone_name, setZoneName] = useState<string>('');
+  const [popupOpen, setPopupOpen] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   dispatch(getAllCountriesWithFlagAction());
-  //   dispatch(getAllStatesBasedOnCountryAction({ country: 'India' }));
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getAllCountriesWithFlagAction());
+    dispatch(getAllStatesBasedOnCountryAction({ country: 'India' }));
+  }, [dispatch]);
 
   const onCountrySelect = useCallback(
     (val: string, opt: any) => {
@@ -67,24 +67,24 @@ const AddCountry = ({ formInst, onCancelHandler, onSaveHandler }: { formInst?: F
     [addCountryForm],
   );
 
-  // const addNewZone = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
-  //   e.preventDefault();
-  //   if (!zone_name) {
-  //     message.error('Field should not be empty');
-  //   } else {
-  //     dispatch(
-  //       addZoneAction({
-  //         zone_name: zone_name
-  //           .split(' ')
-  //           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-  //           .join(' '),
-  //         zone_id: allZones.length + 1,
-  //       }),
-  //     );
-  //     setPopupOpen(false);
-  //     setZoneName('');
-  //   }
-  // };
+  const addNewZone = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (!zone_name) {
+      message.error('Field should not be empty');
+    } else {
+      dispatch(
+        addZoneAction({
+          zone_name: zone_name
+            .split(' ')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' '),
+          zone_id: allZones.length + 1,
+        }),
+      );
+      setPopupOpen(false);
+      setZoneName('');
+    }
+  };
 
   // const onFormFinish = useCallback((values: any) => {
   //   // dispatch(addLocation({ ...values, id: uuidv4(), created_date: new Date().toLocaleDateString('en-GB'), updated_date: new Date().toLocaleDateString('en-GB') }));
@@ -122,6 +122,8 @@ const AddCountry = ({ formInst, onCancelHandler, onSaveHandler }: { formInst?: F
       </Form.Item>
       {/* <Row gutter={24} style={{ width: '100%' }}>
         <Col span={12}> */}
+      <SelectWithAdd formPlaceholder="Select Zone/Region" loadingState={false} dropDownList={allZones.map((el) => ({ field_name: el.zone_name, field_id: el.zone_id }))} field_id="zone_id" formItemLabel="Zone/Region" buttonLabel="Add" onAddHandler={(e: any) => addNewZone(e)} onItemSelectHandler={() => onZoneSelect} />
+
       <Form.Item label="Postal Code/Zip Code" name="postal_code" rules={[{ required: true, message: 'Required' }]}>
         <Input placeholder="Enter postal code." />
       </Form.Item>
@@ -131,6 +133,9 @@ const AddCountry = ({ formInst, onCancelHandler, onSaveHandler }: { formInst?: F
       </Form.Item>
       <Form.Item label="State" name="state_code" rules={[{ required: true, message: 'Required' }]}>
         <Select showSearch placeholder="Select State" optionFilterProp="name" filterSort={(optionA, optionB) => (optionA?.name ?? '').toLowerCase().localeCompare((optionB?.name ?? '').toLowerCase())} fieldNames={{ label: 'name', value: 'id' }} options={allStates} onSelect={onStateSelect} />
+      </Form.Item>
+      <Form.Item label="Country" name="country_code" rules={[{ required: true, message: 'Required' }]}>
+        <Select showSearch placeholder="Select Country" optionFilterProp="name" filterSort={(optionA, optionB) => (optionA?.name ?? '').toLowerCase().localeCompare((optionB?.name ?? '').toLowerCase())} fieldNames={{ label: 'name', value: 'id' }} options={allCountries} onSelect={onCountrySelect} />
       </Form.Item>
       {/* <Form.Item
         label={
@@ -143,10 +148,7 @@ const AddCountry = ({ formInst, onCancelHandler, onSaveHandler }: { formInst?: F
       >
         <Select placeholder="Select Zone/Region" optionFilterProp="label" filterSort={(optionA, optionB) => (optionA?.zone_name ?? '').toLowerCase().localeCompare((optionB?.zone_name ?? '').toLowerCase())} fieldNames={{ label: 'zone_name', value: 'zone_id' }} options={allZones} onSelect={onZoneSelect} />
       </Form.Item> */}
-      <SelectWithAdd formPlaceholder="Select Zone/Region" loadingState={true} dropDownList={allZones.map((el) => ({ field_name: el.zone_name, field_id: el.zone_id }))} field_id="zone_id" formItemLabel="Zone/Region" buttonLabel="Add" onAddHandler={() => 'addZone'} onItemSelectHandler={() => onZoneSelect} />
-      <Form.Item label="Country" name="country_code" rules={[{ required: true, message: 'Required' }]}>
-        <Select showSearch placeholder="Select Country" optionFilterProp="name" filterSort={(optionA, optionB) => (optionA?.name ?? '').toLowerCase().localeCompare((optionB?.name ?? '').toLowerCase())} fieldNames={{ label: 'name', value: 'id' }} options={allCountries} onSelect={onCountrySelect} />
-      </Form.Item>
+
       {/* </Col>
         <Col span={12}> */}
 

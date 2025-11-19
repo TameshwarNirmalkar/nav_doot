@@ -18,7 +18,7 @@ import { AppState } from '@src/store/store_config';
 import { getZoneListAction } from '@src/store/zone/action';
 import { getUniqueFilters } from '@src/utility/common_function';
 import { delayWaitFor } from '@src/utility/delay';
-import { Button, Card, Drawer, Flex, Form, Input, MenuProps, Popconfirm, Space, Switch } from 'antd';
+import { Button, Card, Drawer, Dropdown, Flex, Form, Input, MenuProps, Popconfirm, Space, Switch } from 'antd';
 // import Search from 'antd/es/input/Search';
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { BiEdit } from 'react-icons/bi';
@@ -37,7 +37,7 @@ const LocationTableList = () => {
   const pincodeList = useAppSelector(getAllPinCode);
   const isCollapsed = useAppSelector((state: AppState) => selectIsCollapsedById(state, 'add_location_drawer'));
   const isLoading = useAppSelector(countryCityIsLoading);
-  const [_showAdd, setShowAddd] = useState<boolean>(false);
+  const [showAdd, setShowAddd] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
 
   const _id = Form.useWatch('id', addCountryForm);
@@ -158,9 +158,9 @@ const LocationTableList = () => {
   }, [selectedColumns, columns]);
 
   useEffect(() => {
-    // dispatch(getAllCountriesWithFlagAction());
-    // dispatch(getAllLocationAction());
-    // dispatch(getZoneListAction());
+    dispatch(getAllCountriesWithFlagAction());
+    dispatch(getAllLocationAction());
+    dispatch(getZoneListAction());
     dispatch(addDrawer({ drawerId: 'add_location_drawer', isCollapsed: false }));
   }, [dispatch]);
 
@@ -193,7 +193,7 @@ const LocationTableList = () => {
     onDrawerClose();
   }, [onDrawerClose, addCountryForm, dispatch]);
 
-  const _onEdit = useCallback(
+  const onEdit = useCallback(
     async (el: any) => {
       await dispatch(getAllStatesBasedOnCountryAction({ country: el.country_code }));
       await dispatch(getAllCitiesBasedOnCountryAndStateAction({ country: el.country_code, state: el.state_code }));
@@ -203,16 +203,16 @@ const LocationTableList = () => {
     [addCountryForm, onOpenDrawer, dispatch],
   );
 
-  const _onRemoveLocation = useCallback(
+  const onRemoveLocation = useCallback(
     (val: any) => {
       dispatch(removeLocation(val.id));
     },
     [dispatch],
   );
 
-  const _onShowAdd = useCallback(
+  const onShowAdd = useCallback(
     (val: any) => {
-      // setShowAddd(true);
+      setShowAddd(true);
       onOpenDrawer();
     },
     [onOpenDrawer],
@@ -237,9 +237,9 @@ const LocationTableList = () => {
                 Add Filter
               </Button>
             </Dropdown> */}
-            {/* <Button type="primary" onClick={onShowAdd} disabled={showAdd} icon={<LuSquarePlus size={15} />}>
+            <Button type="primary" onClick={onShowAdd} icon={<LuSquarePlus size={15} />}>
               Add
-            </Button> */}
+            </Button>
           </Space>
         }>
         {/* {showAdd ? (
