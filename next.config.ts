@@ -97,7 +97,7 @@ const nextConfig: NextConfig = {
     return config;
   },
   devIndicators: {
-    position: 'bottom-right',
+    position: 'bottom-left',
   },
 };
 

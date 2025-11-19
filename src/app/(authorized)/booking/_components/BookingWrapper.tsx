@@ -102,7 +102,7 @@ export default memo(function BookingWrapper() {
         }
         extra={
           <Space>
-            <RangePicker suffixIcon={<BsCalendarDate size={20} />} />
+            {/* <RangePicker suffixIcon={<BsCalendarDate size={20} />} /> */}
             <Button type="primary" onClick={onDrawerOpen}>
               Add Booking
             </Button>
@@ -113,7 +113,7 @@ export default memo(function BookingWrapper() {
       </Card>
 
       <Drawer
-        width={'70%'}
+        width={'85%'}
         title={
           <Flex justify="space-between">
             <span>Add Booking</span>
@@ -141,9 +141,9 @@ export default memo(function BookingWrapper() {
               <BookingForm />
             </Form>
           </div>
-          <div className="flex-1">
+          {/* <div className="flex-1">
             <BookingSummaryDescription />
-          </div>
+          </div> */}
         </div>
       </Drawer>
     </div>

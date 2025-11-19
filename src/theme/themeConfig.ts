@@ -9,6 +9,7 @@ const selectedItemBgColor = textColor;
 const itemDisabledColor = '#939393';
 
 const descLabelBg = '#cee3ff';
+const cardHeaderBg = '#ebebeb';
 
 const customTheme: ThemeConfig = {
   algorithm: theme.compactAlgorithm,
@@ -19,6 +20,9 @@ const customTheme: ThemeConfig = {
     fontSize: 14,
   },
   components: {
+    Form: {
+      itemMarginBottom: 10,
+    },
     Menu: {
       itemBg: grayBgcolor, // Optional: Change the selected item's background and text color as well
       itemColor: textColor,
@@ -53,6 +57,8 @@ const customTheme: ThemeConfig = {
     Card: {
       bodyPadding: 10,
       headerPadding: 10,
+      // headerBg: cardHeaderBg,
+      // colorBgContainer: cardHeaderBg,
     },
     Popover: {
       // colorBgElevated: grayColor,

@@ -62,7 +62,7 @@ export default memo(function PermissionWrapper() {
         }
         extra={
           <Space>
-            <RangePicker suffixIcon={<BsCalendarDate size={20} />} />
+            {/* <RangePicker suffixIcon={<BsCalendarDate size={20} />} /> */}
             {/* <Button type="primary" onClick={onDrawerOpen}>
               Add Permission
             </Button> */}

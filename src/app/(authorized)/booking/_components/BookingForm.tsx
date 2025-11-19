@@ -39,25 +39,25 @@ const BookingForm = () => {
             Booking Details <Text type="danger">*</Text>
           </Title>
         }
-        className="">
+        className="bg-gray-300">
         <Row gutter={10}>
-          <Col span={12}>
+          <Col span={6}>
             <Form.Item label="AWB (Waybill Number)" name="awbNumber" rules={[{ required: true, message: 'Required' }]}>
               <Input />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={6}>
             <Form.Item label="Booking Branch" name="branch" rules={[{ required: true, message: 'Required' }]}>
               <Input />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={6}>
             <Form.Item label="Booking Date" name="bookingDate" rules={[{ required: true, message: 'Required' }]}>
               {/* <Input type="date" /> */}
               <DatePicker style={{ width: '100%' }} />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={6}>
             <Form.Item label="Product" name="product" rules={[{ required: true, message: 'Required' }]}>
               <Input />
             </Form.Item>
@@ -75,51 +75,47 @@ const BookingForm = () => {
         }>
         <Text strong>Delivery Address</Text>
         <Row gutter={10}>
-          <Col span={12}>
+          <Col span={6}>
             <Form.Item label="Full Name" name={['deliveryAddress', 'fullName']} rules={[{ required: true, message: 'Required' }]}>
               <Input />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={6}>
             <Form.Item label="Mobile Number" name={['deliveryAddress', 'mobileNumber']} rules={[{ required: true, message: 'Required' }]}>
               <Input type="tel" />
             </Form.Item>
           </Col>
-        </Row>
-        <Row gutter={10}>
-          <Col span={12}>
-            <Form.Item label="Postal Code" name={['deliveryAddress', 'postalCode']} rules={[{ required: true, message: 'Required' }]}>
-              <Input />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
+
+          <Col span={6}>
             <Form.Item label="Address 1" name={['deliveryAddress', 'address1']} rules={[{ required: true, message: 'Required' }]}>
               <Input />
             </Form.Item>
           </Col>
-        </Row>
-        <Row gutter={10}>
-          <Col span={12}>
-            <Form.Item label="City" name={['deliveryAddress', 'city']} rules={[{ required: true, message: 'Required' }]}>
-              <Input />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
+          <Col span={6}>
             <Form.Item label="Address 2" name={['deliveryAddress', 'address2']}>
               <Input />
             </Form.Item>
           </Col>
         </Row>
+
         <Row gutter={10}>
-          <Col span={12}>
+          <Col span={6}>
+            <Form.Item label="Postal Code" name={['deliveryAddress', 'postalCode']} rules={[{ required: true, message: 'Required' }]}>
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={6}>
+            <Form.Item label="City" name={['deliveryAddress', 'city']} rules={[{ required: true, message: 'Required' }]}>
+              <Input />
+            </Form.Item>
+          </Col>
+
+          <Col span={6}>
             <Form.Item label="State" name={['deliveryAddress', 'state']} rules={[{ required: true, message: 'Required' }]}>
               <Input />
             </Form.Item>
           </Col>
-          <Col span={12}>{/* Empty Col for alignment */}</Col>
-        </Row>
-        <Row gutter={10}>
-          <Col span={12}>
+          <Col span={6}>
             <Form.Item label="Country" name={['deliveryAddress', 'country']} rules={[{ required: true, message: 'Required' }]}>
               <Input />
             </Form.Item>
@@ -136,42 +132,43 @@ const BookingForm = () => {
           {({ getFieldValue }) =>
             !getFieldValue('useProfileAsPickup') ? (
               <Row gutter={10}>
-                <Col span={12}>
+                <Col span={6}>
                   <Form.Item label="Full Name" name={['pickupAddress', 'fullName']} rules={[{ required: true, message: 'Required' }]}>
                     <Input />
                   </Form.Item>
                 </Col>
-                <Col span={12}>
+                <Col span={6}>
                   <Form.Item label="Mobile Number" name={['pickupAddress', 'mobileNumber']} rules={[{ required: true, message: 'Required' }]}>
                     <Input type="tel" />
                   </Form.Item>
                 </Col>
-                <Col span={12}>
-                  <Form.Item label="Postal Code" name={['pickupAddress', 'postalCode']} rules={[{ required: true, message: 'Required' }]}>
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
+                <Col span={6}>
                   <Form.Item label="Address 1" name={['pickupAddress', 'address1']} rules={[{ required: true, message: 'Required' }]}>
                     <Input />
                   </Form.Item>
                 </Col>
-                <Col span={12}>
-                  <Form.Item label="City" name={['pickupAddress', 'city']} rules={[{ required: true, message: 'Required' }]}>
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
+                <Col span={6}>
                   <Form.Item label="Address 2" name={['pickupAddress', 'address2']}>
                     <Input />
                   </Form.Item>
                 </Col>
-                <Col span={12}>
+                <Col span={6}>
+                  <Form.Item label="Postal Code" name={['pickupAddress', 'postalCode']} rules={[{ required: true, message: 'Required' }]}>
+                    <Input />
+                  </Form.Item>
+                </Col>
+                <Col span={6}>
+                  <Form.Item label="City" name={['pickupAddress', 'city']} rules={[{ required: true, message: 'Required' }]}>
+                    <Input />
+                  </Form.Item>
+                </Col>
+
+                <Col span={6}>
                   <Form.Item label="State" name={['pickupAddress', 'state']} rules={[{ required: true, message: 'Required' }]}>
                     <Input />
                   </Form.Item>
                 </Col>
-                <Col span={12}>
+                <Col span={6}>
                   <Form.Item label="Country" name={['pickupAddress', 'country']} rules={[{ required: true, message: 'Required' }]}>
                     <Input />
                   </Form.Item>
@@ -192,7 +189,7 @@ const BookingForm = () => {
           </Title>
         }>
         <Row gutter={10}>
-          <Col span={12}>
+          <Col span={6}>
             <Form.Item label="Select the Packet type" name="packetType" rules={[{ required: true, message: 'Required' }]}>
               <Select placeholder="Select a type">
                 {packageTypes.map((type) => (
@@ -203,17 +200,17 @@ const BookingForm = () => {
               </Select>
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={6}>
             <Form.Item label="Declared Value" name="declaredValue" rules={[{ required: true, message: 'Required' }]}>
               <Input type="number" min={0} />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={6}>
             <Form.Item label="Number of Packets" name="numberOfPackets" rules={[{ required: true, message: 'Required' }]}>
               <Input type="number" min={1} />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={6}>
             <Form.Item label="Actual Weight" name="actualWeight" rules={[{ required: true, message: 'Required' }]}>
               <Input suffix="kg" />
             </Form.Item>
