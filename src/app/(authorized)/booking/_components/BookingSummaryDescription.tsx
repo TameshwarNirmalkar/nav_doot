@@ -47,9 +47,10 @@ const BookingSummaryDescription: React.FC = () => {
   const { awbNumber, pickupAddress, deliveryAddress, bookingDate, numberOfPackets, packetType, actualWeight, volumetricWeight, receiverPhoneNo, gstRequired, gstNumber, ewayBillNumber, ewayExpiryDate, netAmount, totalCost } = bookingData;
 
   return (
-    <Card title={<Title level={5}>📦 Booking Summary</Title>} style={{}}>
+    <Card title={<Title level={5}>📦 Booking Summary</Title>} type="inner">
       {/* --- Shipment Details Section --- */}
       <Descriptions
+        layout="vertical"
         bordered
         column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
         size="middle"
@@ -86,6 +87,7 @@ const BookingSummaryDescription: React.FC = () => {
       {/* --- GST/Eway Bill Required Checkbox (Simulated) --- */}
       <Descriptions
         title="GST/Eway Bill Required"
+        layout="vertical"
         bordered
         column={1}
         size="small"
@@ -102,6 +104,7 @@ const BookingSummaryDescription: React.FC = () => {
       {gstRequired && (
         <Descriptions
           title="GST & Eway Bill Details"
+          layout="vertical"
           bordered
           column={1}
           size="small"

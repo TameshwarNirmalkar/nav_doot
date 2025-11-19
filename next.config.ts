@@ -3,7 +3,7 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
-  skipMiddlewareUrlNormalize: true,
+  skipProxyUrlNormalize: true,
   skipTrailingSlashRedirect: true,
   turbopack: {
     root: path.join(__dirname, '.'),
@@ -19,12 +19,6 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   typescript: {
     ignoreBuildErrors: false,
-  },
-  eslint: {
-    /** Only run ESLint on these directories with `next lint` and `next build`. */
-    dirs: ['src'],
-    /** Do not run ESLint during production builds (`next build`). */
-    ignoreDuringBuilds: false,
   },
   async rewrites() {
     return [

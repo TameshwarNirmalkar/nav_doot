@@ -8,7 +8,7 @@ const corsOptions = {
 };
 
 // This function can be marked `async` if using `await` inside
-export async function middleware(request: NextRequest, response: NextResponse) {
+export async function proxy(request: NextRequest, response: NextResponse) {
   const requestHeaders = new Headers(request.headers);
   const { pathname } = request.nextUrl;
   // const authSession = await auth();
