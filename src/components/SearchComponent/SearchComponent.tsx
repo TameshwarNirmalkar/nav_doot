@@ -32,7 +32,7 @@ export default memo(function SearchComponent({ searchLabel, onSearch, onChangeHa
     <Space align="center" className="flex items-center">
       <div className="pl-3">{searchLabel || 'Permission'}</div>
       <div>
-        <Input id="search_fld" name="search_fld" suffix={<CgSearch onClick={handleSearch} />} placeholder={placeholder} style={{ width: 380, ...stylesProps }} onChange={handleInputChange} onPressEnter={handleSearch} />
+        <Input id="search_fld" name="search_fld" suffix={<CgSearch onClick={handleSearch} className="cursor-pointer" />} placeholder={placeholder} style={{ width: 380, ...stylesProps }} onChange={handleInputChange} onPressEnter={handleSearch} />
         {/* <Button type="primary" onClick={handleSearch} icon={<CgSearch />}></Button> */}
       </div>
     </Space>
