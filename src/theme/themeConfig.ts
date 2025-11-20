@@ -48,6 +48,7 @@ const customTheme: ThemeConfig = {
     Layout: {
       triggerColor: '#FFF', // This token controls the color of the text and icons in the Sider trigger
       triggerBg: grayBgcolor, // Optional: Change the background color when the trigger is hovered
+      bodyBg: '#dcdcdc',
     },
 
     Table: {

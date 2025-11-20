@@ -237,7 +237,7 @@ const LocationTableList = () => {
                 Add Filter
               </Button>
             </Dropdown> */}
-            <Button type="primary" onClick={onShowAdd} icon={<LuSquarePlus size={15} />}>
+            <Button type="primary" onClick={onShowAdd}>
               Add
             </Button>
           </Space>
@@ -252,6 +252,7 @@ const LocationTableList = () => {
       </Card>
 
       <Drawer
+        width={500}
         title={
           <Flex justify="space-between">
             <span>Add Location</span>
@@ -275,11 +276,6 @@ const LocationTableList = () => {
           <Form form={addCountryForm} layout="vertical">
             <AddCountry formInst={addCountryForm} onCancelHandler={() => setShowAddd(false)} onSaveHandler={() => setShowAddd(false)} />
           </Form>
-
-          {/* <>Created By</>
-          <>Created Date</>
-          <>Updated By</>
-          <>Updated Date</> */}
         </div>
       </Drawer>
     </>

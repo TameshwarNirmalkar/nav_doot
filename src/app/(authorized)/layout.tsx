@@ -410,7 +410,7 @@ export default function AuthorizedLayout({ children }: { children: React.ReactNo
         <Content style={{ margin: '0 16px' }}>
           <section>{children}</section>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>NavDoot ©Created by NavDoot Logistics Solutions Pvt Ltd</Footer>
+        {/* <Footer style={{ textAlign: 'center' }}>NavDoot ©Created by NavDoot Logistics Solutions Pvt Ltd</Footer> */}
       </Layout>
     </Layout>
   );

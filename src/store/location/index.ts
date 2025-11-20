@@ -1,6 +1,6 @@
-import type { AppState } from "@redux-store/store_config";
-import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from "@reduxjs/toolkit";
-import { addLocationAction, getAllLocationAction } from "./action";
+import type { AppState } from '@redux-store/store_config';
+import { createEntityAdapter, createSlice, type EntityId, type PayloadAction } from '@reduxjs/toolkit';
+import { addLocationAction, getAllLocationAction } from './action';
 
 export interface LocationCollectionI {
   id: string;
@@ -24,15 +24,15 @@ interface LocationStateI {
 
 const locationEntityAdapter = createEntityAdapter<LocationCollectionI, EntityId>({
   selectId: (country: LocationCollectionI) => country.id,
-  sortComparer: (a: LocationCollectionI, b: LocationCollectionI) => a.name.localeCompare(b.name),
+  // sortComparer: (a: LocationCollectionI, b: LocationCollectionI) => a.name.localeCompare(b.name),
 });
 
 const locationEntitySlice = createSlice({
-  name: "LOCATION_SLICE",
+  name: 'LOCATION_SLICE',
   initialState: locationEntityAdapter.getInitialState<LocationStateI>({
     isLoading: false,
     error: false,
-    message: "",
+    message: '',
   }),
   reducers: {
     addLocation: locationEntityAdapter.addOne,
