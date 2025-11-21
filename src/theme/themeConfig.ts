@@ -77,6 +77,9 @@ const customTheme: ThemeConfig = {
       labelColor: grayBgcolor,
       labelBg: descLabelBg,
     },
+    Drawer: {
+      paddingLG: 10,
+    },
   },
 };
 
