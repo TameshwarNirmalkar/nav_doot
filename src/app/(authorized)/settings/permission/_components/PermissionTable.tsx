@@ -56,6 +56,17 @@ export default memo(function PermissionTable() {
       ),
     },
     {
+      title: <Flex justify="center">Edit</Flex>,
+      dataIndex: 'read_only',
+      key: 'read_only',
+      width: 150,
+      render: (bool: string, row: any) => (
+        <Flex justify="center">
+          <Checkbox checked={row.read_only} onChange={(e) => console.log(`Checkbox in row ${row.key} changed to ${e.target.checked}`)} />
+        </Flex>
+      ),
+    },
+    {
       title: <Flex justify="center">Delete</Flex>,
       dataIndex: 'delete',
       key: 'delete',
@@ -66,17 +77,7 @@ export default memo(function PermissionTable() {
         </Flex>
       ),
     },
-    {
-      title: <Flex justify="center">ReadOnly</Flex>,
-      dataIndex: 'read_only',
-      key: 'read_only',
-      width: 150,
-      render: (bool: string, row: any) => (
-        <Flex justify="center">
-          <Checkbox checked={row.read_only} onChange={(e) => console.log(`Checkbox in row ${row.key} changed to ${e.target.checked}`)} />
-        </Flex>
-      ),
-    },
+
     // {
     //   title: <Flex justify="center">Action</Flex>,
     //   dataIndex: 'id',
@@ -129,5 +130,5 @@ export default memo(function PermissionTable() {
     },
   ];
 
-  return <TableComponent rowKey={'id'} columns={permissionCol} dataSource={permissionList} bordered pagination={false} />;
+  return <TableComponent rowKey={'id'} columns={permissionCol} dataSource={permissionList} bordered />;
 });

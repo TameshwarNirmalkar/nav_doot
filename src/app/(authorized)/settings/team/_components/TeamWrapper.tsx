@@ -9,17 +9,18 @@ import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
 import { getAllTeams } from '@src/store/team';
 import { addTeamAction, getTeamListAction, updateTeamAction } from '@src/store/team/action';
 import { getUniqueFilters } from '@src/utility/common_function';
-import { Avatar, Button, Card, Col, DatePicker, Descriptions, DescriptionsProps, Drawer, Dropdown, Flex, Form, Input, MenuProps, Row, Space, Switch, Tag } from 'antd';
+import { Avatar, Button, Card, Col, DatePicker, Descriptions, DescriptionsProps, Drawer, Dropdown, Flex, Form, Input, MenuProps, Popconfirm, Row, Space, Switch, Tag } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import TextArea from 'antd/es/input/TextArea';
 import type { Dayjs } from 'dayjs';
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { BiDotsVerticalRounded, BiUser } from 'react-icons/bi';
 import { BsCalendarDate, BsFillSendCheckFill } from 'react-icons/bs';
+import { FaEye } from 'react-icons/fa';
 import { GrDocumentText } from 'react-icons/gr';
 import { MdClose, MdOutlineCheck } from 'react-icons/md';
 import { RiCloseLine, RiFilter3Fill } from 'react-icons/ri';
-import { TbEdit, TbEyeCheck } from 'react-icons/tb';
+import { TbEdit, TbEyeCheck, TbTrash } from 'react-icons/tb';
 import { v4 as uuidv4 } from 'uuid';
 
 const { Search } = Input;
@@ -144,12 +145,23 @@ export default memo(function TeamWrapper() {
       key: 'created_date',
       width: 120,
     },
+    // {
+    //   title: <Flex justify="center">Active</Flex>,
+    //   dataIndex: 'verified',
+    //   key: 'verified',
+    //   width: 120,
+    //   render: (bool: string, row: any) => <Flex justify="center">{row.active ? <MdOutlineCheck size={20} className="text-green-700" /> : <MdClose size={20} className="text-red-700" />}</Flex>,
+    // },
     {
-      title: <Flex justify="center">Active</Flex>,
+      title: <Flex justify="center">Status</Flex>,
       dataIndex: 'verified',
       key: 'verified',
       width: 120,
-      render: (bool: string, row: any) => <Flex justify="center">{row.active ? <MdOutlineCheck size={20} className="text-green-700" /> : <MdClose size={20} className="text-red-700" />}</Flex>,
+      render: (bool: string, row: any) => (
+        <Flex justify="center">
+          <Switch size="small" checked={row.active} onChange={(checked: boolean) => dispatch(updateTeamAction({ ...row, active: checked }))} />
+        </Flex>
+      ),
     },
     {
       title: <Flex justify="center">Action</Flex>,
@@ -158,10 +170,14 @@ export default memo(function TeamWrapper() {
       width: 130,
       render: (text: string, row: any) => (
         <Flex align="center" justify="center" gap={10}>
-          <Switch size="small" checked={row.active} onChange={(checked: boolean) => dispatch(updateTeamAction({ ...row, active: checked }))} />
-          <Dropdown menu={{ items: rowItems, onClick: onItemClickHandler }} placement="bottomRight" trigger={['hover']} overlayStyle={{ width: 200 }}>
+          <FaEye size={20} color="gray" />
+          <TbEdit size={20} color="green" />
+          <Popconfirm title="Delete" description="Are you sure to delete this record?" okText="Yes" cancelText="No">
+            <TbTrash size={20} color="#c00" className="cursor-pointer" />
+          </Popconfirm>
+          {/* <Dropdown menu={{ items: rowItems, onClick: onItemClickHandler }} placement="bottomRight" trigger={['hover']} overlayStyle={{ width: 200 }}>
             <BiDotsVerticalRounded size={20} />
-          </Dropdown>
+          </Dropdown> */}
         </Flex>
       ),
     },
@@ -216,7 +232,7 @@ export default memo(function TeamWrapper() {
             {/* <IconLoader showLoader={true} /> */}
           </Space>
         }>
-        <TableComponent rowKey={'id'} columns={teamCol} dataSource={teamList} bordered pagination={false} />
+        <TableComponent rowKey={'id'} columns={teamCol} dataSource={teamList} bordered />
       </Card>
 
       <Drawer
@@ -237,62 +253,63 @@ export default memo(function TeamWrapper() {
                 Cancel
               </Button>
               <Button type="primary" onClick={onSave} disabled={isLoading} icon={isLoading ? <IconLoader showLoader={isLoading} iconSize={20} /> : null}>
-                Save
+                Send
               </Button>
             </Space>
           </Flex>
         }>
         <div className="flex flex-col gap-3">
-          <Form form={teamForm} layout="vertical">
-            <Form.Item name="country_name" hidden>
-              <Input hidden />
-            </Form.Item>
-            <Form.Item name="country_name" hidden>
-              <Input hidden />
-            </Form.Item>
-            <Form.Item name="role" hidden>
-              <Input hidden />
-            </Form.Item>
-            <Form.Item name="user_branch" hidden>
-              <Input hidden />
-            </Form.Item>
+          <Card title="User Details">
+            <Form form={teamForm} layout="vertical">
+              <Form.Item name="country_name" hidden>
+                <Input hidden />
+              </Form.Item>
+              <Form.Item name="country_name" hidden>
+                <Input hidden />
+              </Form.Item>
+              <Form.Item name="role" hidden>
+                <Input hidden />
+              </Form.Item>
+              <Form.Item name="user_branch" hidden>
+                <Input hidden />
+              </Form.Item>
 
-            <Form.Item name="user_name" label="User Name">
-              <Input />
-            </Form.Item>
-            <Form.Item name="user_email" label="User Email Id">
-              <Input />
-            </Form.Item>
-            {/* <Form.Item name="user_branch" label="User Branch">
-              <Input />
-            </Form.Item> */}
-            <SelectWithAdd
-              loadingState={false}
-              dropDownList={branchList}
-              formItemLabel="User Branch"
-              field_id="user_branch_code"
-              buttonLabel="Add Branch"
-              onAddHandler={(val) => {
-                // setRoleList((prev) => prev.concat({ field_name: val, field_id: val.toUpperCase() }));
-              }}
-            />
-            {/* <Form.Item name="user_role" label="User Role">
+              <Form.Item name="user_name" label="User Name">
+                <Input />
+              </Form.Item>
+              <Form.Item name="user_email" label="User Email Id">
+                <Input />
+              </Form.Item>
+              {/* <Form.Item name="user_branch" label="User Branch">
               <Input />
             </Form.Item> */}
-            <SelectWithAdd
-              loadingState={false}
-              dropDownList={roleList}
-              formItemLabel="User Role"
-              field_id="user_role"
-              buttonLabel="Add Role"
-              onAddHandler={(val) => {
-                setRoleList((prev) => prev.concat({ field_name: val, field_id: val.toUpperCase() }));
-              }}
-            />
-            <Form.Item name="user_description" label="Description">
-              <TextArea rows={5} cols={4} showCount maxLength={500} onChange={onChange} />
-            </Form.Item>
-            {/* <SelectWithAdd
+              <SelectWithAdd
+                loadingState={false}
+                dropDownList={branchList}
+                formItemLabel="User Branch"
+                field_id="user_branch_code"
+                buttonLabel="Add Branch"
+                onAddHandler={(val) => {
+                  // setRoleList((prev) => prev.concat({ field_name: val, field_id: val.toUpperCase() }));
+                }}
+              />
+              {/* <Form.Item name="user_role" label="User Role">
+              <Input />
+            </Form.Item> */}
+              <SelectWithAdd
+                loadingState={false}
+                dropDownList={roleList}
+                formItemLabel="User Role"
+                field_id="user_role"
+                buttonLabel="Add Role"
+                onAddHandler={(val) => {
+                  setRoleList((prev) => prev.concat({ field_name: val, field_id: val.toUpperCase() }));
+                }}
+              />
+              <Form.Item name="user_description" label="Description">
+                <TextArea rows={5} cols={4} showCount maxLength={500} onChange={onChange} />
+              </Form.Item>
+              {/* <SelectWithAdd
               loadingState={false}
               dropDownList={moduleList}
               formItemLabel="Module Name"
@@ -315,7 +332,8 @@ export default memo(function TeamWrapper() {
                 setRoleList((prev) => prev.concat({ field_name: val, field_id: val.toUpperCase() }));
               }}
             /> */}
-          </Form>
+            </Form>
+          </Card>
         </div>
       </Drawer>
 

@@ -2,6 +2,7 @@
 
 import IconLoader from '@src/components/IconLoader/IconLoader';
 import SearchComponent from '@src/components/SearchComponent/SearchComponent';
+import SelectWithAdd from '@src/components/SelectWithAdd/SelectWithAdd';
 import { Button, Card, DatePicker, Drawer, Flex, Form, Input, Select, Space } from 'antd';
 import React, { memo, useCallback, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
@@ -49,6 +50,7 @@ export default memo(function PermissionWrapper() {
           <div className="flex items-center">
             <Select
               style={{ width: 200 }}
+              placeholder="Select Role"
               options={[
                 { value: 1, label: 'Admin' },
                 { value: 2, label: 'User' },
@@ -57,6 +59,24 @@ export default memo(function PermissionWrapper() {
               ]}
               onChange={onRoleSelect}
             />
+            {/* <SelectWithAdd
+              dropDownList={[
+                { value: 1, label: 'Admin' },
+                { value: 2, label: 'User' },
+                { value: 3, label: 'Manager' },
+                { value: 4, label: 'Head' },
+              ].map((el) => ({ field_name: el.label, field_id: el.value }))}
+              loadingState={true}
+              field_id="parent_branch_code"
+              formItemLabel=" "
+              buttonLabel="Add"
+              onAddHandler={() => {
+                console;
+              }}
+              onItemSelectHandler={() => {
+                console.log('====');
+              }}
+            /> */}
             <SearchComponent searchLabel=" " onSearch={(val: string) => console.log('==== ', val)} />
           </div>
         }
@@ -69,7 +89,7 @@ export default memo(function PermissionWrapper() {
             {/* <IconLoader showLoader={true} /> */}
           </Space>
         }>
-        {showTable && <PermissionTable />}
+        {<PermissionTable />}
       </Card>
 
       <Drawer
