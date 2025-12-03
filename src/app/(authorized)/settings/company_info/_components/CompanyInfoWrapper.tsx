@@ -7,7 +7,11 @@ import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
 import { AppState } from '@src/store/store_config';
 import { Button, Card, Col, Collapse, CollapseProps, Descriptions, DescriptionsProps, Drawer, Flex, Form, Image, Row, Space } from 'antd';
 import React, { memo, useCallback, useEffect, useState } from 'react';
+import { BiEdit } from 'react-icons/bi';
+import { FaCloudUploadAlt, FaEdit } from 'react-icons/fa';
+import { FaChalkboardUser } from 'react-icons/fa6';
 import { RiCloseLine } from 'react-icons/ri';
+import { TbEdit } from 'react-icons/tb';
 import CompanyForm from './CompanyForm';
 import UploadLogo from './UploadLogo';
 
@@ -57,21 +61,25 @@ export default memo(function CompanyInfoWrapper() {
   const companyInformation: DescriptionsProps['items'] = [
     {
       key: '1',
-      label: 'Reg. Company Name',
+      label: <span className="font-extrabold">Reg. Company Name</span>,
       children: 'AirFlight',
       span: 'filled',
       labelStyle: narrowLabelStyle,
     },
     {
       key: '2',
-      label: 'Company ID',
+      label: <span className="font-extrabold">Company ID</span>,
       children: '1242533FDS252',
       span: 'filled',
     },
     {
       key: '3',
-      label: 'Company Logo',
-      children: <Image src="https://dummyimage.com/100x100/C00/fff.png&text=AirLift" className="rounded border border-amber-700" />,
+      label: <span className="font-extrabold">Company Logo</span>,
+      children: (
+        <>
+          <FaCloudUploadAlt size={50} /> {/* <Image src="https://img.freepik.com/premium-vector/creative-elegant-abstract-minimalistic-logo-design-vector-any-brand-company_1253202-136677.jpg?semt=ais_hybrid&w=740&q=80" className="rounded border border-amber-700" width={200} /> */}
+        </>
+      ),
       span: 'filled',
     },
   ];
@@ -169,7 +177,12 @@ export default memo(function CompanyInfoWrapper() {
   const items: CollapseProps['items'] = [
     {
       key: '1',
-      label: 'Company Information',
+      label: (
+        <Flex align="center">
+          <span>Company Information</span>
+          <TbEdit size={18} className="ml-2 cursor-pointer" color="green" onClick={onOpenDrawer} />
+        </Flex>
+      ),
       children: (
         <>
           <Descriptions bordered={true} size={'small'} items={companyInformation} />
@@ -178,7 +191,12 @@ export default memo(function CompanyInfoWrapper() {
     },
     {
       key: '2',
-      label: 'KYC Information',
+      label: (
+        <Flex align="center">
+          <span>KYC Information</span>
+          <TbEdit size={18} className="ml-2 cursor-pointer" color="green" onClick={onOpenDrawer} />
+        </Flex>
+      ),
       children: (
         <>
           <Descriptions bordered={true} size={'small'} items={kycInfo} />
@@ -187,7 +205,12 @@ export default memo(function CompanyInfoWrapper() {
     },
     {
       key: '3',
-      label: 'Payment Information',
+      label: (
+        <Flex align="center">
+          <span>Payment Information</span>
+          <TbEdit size={18} className="ml-2 cursor-pointer" color="green" onClick={onOpenDrawer} />
+        </Flex>
+      ),
       children: (
         <>
           <Descriptions bordered={true} size={'small'} items={paymentInfo} />
@@ -196,7 +219,12 @@ export default memo(function CompanyInfoWrapper() {
     },
     {
       key: '4',
-      label: 'Invoicing Information',
+      label: (
+        <Flex align="center">
+          <span>Invoicing Information</span>
+          <TbEdit size={18} className="ml-2 cursor-pointer" color="green" onClick={onOpenDrawer} />
+        </Flex>
+      ),
       children: (
         <>
           <Descriptions bordered={true} size={'small'} items={invoicingInfo} />
@@ -226,7 +254,7 @@ export default memo(function CompanyInfoWrapper() {
         title={
           <Flex justify="space-between">
             <span>Company Information</span>
-            <RiCloseLine size={20} onClick={onDrawerClose} className="cursor-pointer" />
+            <RiCloseLine size={18} onClick={onDrawerClose} className="cursor-pointer" />
           </Flex>
         }
         width={'25%'}

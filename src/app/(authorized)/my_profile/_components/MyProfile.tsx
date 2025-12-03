@@ -3,6 +3,7 @@
 import { CheckCircleFilled, UserOutlined } from '@ant-design/icons';
 import { Avatar, Card, Divider, Flex, List, Typography } from 'antd';
 import React, { memo } from 'react';
+import { TbEdit } from 'react-icons/tb';
 
 // Assuming 'profile.jpg' is available/imported, or you can use a public URL.
 
@@ -34,7 +35,10 @@ const UserProfileCard = () => {
       <Flex gap={10} className="flex-col pb-10">
         {/* Avatar with the image */}
         <div className="py-5">
-          <Avatar size={90} src={userData.profilePictureUrl} icon={<UserOutlined />} />
+          <Flex align="center" className="relative">
+            <Avatar size={90} src={userData.profilePictureUrl} icon={<UserOutlined />} />
+            <TbEdit size={20} color="green" />
+          </Flex>
         </div>
 
         {/* Name and Email */}

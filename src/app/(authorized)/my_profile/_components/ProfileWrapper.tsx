@@ -99,6 +99,9 @@ export default memo(function ProfileWrapper() {
         </Row>
       </Card>
       <UserProfileCard />
+
+      {/* Not in use  */}
+
       <Drawer
         title={
           <Flex justify="space-between">

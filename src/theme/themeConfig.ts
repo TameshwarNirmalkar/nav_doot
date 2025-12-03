@@ -75,8 +75,9 @@ const customTheme: ThemeConfig = {
     Descriptions: {
       itemPaddingBottom: 10,
       itemPaddingEnd: 0,
-      labelColor: grayBgcolor,
-      labelBg: descLabelBg,
+      labelColor: 'strong',
+      labelBg: '#ebebeb',
+      fontWeightStrong: 25,
     },
     Drawer: {
       paddingLG: 10,
