@@ -10,7 +10,7 @@ import { isLoading } from '@src/store/users/memonised-user';
 import { addZone, selectZoneList } from '@src/store/zone';
 import { addZoneAction } from '@src/store/zone/action';
 import { delayWaitFor } from '@src/utility/delay';
-import { App, Button, Col, Flex, Form, FormInstance, Input, Popover, Row, Select, Space, Tag } from 'antd';
+import { App, Button, Card, Col, Flex, Form, FormInstance, Input, Popover, Row, Select, Space, Tag } from 'antd';
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import { FaPlusCircle } from 'react-icons/fa';
 import { FaPlus } from 'react-icons/fa6';
@@ -103,7 +103,7 @@ const AddCountry = ({ formInst, onCancelHandler, onSaveHandler }: { formInst?: F
   // }, []);
 
   return (
-    <div>
+    <Card title="Network Details">
       {/* <Form form={addCountryForm} layout="vertical" onFinish={onFormFinish} style={{ width: '100%' }}> */}
       <Form.Item name="id" hidden>
         <Input hidden />
@@ -122,11 +122,11 @@ const AddCountry = ({ formInst, onCancelHandler, onSaveHandler }: { formInst?: F
       </Form.Item>
       {/* <Row gutter={24} style={{ width: '100%' }}>
         <Col span={12}> */}
-      <SelectWithAdd formPlaceholder="Select Zone/Region" loadingState={false} dropDownList={allZones.map((el) => ({ field_name: el.zone_name, field_id: el.zone_id }))} field_id="zone_id" formItemLabel="Zone/Region" buttonLabel="Add" onAddHandler={(e: any) => addNewZone(e)} onItemSelectHandler={() => onZoneSelect} />
-
       <Form.Item label="Postal Code/Zip Code" name="postal_code" rules={[{ required: true, message: 'Required' }]}>
         <Input placeholder="Enter postal code." />
       </Form.Item>
+
+      <SelectWithAdd formPlaceholder="Select Zone/Region" loadingState={false} dropDownList={allZones.map((el) => ({ field_name: el.zone_name, field_id: el.zone_id }))} field_id="zone_id" formItemLabel="Zone/Region" buttonLabel="Add" onAddHandler={(e: any) => addNewZone(e)} onItemSelectHandler={() => onZoneSelect} />
 
       <Form.Item label="City" name="city_code" rules={[{ required: true, message: 'Required' }]}>
         <Select showSearch placeholder="Select City" optionFilterProp="name" filterSort={(optionA, optionB) => (optionA.name ?? '').toLowerCase().localeCompare((optionB.name ?? '').toLowerCase())} fieldNames={{ label: 'name', value: 'id' }} options={allCities} onSelect={onCitySelect} />
@@ -165,7 +165,7 @@ const AddCountry = ({ formInst, onCancelHandler, onSaveHandler }: { formInst?: F
         </Form.Item>
       </Flex> */}
       {/* </Form> */}
-    </div>
+    </Card>
   );
 };
 

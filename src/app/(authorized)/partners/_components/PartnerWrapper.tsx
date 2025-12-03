@@ -10,16 +10,17 @@ import { addDrawer, drawerUpdate } from '@src/store/drawer';
 import { selectIsCollapsedById } from '@src/store/drawer/memoised_drawer_selector';
 import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
 import { AppState } from '@src/store/store_config';
-import { Button, Card, Drawer, Flex, Form, Popconfirm, Space, Spin, Table } from 'antd';
+import { Button, Card, Drawer, Flex, Form, Popconfirm, Space, Spin, Switch, Table } from 'antd';
 import React, { memo, useCallback, useEffect, useMemo } from 'react';
 import { BiEdit } from 'react-icons/bi';
-import { RiCloseLine } from 'react-icons/ri';
+import { FaEye } from 'react-icons/fa';
+import { RiCloseLine, RiFilter3Fill } from 'react-icons/ri';
 import { TbTrash } from 'react-icons/tb';
 import { v4 as uuidv4 } from 'uuid';
 import AddCustomerForm from './AddPartnerForm';
 
 const PartnerWrapper = () => {
-  const columns = useMemo(
+  const columns: any = useMemo(
     () => [
       {
         title: 'Name',
@@ -61,14 +62,15 @@ const PartnerWrapper = () => {
         dataIndex: 'updated_date',
         key: 'updated_date',
       },
+
       {
-        title: 'Action',
+        title: <Flex justify="center">Action</Flex>,
         dataIndex: 'id',
         key: 'id',
         render: (text: string, row: any) => (
           <Space>
+            <FaEye size={20} color="gray" className="cursor-pointer" />
             <BiEdit size={20} color="green" className="cursor-pointer" onClick={() => onCustomerEdit(row)} />
-
             <Popconfirm title="Delete" description="Are you sure to delete this record?" okText="Yes" cancelText="No" onConfirm={() => onRemoveCustomer(row)}>
               <TbTrash size={20} color="#c00" className="cursor-pointer" />
             </Popconfirm>

@@ -12,11 +12,13 @@ import { selectIsCollapsedById } from '@src/store/drawer/memoised_drawer_selecto
 import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
 import { AppState } from '@src/store/store_config';
 import { getUniqueFilters } from '@src/utility/common_function';
-import { Button, Card, Drawer, Flex, Form, Popconfirm, Space, Table, TableColumnsType } from 'antd';
+import { Button, Card, Drawer, Flex, Form, Popconfirm, Space, Switch, Table, TableColumnsType } from 'antd';
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { BiEdit } from 'react-icons/bi';
+import { BsEye } from 'react-icons/bs';
+import { FaEye } from 'react-icons/fa';
 import { RiCloseLine, RiFilter3Fill } from 'react-icons/ri';
-import { TbTrash } from 'react-icons/tb';
+import { TbEyeCheck, TbTrash } from 'react-icons/tb';
 import { v4 as uuidv4 } from 'uuid';
 import AddBranchFormComponent from './AddBranchFormComponent';
 
@@ -83,28 +85,48 @@ const BranchesWrapper = () => {
         key: 'state_name',
         ...CreateStandardFilter(filterFields.stateName, 'state_name'),
       },
+      // {
+      //   title: 'Created Date',
+      //   dataIndex: 'created_date',
+      //   key: 'created_date',
+      // },
+      // {
+      //   title: 'Modified Date',
+      //   dataIndex: 'updated_date',
+      //   key: 'updated_date',
+      // },
       {
-        title: 'Created Date',
-        dataIndex: 'created_date',
-        key: 'created_date',
+        title: 'Status',
+        dataIndex: 'id',
+        key: 'id',
+        width: 100,
+        filters: filterFields.stateName,
+        filterIcon: <RiFilter3Fill size={20} />,
+        onFilter: (value: string, record: any) => {
+          return record.country.toLowerCase() === value;
+        },
+        filterMultiple: true,
+        render: (text: string, row: any) => (
+          <Flex>
+            <Switch size="small" loading={false} defaultChecked={false} />
+          </Flex>
+        ),
       },
       {
-        title: 'Modified Date',
-        dataIndex: 'updated_date',
-        key: 'updated_date',
-      },
-      {
-        title: 'Action',
+        title: <Flex justify="center">Action</Flex>,
         dataIndex: 'id',
         key: 'id',
         render: (text: string, row: any) => (
-          <Space>
+          <Flex gap={10} justify="center" align="center">
+            {/* <TbEyeCheck size={22} color="#007bff" className="cursor-pointer" /> */}
+            <FaEye size={20} color="gray" className="cursor-pointer" title="Show all the dates. and user details" />
+
             <BiEdit size={20} color="green" className="cursor-pointer" onClick={() => onBranchEdit(row)} />
 
             <Popconfirm title="Delete" description="Are you sure to delete this record?" okText="Yes" cancelText="No" onConfirm={() => onRemoveBranches(row)}>
               <TbTrash size={20} color="#c00" className="cursor-pointer" />
             </Popconfirm>
-          </Space>
+          </Flex>
         ),
       },
     ],

@@ -20,7 +20,7 @@ import { getUniqueFilters } from '@src/utility/common_function';
 import { delayWaitFor } from '@src/utility/delay';
 import { Button, Card, Drawer, Dropdown, Flex, Form, Input, MenuProps, Popconfirm, Space, Switch } from 'antd';
 // import Search from 'antd/es/input/Search';
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, use, useCallback, useEffect, useMemo, useState } from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { FaEye } from 'react-icons/fa';
 import { LuSquarePlus } from 'react-icons/lu';
@@ -35,6 +35,7 @@ const LocationTableList = () => {
   const [addCountryForm] = Form.useForm();
   const dispatch = useAppDispatch();
   const pincodeList = useAppSelector(getAllPinCode);
+  const allLocation = useAppSelector(selectLocationList);
   const isCollapsed = useAppSelector((state: AppState) => selectIsCollapsedById(state, 'add_location_drawer'));
   const isLoading = useAppSelector(countryCityIsLoading);
   const [showAdd, setShowAddd] = useState<boolean>(false);
@@ -122,19 +123,36 @@ const LocationTableList = () => {
     //   key: 'updated_date',
     // },
     {
-      title: 'Action',
+      title: 'Status',
+      dataIndex: 'updated_date',
+      key: 'updated_date',
+      width: 100,
+      filters: filterFields.countryName,
+      filterIcon: <RiFilter3Fill size={20} />,
+      onFilter: (value: string, record: any) => {
+        return record.country.toLowerCase() === value;
+      },
+      filterMultiple: true,
+      render: (text: string, row: any) => (
+        <Flex>
+          <Switch size="small" loading={false} defaultChecked={false} onChange={(checked) => onSwitchChange(checked, row)} />
+        </Flex>
+      ),
+    },
+    {
+      title: <Flex justify="center">Action</Flex>,
       dataIndex: 'id',
       key: 'id',
       width: 120,
       render: (text: string, row: any) => (
         <Flex gap={10} justify="center" align="center">
-          {/* <FaEye size={20} color="gray" className="cursor-pointer" onClick={() => onEdit(row)} />
+          <FaEye size={20} color="gray" className="cursor-pointer" onClick={() => onEdit(row)} />
           <BiEdit size={20} color="green" className="cursor-pointer" onClick={() => onEdit(row)} />
 
           <Popconfirm title="Delete" description="Are you sure to delete this record?" okText="Yes" cancelText="No" onConfirm={() => onRemoveLocation(row)}>
             <TbTrash size={20} color="#c00" className="cursor-pointer" />
-          </Popconfirm> */}
-          <Switch size="small" loading={false} defaultChecked={false} onChange={(checked) => onSwitchChange(checked, row)} />
+          </Popconfirm>
+          {/* <Switch size="small" loading={false} defaultChecked={false} onChange={(checked) => onSwitchChange(checked, row)} /> */}
         </Flex>
       ),
     },
@@ -248,14 +266,14 @@ const LocationTableList = () => {
         {/* ) : (
            </Form>
            */}
-        <TableComponent rowKey={'id'} columns={filteredColumns} dataSource={pincodeList} bordered pagination={false} />
+        <TableComponent rowKey={'id'} columns={filteredColumns} dataSource={allLocation} bordered pagination={false} />
       </Card>
 
       <Drawer
         width={500}
         title={
           <Flex justify="space-between">
-            <span>Add Location</span>
+            <span>Add Network</span>
             <RiCloseLine size={20} onClick={onDrawerClose} />
           </Flex>
         }

@@ -7,6 +7,7 @@ const textColor = '#333';
 const selectedItemTextColor = '#fff';
 const selectedItemBgColor = textColor;
 const itemDisabledColor = '#939393';
+const drawerBgColor = '#dcdcdc';
 
 const descLabelBg = '#cee3ff';
 const cardHeaderBg = '#ebebeb';
@@ -58,7 +59,7 @@ const customTheme: ThemeConfig = {
     Card: {
       bodyPadding: 10,
       headerPadding: 10,
-      // headerBg: cardHeaderBg,
+      headerBg: cardHeaderBg,
       // colorBgContainer: cardHeaderBg,
     },
     Popover: {
@@ -79,6 +80,11 @@ const customTheme: ThemeConfig = {
     },
     Drawer: {
       paddingLG: 10,
+      // colorBgElevated: drawerBgColor,
+    },
+    Button: {
+      // dangerColor: '#f3841d',
+      defaultBg: '#f68222',
     },
   },
 };

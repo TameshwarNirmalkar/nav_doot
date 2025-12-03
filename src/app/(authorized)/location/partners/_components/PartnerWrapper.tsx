@@ -13,9 +13,10 @@ import { selectIsCollapsedById } from '@src/store/drawer/memoised_drawer_selecto
 import { useAppDispatch, useAppSelector } from '@src/store/redux_hooks';
 import { AppState } from '@src/store/store_config';
 import { getUniqueFilters } from '@src/utility/common_function';
-import { Button, Card, Drawer, Flex, Form, Popconfirm, Space, Spin, Table } from 'antd';
+import { Button, Card, Drawer, Flex, Form, Popconfirm, Space, Spin, Switch, Table } from 'antd';
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { BiEdit } from 'react-icons/bi';
+import { FaEye } from 'react-icons/fa';
 import { RiCloseLine, RiFilter3Fill } from 'react-icons/ri';
 import { TbTrash } from 'react-icons/tb';
 import { v4 as uuidv4 } from 'uuid';
@@ -107,17 +108,35 @@ const PartnerWrapper = () => {
     //   key: 'updated_date',
     // },
     {
-      title: 'Action',
+      title: 'Status',
+      dataIndex: 'id',
+      key: 'id',
+      width: 100,
+      filters: filterFields.parentBranchName,
+      filterIcon: <RiFilter3Fill size={20} />,
+      onFilter: (value: string, record: any) => {
+        return record.country.toLowerCase() === value;
+      },
+      filterMultiple: true,
+      render: (text: string, row: any) => (
+        <Flex>
+          <Switch size="small" loading={false} defaultChecked={false} />
+        </Flex>
+      ),
+    },
+    {
+      title: <Flex justify="center">Action</Flex>,
       dataIndex: 'id',
       key: 'id',
       render: (text: string, row: any) => (
-        <Space>
+        <Flex gap={10} justify="center" align="center">
+          <FaEye size={20} color="gray" className="cursor-pointer" />
           <BiEdit size={20} color="green" className="cursor-pointer" onClick={() => onCustomerEdit(row)} />
 
           <Popconfirm title="Delete" description="Are you sure to delete this record?" okText="Yes" cancelText="No" onConfirm={() => onRemoveCustomer(row)}>
             <TbTrash size={20} color="#c00" className="cursor-pointer" />
           </Popconfirm>
-        </Space>
+        </Flex>
       ),
     },
   ];

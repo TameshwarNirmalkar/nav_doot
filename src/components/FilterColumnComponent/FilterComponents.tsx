@@ -1,7 +1,7 @@
-import { Button, Checkbox, CheckboxChangeEvent, CheckboxProps, Dropdown, Space } from "antd";
-import React, { useCallback, useMemo, useState } from "react";
-import { IoCaretDown } from "react-icons/io5";
-import { TbFilterCheck } from "react-icons/tb";
+import { Button, Checkbox, CheckboxChangeEvent, CheckboxProps, Dropdown, Space } from 'antd';
+import React, { useCallback, useMemo, useState } from 'react';
+import { IoCaretDown } from 'react-icons/io5';
+import { TbFilterCheck } from 'react-icons/tb';
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -18,7 +18,7 @@ const DropdownWithCheckboxes = ({ tableColumns, onFilterChangeValue }: { tableCo
   const onGroupChange = useCallback(
     (list: string[]) => {
       setCheckedList(list);
-      if (typeof onFilterChangeValue === "function") {
+      if (typeof onFilterChangeValue === 'function') {
         onFilterChangeValue(list);
       }
     },
@@ -46,10 +46,10 @@ const DropdownWithCheckboxes = ({ tableColumns, onFilterChangeValue }: { tableCo
   );
 
   return (
-    <Dropdown popupRender={renderDropdownContent} trigger={["click"]}>
+    <Dropdown popupRender={renderDropdownContent} trigger={['click']}>
       <Button type="primary" icon={<TbFilterCheck />} style={{ width: 190 }}>
         <Space>
-          Select Columns ({checkedList.length}){/* <IoCaretDown /> */}
+          Hide Columns ({checkedList.length}){/* <IoCaretDown /> */}
         </Space>
       </Button>
     </Dropdown>

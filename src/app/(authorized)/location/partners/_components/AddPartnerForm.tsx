@@ -67,7 +67,7 @@ const AddPartnerForm = () => {
 
   return (
     <>
-      <Card title="Branch Details" type="inner" style={{ marginBottom: 20 }}>
+      <Card title="Branch Details" style={{ marginBottom: 20 }}>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <Form.Item name="id" hidden>
@@ -135,7 +135,7 @@ const AddPartnerForm = () => {
         </div>
       </Card>
 
-      <Card title="Contact Details" type="inner">
+      <Card title="Contact Details">
         <div className="grid grid-cols-2 gap-4">
           <div>
             <Form.Item label="Contact Person" name="contact_person" rules={[{ required: true, message: 'Required' }]}>
