@@ -3,10 +3,11 @@
 import IconLoader from '@src/components/IconLoader/IconLoader';
 import SearchComponent from '@src/components/SearchComponent/SearchComponent';
 import SelectWithAdd from '@src/components/SelectWithAdd/SelectWithAdd';
-import { Button, Card, DatePicker, Drawer, Flex, Form, Input, Select, Space } from 'antd';
+import { Button, Card, DatePicker, Divider, Drawer, Flex, Form, Input, Select, Space } from 'antd';
 import React, { memo, useCallback, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { BsCalendarDate } from 'react-icons/bs';
+import { FaPlus } from 'react-icons/fa';
 import { RiCloseLine } from 'react-icons/ri';
 import PermissionForm from './PermissionForm';
 import PermissionTable from './PermissionTable';
@@ -24,11 +25,7 @@ export default memo(function PermissionWrapper() {
     setIsCollapsed(false);
   }, []);
 
-  const onDrawerOpen = useCallback(() => {
-    setIsCollapsed(true);
-  }, []);
-
-  const onCreatePermission = useCallback(async () => {
+  const onCreatePermission = async () => {
     try {
       setIsCollapsed(false);
       const values = await permissonFormInstance.getFieldsValue();
@@ -36,20 +33,21 @@ export default memo(function PermissionWrapper() {
     } catch (error) {
       console.log('eee ', error);
     }
-  }, [permissonFormInstance]);
+  };
 
-  const onRoleSelect = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const onRoleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log('======== ', e);
     setShowTable(true);
-  }, []);
+  };
 
   return (
     <>
       <Card
         title={
-          <div className="flex items-center">
+          <div className="flex items-center gap-3">
+            <span>Role Permission</span>
             <Select
-              style={{ width: 200 }}
+              style={{ width: 300 }}
               placeholder="Select Role"
               options={[
                 { value: 1, label: 'Admin' },
@@ -58,6 +56,18 @@ export default memo(function PermissionWrapper() {
                 { value: 4, label: 'Head' },
               ]}
               onChange={onRoleSelect}
+              popupRender={(menu) => (
+                <>
+                  {menu}
+                  <Divider style={{ margin: '8px 0' }} />
+                  <div className="p-3 align-middle justify-between flex gap-2">
+                    <Space>
+                      <Input placeholder="Enter Role" />
+                      <Button icon={<FaPlus />}>Add</Button>
+                    </Space>
+                  </div>
+                </>
+              )}
             />
             {/* <SelectWithAdd
               dropDownList={[

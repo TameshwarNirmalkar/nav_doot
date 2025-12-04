@@ -1,5 +1,5 @@
-import BreadcrumbComponent from "@src/components/BreadcrumbComponent/BreadcrumbComponent";
-import PermissionWrapper from "./_components/PermissionWrapper";
+// import BreadcrumbComponent from "@src/components/BreadcrumbComponent/BreadcrumbComponent";
+import PermissionWrapper from './_components/PermissionWrapper';
 
 export default function PermissionPage() {
   return (

@@ -227,7 +227,7 @@ export default memo(function TeamWrapper() {
         extra={
           <Space>
             <RangePicker suffixIcon={<BsCalendarDate size={20} />} />
-            <Button onClick={onDrawerOpen}>Add User</Button>
+            <Button onClick={onDrawerOpen}>Add</Button>
             {/* <IconLoader showLoader={true} /> */}
           </Space>
         }>
