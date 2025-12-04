@@ -13,7 +13,7 @@ import { SlSettings } from 'react-icons/sl';
 
 const MainHeader = () => {
   const {
-    token: { colorBgContainer },
+    token: { colorPrimary },
   } = theme.useToken();
 
   const items: MenuProps['items'] = [
@@ -76,7 +76,7 @@ const MainHeader = () => {
           <SlSettings size={20} className="cursor-pointer" />
         </Dropdown>
 
-        <div className="border-0 rounded-3xl bg-purple-700 pl-2" style={{ backgroundColor: '#007bff' }}>
+        <div className="border-0 rounded-3xl bg-purple-700 pl-2" style={{ backgroundColor: colorPrimary }}>
           <Dropdown menu={{ items }} placement="bottomRight" trigger={['hover']} overlayStyle={{ width: 200 }}>
             <Flex align="center" className="cursor-pointer">
               <span className="text-white px-1">John Doe</span>

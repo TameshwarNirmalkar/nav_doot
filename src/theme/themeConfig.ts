@@ -2,12 +2,15 @@ import { type ThemeConfig, theme } from 'antd';
 
 const grayColor = '#504f4f';
 const grayBgcolor = '#FFF';
-const themeItemBgColor = '#007bff';
+const themeItemBgColor = '#0253c7';
 const textColor = '#333';
 const selectedItemTextColor = '#fff';
 const selectedItemBgColor = textColor;
 const itemDisabledColor = '#939393';
 const drawerBgColor = '#dcdcdc';
+
+const defaultColor = '#f17f20';
+const defaultHoverColor = '#e46800';
 
 const descLabelBg = '#cee3ff';
 const cardHeaderBg = '#ebebeb';
@@ -15,9 +18,9 @@ const cardHeaderBg = '#ebebeb';
 const customTheme: ThemeConfig = {
   algorithm: theme.compactAlgorithm,
   token: {
-    colorPrimary: '#007bff',
-    colorInfo: '#ff8316',
-    colorError: '#cc0000',
+    colorPrimary: '#0253c7',
+    // colorInfo: '#ff8316',
+    // colorError: '#cc0000',
     fontSize: 14,
   },
   components: {
@@ -36,14 +39,18 @@ const customTheme: ThemeConfig = {
       itemDisabledColor,
 
       horizontalItemSelectedColor: 'white',
-      horizontalItemHoverBg: grayColor,
+      horizontalItemHoverBg: 'grayColor',
       horizontalItemHoverColor: 'white',
       subMenuItemBg: grayBgcolor,
       horizontalItemBorderRadius: 3,
     },
     Dropdown: {
-      // colorBgElevated: grayBgcolor,
-      controlItemBgHover: '#007bff',
+      // colorBgElevated: themeItemBgColor,
+      // controlItemBgHover: 'white',
+      // colorText: 'white',
+
+      // colorBgTextHover: themeItemBgColor,
+      // colorPrimaryTextHover: themeItemBgColor,
       padding: 0,
     },
     Layout: {
@@ -85,7 +92,12 @@ const customTheme: ThemeConfig = {
     },
     Button: {
       // dangerColor: '#f3841d',
-      defaultBg: '#f68222',
+      defaultColor: '#fff',
+      defaultBg: defaultColor,
+      defaultBorderColor: defaultColor,
+      defaultHoverColor: '#fff',
+      defaultHoverBg: defaultHoverColor,
+      defaultHoverBorderColor: defaultHoverColor,
     },
   },
 };

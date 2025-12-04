@@ -156,9 +156,10 @@ export default memo(function TeamWrapper() {
       title: <Flex justify="center">Status</Flex>,
       dataIndex: 'verified',
       key: 'verified',
-      width: 120,
+      width: 100,
+      ...CreateStandardFilter(filterFields.userRole, 'role'),
       render: (bool: string, row: any) => (
-        <Flex justify="center">
+        <Flex>
           <Switch size="small" checked={row.active} onChange={(checked: boolean) => dispatch(updateTeamAction({ ...row, active: checked }))} />
         </Flex>
       ),
@@ -167,11 +168,11 @@ export default memo(function TeamWrapper() {
       title: <Flex justify="center">Action</Flex>,
       dataIndex: 'id',
       key: 'id',
-      width: 130,
+      width: 120,
       render: (text: string, row: any) => (
         <Flex align="center" justify="center" gap={10}>
-          <FaEye size={20} color="gray" />
-          <TbEdit size={20} color="green" />
+          <FaEye size={20} color="gray" className="cursor-pointer" />
+          <TbEdit size={20} color="green" className="cursor-pointer" />
           <Popconfirm title="Delete" description="Are you sure to delete this record?" okText="Yes" cancelText="No">
             <TbTrash size={20} color="#c00" className="cursor-pointer" />
           </Popconfirm>
@@ -226,9 +227,7 @@ export default memo(function TeamWrapper() {
         extra={
           <Space>
             <RangePicker suffixIcon={<BsCalendarDate size={20} />} />
-            <Button type="primary" onClick={onDrawerOpen}>
-              Add User
-            </Button>
+            <Button onClick={onDrawerOpen}>Add User</Button>
             {/* <IconLoader showLoader={true} /> */}
           </Space>
         }>
