@@ -103,9 +103,7 @@ export default memo(function BookingWrapper() {
         extra={
           <Space>
             {/* <RangePicker suffixIcon={<BsCalendarDate size={20} />} /> */}
-            <Button type="primary" onClick={onDrawerOpen}>
-              Add Booking
-            </Button>
+            <Button onClick={onDrawerOpen}>Add Booking</Button>
             {/* <IconLoader showLoader={true} /> */}
           </Space>
         }>

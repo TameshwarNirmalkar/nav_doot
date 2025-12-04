@@ -67,6 +67,7 @@ const customTheme: ThemeConfig = {
       bodyPadding: 10,
       headerPadding: 10,
       headerBg: cardHeaderBg,
+      headerHeight: 46,
       // colorBgContainer: cardHeaderBg,
     },
     Popover: {

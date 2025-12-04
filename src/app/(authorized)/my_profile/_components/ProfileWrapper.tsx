@@ -53,6 +53,9 @@ export default memo(function ProfileWrapper() {
 
   return (
     <>
+      <UserProfileCard />
+
+      {/* Not in use  */}
       <Card
         className="hidden"
         title="My Information"
@@ -98,9 +101,6 @@ export default memo(function ProfileWrapper() {
           </Col>
         </Row>
       </Card>
-      <UserProfileCard />
-
-      {/* Not in use  */}
 
       <Drawer
         title={

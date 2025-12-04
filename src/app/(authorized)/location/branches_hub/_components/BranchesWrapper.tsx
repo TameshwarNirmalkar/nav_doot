@@ -202,9 +202,7 @@ const BranchesWrapper = () => {
                 setSelectedColumns(val);
               }}
             />
-            <Button type="primary" onClick={onOpenDrawer}>
-              Add
-            </Button>
+            <Button onClick={onOpenDrawer}>Add</Button>
           </Space>
         }>
         <TableComponent rowKey={'id'} columns={filteredColumns} dataSource={allBranches} />

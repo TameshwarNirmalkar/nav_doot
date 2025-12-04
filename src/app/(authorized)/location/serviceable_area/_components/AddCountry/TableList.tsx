@@ -255,9 +255,7 @@ const LocationTableList = () => {
                 Add Filter
               </Button>
             </Dropdown> */}
-            <Button type="primary" onClick={onShowAdd}>
-              Add
-            </Button>
+            <Button onClick={onShowAdd}>Add</Button>
           </Space>
         }>
         {/* {showAdd ? (

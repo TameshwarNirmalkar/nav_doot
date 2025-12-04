@@ -249,9 +249,7 @@ const PartnerWrapper = () => {
                 setSelectedColumns(val);
               }}
             />
-            <Button type="primary" onClick={onOpenDrawer}>
-              Add
-            </Button>
+            <Button onClick={onOpenDrawer}>Add</Button>
           </Space>
         }>
         <TableComponent rowKey={'id'} columns={filteredColumns} dataSource={customerList} />
