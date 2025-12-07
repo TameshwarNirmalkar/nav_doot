@@ -4,8 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-yarn.*
-yarn.lock
 
 # testing
 /coverage
@@ -28,7 +26,6 @@ yarn-error.log*
 /node_modules
 /.pnp
 .pnp.*
-.yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
