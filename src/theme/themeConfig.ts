@@ -1,18 +1,15 @@
 import { type ThemeConfig, theme } from 'antd';
 
-const grayColor = '#504f4f';
-const grayBgcolor = '#FFF';
+const whiteBgcolor = '#FFF';
 const themeItemBgColor = '#0253c7';
 const textColor = '#333';
 const selectedItemTextColor = '#fff';
 const selectedItemBgColor = textColor;
 const itemDisabledColor = '#939393';
-const drawerBgColor = '#dcdcdc';
 
 const defaultColor = '#f17f20';
 const defaultHoverColor = '#e46800';
 
-const descLabelBg = '#cee3ff';
 const cardHeaderBg = '#ebebeb';
 
 const customTheme: ThemeConfig = {
@@ -28,7 +25,7 @@ const customTheme: ThemeConfig = {
       itemMarginBottom: 10,
     },
     Menu: {
-      itemBg: grayBgcolor, // Optional: Change the selected item's background and text color as well
+      itemBg: whiteBgcolor, // Optional: Change the selected item's background and text color as well
       itemColor: textColor,
       itemSelectedColor: selectedItemTextColor, // Optional: Change the text color of all unselected items
       itemActiveBg: textColor,
@@ -41,7 +38,7 @@ const customTheme: ThemeConfig = {
       horizontalItemSelectedColor: 'white',
       horizontalItemHoverBg: 'grayColor',
       horizontalItemHoverColor: 'white',
-      subMenuItemBg: grayBgcolor,
+      subMenuItemBg: whiteBgcolor,
       horizontalItemBorderRadius: 3,
     },
     Dropdown: {
@@ -55,7 +52,7 @@ const customTheme: ThemeConfig = {
     },
     Layout: {
       triggerColor: '#FFF', // This token controls the color of the text and icons in the Sider trigger
-      triggerBg: grayBgcolor, // Optional: Change the background color when the trigger is hovered
+      triggerBg: whiteBgcolor, // Optional: Change the background color when the trigger is hovered
       bodyBg: '#dcdcdc',
     },
 
