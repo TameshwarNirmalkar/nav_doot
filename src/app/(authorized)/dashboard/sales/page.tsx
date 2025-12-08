@@ -30,7 +30,18 @@ export default function SalesPage() {
                 <Flex>Available Trucks</Flex>
               </Flex>
             }>
-            <Statistic title="Active Consignment" value={60} precision={2} valueStyle={{ color: '#3f8600' }} prefix={<FaArrowUp />} suffix="%" />
+            <Statistic
+              title="Active Consignment"
+              value={60}
+              precision={2}
+              styles={{
+                content: {
+                  color: '#3f8600',
+                },
+              }}
+              prefix={<FaArrowUp />}
+              suffix="%"
+            />
           </Card>
           <Divider size="small" />
           <Card
@@ -40,7 +51,18 @@ export default function SalesPage() {
                 <Flex>Available Trains</Flex>
               </Flex>
             }>
-            <Statistic title="Active Consignment" value={50} precision={2} valueStyle={{ color: '#3f8600' }} prefix={<FaArrowUp />} suffix="%" />
+            <Statistic
+              title="Active Consignment"
+              value={50}
+              precision={2}
+              styles={{
+                content: {
+                  color: '#3f8600',
+                },
+              }}
+              prefix={<FaArrowUp />}
+              suffix="%"
+            />
           </Card>
         </Col>
         <Col xs={24} sm={24} md={12} lg={12} xl={6}></Col>

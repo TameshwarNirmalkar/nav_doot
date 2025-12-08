@@ -72,12 +72,28 @@ const MainHeader = () => {
           </Popover>
         </ConfigProvider>
 
-        <Dropdown menu={{ items }} placement="bottomRight" trigger={['hover']} overlayStyle={{ width: 200 }}>
+        <Dropdown
+          menu={{ items }}
+          placement="bottomRight"
+          trigger={['hover']}
+          styles={{
+            root: {
+              width: 200,
+            },
+          }}>
           <SlSettings size={20} className="cursor-pointer" />
         </Dropdown>
 
         <div className="border-0 rounded-3xl bg-purple-700 pl-2" style={{ backgroundColor: colorPrimary }}>
-          <Dropdown menu={{ items }} placement="bottomRight" trigger={['hover']} overlayStyle={{ width: 200 }}>
+          <Dropdown
+            menu={{ items }}
+            placement="bottomRight"
+            trigger={['hover']}
+            styles={{
+              root: {
+                width: 200,
+              },
+            }}>
             <Flex align="center" className="cursor-pointer">
               <span className="text-white px-1">John Doe</span>
               <PiUserCircleDashedFill size={32} color="white" />
