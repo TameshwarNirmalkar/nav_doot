@@ -10,6 +10,7 @@ const DropdownWithCheckboxes = ({ tableColumns, onFilterChangeValue }: { tableCo
 
   const optiions = useMemo(() => {
     return tableColumns.map((el) => ({
+      id: el.title,
       label: el.title,
       value: el.dataIndex,
     }));
