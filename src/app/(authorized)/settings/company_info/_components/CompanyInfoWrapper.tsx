@@ -257,7 +257,7 @@ export default memo(function CompanyInfoWrapper() {
             <RiCloseLine size={18} onClick={onDrawerClose} className="cursor-pointer" />
           </Flex>
         }
-        width={'25%'}
+        size={'large'}
         open={isCollapsed}
         closable={false}
         maskClosable={false}

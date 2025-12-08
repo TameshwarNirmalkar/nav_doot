@@ -111,7 +111,7 @@ export default memo(function BookingWrapper() {
       </Card>
 
       <Drawer
-        width={'85%'}
+        size={900}
         title={
           <Flex justify="space-between">
             <span>Add Booking</span>

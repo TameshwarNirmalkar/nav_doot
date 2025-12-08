@@ -109,7 +109,7 @@ export default memo(function ProfileWrapper() {
             <RiCloseLine size={20} onClick={onDrawerClose} className="cursor-pointer" />
           </Flex>
         }
-        width={'40%'}
+        size={'large'}
         open={isCollapsed}
         closable={false}
         maskClosable={false}

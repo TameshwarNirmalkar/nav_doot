@@ -103,7 +103,7 @@ export default memo(function PermissionWrapper() {
       </Card>
 
       <Drawer
-        width={520}
+        size={520}
         title={
           <Flex justify="space-between">
             <span>Add User Permission</span>

@@ -235,7 +235,7 @@ export default memo(function TeamWrapper() {
       </Card>
 
       <Drawer
-        width={520}
+        size={520}
         title={
           <Flex justify="space-between">
             <span>Create User</span>
@@ -338,7 +338,7 @@ export default memo(function TeamWrapper() {
 
       {/* Description View  */}
       <Drawer
-        width={520}
+        size={520}
         title={
           <Flex justify="space-between">
             <span>User Details</span>

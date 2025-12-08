@@ -215,7 +215,7 @@ const BranchesWrapper = () => {
             <RiCloseLine size={20} onClick={onDrawerClose} className="cursor-pointer" />
           </Flex>
         }
-        width={'60%'}
+        size={'large'}
         open={isCollapsed}
         closable={false}
         maskClosable={false}

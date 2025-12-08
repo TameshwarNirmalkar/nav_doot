@@ -268,7 +268,7 @@ const LocationTableList = () => {
       </Card>
 
       <Drawer
-        width={500}
+        size={500}
         title={
           <Flex justify="space-between">
             <span>Add Network</span>
