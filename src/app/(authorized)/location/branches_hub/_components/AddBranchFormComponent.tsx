@@ -145,7 +145,7 @@ const AddBranchForm = () => {
             </Form.Item>
 
             <Form.Item label="State" name="state_code" rules={[{ required: true, message: 'Required' }]}>
-              <Select tabIndex={12} showSearch placeholder="Select State" filterSort={(optionA, optionB) => (optionA.name ?? '').toLowerCase().localeCompare((optionB.name ?? '').toLowerCase())} fieldNames={{ label: 'name', value: 'id' }} optionFilterProp="name" options={allStates} onSelect={onStateSelect} />
+              <Select tabIndex={12} showSearch placeholder="Select State" fieldNames={{ label: 'name', value: 'id' }} options={allStates} onSelect={onStateSelect} />
             </Form.Item>
           </div>
           <div>
@@ -156,10 +156,10 @@ const AddBranchForm = () => {
               <Input placeholder="Enter Alternate Phone Number" tabIndex={9} />
             </Form.Item>
             <Form.Item label="City" name="city_code" rules={[{ required: true, message: 'Required' }]}>
-              <Select tabIndex={11} showSearch placeholder="Select City" filterSort={(optionA, optionB) => (optionA.name ?? '').toLowerCase().localeCompare((optionB.name ?? '').toLowerCase())} options={allCities} optionFilterProp="name" fieldNames={{ label: 'name', value: 'id' }} onSelect={onCitySelect} />
+              <Select tabIndex={11} showSearch placeholder="Select City" options={allCities} fieldNames={{ label: 'name', value: 'id' }} onSelect={onCitySelect} />
             </Form.Item>
             <Form.Item label="Country" name="country_code" rules={[{ required: true, message: 'Required' }]}>
-              <Select tabIndex={13} showSearch placeholder="Select Country" optionFilterProp="name" filterSort={(optionA, optionB) => (optionA?.name ?? '').toLowerCase().localeCompare((optionB?.name ?? '').toLowerCase())} fieldNames={{ label: 'name', value: 'id' }} options={allCountries} onSelect={onCountrySelect} />
+              <Select tabIndex={13} showSearch placeholder="Select Country" fieldNames={{ label: 'name', value: 'id' }} options={allCountries} onSelect={onCountrySelect} />
             </Form.Item>
           </div>
         </div>

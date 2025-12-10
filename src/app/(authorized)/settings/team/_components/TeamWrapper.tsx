@@ -13,7 +13,7 @@ import { Avatar, Button, Card, Col, DatePicker, Descriptions, DescriptionsProps,
 import { useForm } from 'antd/es/form/Form';
 import TextArea from 'antd/es/input/TextArea';
 import type { Dayjs } from 'dayjs';
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { MouseEventHandler, memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { BiDotsVerticalRounded, BiUser } from 'react-icons/bi';
 import { BsCalendarDate, BsFillSendCheckFill } from 'react-icons/bs';
 import { FaEye } from 'react-icons/fa';
@@ -108,6 +108,16 @@ export default memo(function TeamWrapper() {
     [onDrawerOpen],
   );
 
+  const onEditHandler = (e: MouseEventHandler<Element>, item: any) => {
+    onDrawerOpen();
+    teamForm.setFieldsValue({ ...item });
+  };
+
+  const onDetailsHandler = () => {
+    setIsDetailsView(true);
+    // teamForm.setFieldsValue({ ...item });
+  };
+
   const teamCol: any = [
     {
       title: 'Name',
@@ -171,8 +181,8 @@ export default memo(function TeamWrapper() {
       width: 120,
       render: (text: string, row: any) => (
         <Flex align="center" justify="center" gap={10}>
-          <FaEye size={20} color="gray" className="cursor-pointer" />
-          <TbEdit size={20} color="green" className="cursor-pointer" />
+          <FaEye size={20} color="gray" className="cursor-pointer" onClick={() => onDetailsHandler()} />
+          <TbEdit size={20} color="green" className="cursor-pointer" onClick={(e: any) => onEditHandler(e, row)} />
           <Popconfirm title="Delete" description="Are you sure to delete this record?" okText="Yes" cancelText="No">
             <TbTrash size={20} color="#c00" className="cursor-pointer" />
           </Popconfirm>
@@ -186,15 +196,15 @@ export default memo(function TeamWrapper() {
 
   const descItems: DescriptionsProps['items'] = [
     {
-      label: 'Created At:',
+      label: <span className="font-extrabold">Created At:</span>,
       children: '12/05/2025',
       span: 'filled',
       labelStyle: { width: 150 },
     },
     {
-      label: 'Updated At:',
+      label: <span className="font-extrabold">Updated At:|</span>,
       children: '10/10/2025',
-      span: 'filled', // span = 2
+      span: 'filled',
     },
   ];
 
@@ -366,7 +376,12 @@ export default memo(function TeamWrapper() {
             </Space>
           </Flex>
         }>
-        <Descriptions bordered items={descItems} />
+        <Space orientation="vertical" size="large">
+          <Descriptions bordered items={descItems} />
+          <Descriptions bordered items={descItems} />
+          <Descriptions bordered items={descItems} />
+          <Descriptions bordered items={descItems} />
+        </Space>
       </Drawer>
     </>
   );

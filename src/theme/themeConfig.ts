@@ -31,7 +31,7 @@ const customTheme: ThemeConfig = {
       itemActiveBg: textColor,
       itemSelectedBg: themeItemBgColor,
       itemHoverBg: themeItemBgColor,
-      itemHoverColor: selectedItemBgColor,
+      itemHoverColor: 'white',
       subMenuItemSelectedColor: textColor,
       itemDisabledColor,
 
