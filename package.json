@@ -23,7 +23,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "jose": "^6.0.13",
     "jsonwebtoken": "^9.0.2",
-    "next": "16.0.3",
+    "next": "16.0.10",
     "next-auth": "^5.0.0-beta.29",
     "react": "19.2.0",
     "react-dom": "19.2.0",
